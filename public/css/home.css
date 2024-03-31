@@ -1,0 +1,349 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: "Poppins", sans-serif;
+}
+
+.sidebar li {
+    list-style: none;
+    padding: 3vh;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.sidebar a, i {
+    text-decoration: none;
+    color: white;
+    justify-content: center;
+    align-items: center;
+}
+
+.sidebar a:hover {
+    color: rgb(85, 98, 217);
+}
+
+.sidebar {
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(0, 0, 44, .9);
+    position: fixed;
+    height: 100%;
+    width: 35vh;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.sidebar-exit {
+    color: white;
+    margin-top: auto;
+    padding: 3vh;
+    cursor: pointer;
+}
+
+.sidebar-exit:hover, .sidebar-exit:hover a {
+    color: red;
+}
+
+.fas {
+    margin-right: 1vh;
+}
+
+.logo {
+    justify-content: center;
+    align-items: center;
+    color: white;
+}
+
+.page-content {
+    margin-left: 35vh;
+    height: 100%;
+    width: calc(100% - 35vh);
+    position: fixed;
+    background-color: rgb(0, 0, 44);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.panel-main-feed {
+    height: 90%;
+    width: 50%;
+    box-shadow: 0 0 5vh rgb(0, 0, 0);
+    background-color: rgb(255, 255, 255, 0.1);
+    display: flex;
+    flex-direction: column;
+}
+
+.header-feed {
+    display: flex;
+    align-items: center;
+}
+
+.user-image {
+    width: 10vh;
+    height: 10vh;
+    background-color: #fff;
+    border-radius: 50%;
+    margin: 4vh;
+}
+
+.user-name {
+    display: flex;
+    align-items: center;
+    background-color: white;
+    padding: 2vh;
+    flex-grow: 1;
+    margin-right: 4vh;
+}
+
+.body-feed {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.post-image {
+    background-color: #fff;
+    width: 71vh;
+    height: 60vh;
+    margin: 0 4vh 4vh 4vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.like-icon {
+    display: flex;
+    align-items: center;
+    margin: 0 1vh 4vh 4vh;
+    font-size: x-large;
+}
+
+.footer-feed {
+    display: flex;
+    flex-direction: row;
+}
+
+.comments {
+    display: flex;
+    align-items: center;
+    margin: 0 4vh 4vh 1vh;
+    font-size: x-large;
+}
+
+.panel-user-data {
+    height: 80%;
+    width: 85%;
+    box-shadow: 0 0 5vh rgb(0, 0, 0);
+    background-color: rgb(255, 255, 255, 0.8);
+    padding: 5vh;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.data-information {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 70%;
+    justify-content: center;
+}
+
+.profile-status {
+    margin: 0vh 0vh 3vh 0vh;
+    width: 30%;
+    max-height: 100%;
+    background-color: rgb(0, 0, 44, .5);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 5px;
+}
+
+.input-block {
+    background-color: rgb(0, 0, 44, .5);
+    width: 25%;
+    height: 10%;
+    padding: 5vh;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    margin: 0vh 3vh 3vh 3vh;
+    justify-content: center;
+}
+
+.input-block input {
+    padding: 0.5vh;
+    outline: none;
+    border: none;
+    border-radius: 5px;
+    font-size: 2vh;
+}
+
+/* .input-block input:focus {
+    border-bottom: 3px solid rgb(0, 0, 44, 1);
+} */
+
+.input-block label {
+    margin-bottom: 1.5vh;
+    font-weight: bold;
+    font-size: medium;
+}
+
+.btn {
+    color: #000;
+    background: rgb(0, 0, 44, .5);
+    border: none;
+    padding: 1vh 4vh;
+    font-size: 2vh;
+    display: block;
+    margin: auto;
+    cursor: pointer;
+    border-radius: 10px;
+    margin-bottom: 3vh;
+    transition: .5s;
+}
+
+.btn:hover {
+    background: rgb(0, 0, 44, .8);
+    color: rgb(255, 255, 255, 1);
+}
+
+.user-data-image {
+    margin-top: 3vh;
+    background-color: black;
+    width: 12rem;
+    height: 12rem;
+}
+
+.user-bio {
+    margin-top: 3vh;
+    display: flex;
+    flex-direction: column;
+    font-weight: bold;
+    margin-bottom: 1.5vh;
+}
+
+.user-workout-information {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.user-workout-information .square {
+    background-color: black;
+    width: 6rem;
+    height: 6rem;
+    margin: 3vh;
+}
+
+.panel-user-workout {
+    height: 80%;
+    width: 85%;
+    padding: 3vh;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+}
+
+.routines {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    margin: 1vh;
+    width: 20%;
+    height: 30%;
+    justify-content: center;
+    align-items: center;
+    background-color: #fff;
+    transition: background-color 0.2s ease-in-out, transform 0.2s ease-in-out;
+    position: relative;
+}
+
+.routines:hover {
+    background: rgb(85, 98, 217);
+    transform: scale(1.05);
+    cursor: pointer;
+}
+
+.remove-icon {
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    cursor: pointer;
+}
+
+.remove-icon:hover {
+    color: red;
+}
+
+.workout-feedback {
+    position: absolute;
+    bottom: 8px;
+    right: 8px;
+    cursor: pointer;
+    color: rgb(0, 255, 0);
+    font-weight: bolder;
+}
+
+.exercise-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+}
+
+.exercise-checkbox {
+    height: 100%; 
+    border-radius: 5px; 
+    border: 1px solid #ccc; 
+    width: 20px; 
+    cursor: pointer; 
+}
+
+.exercise {
+    width: calc(40% - 5px); 
+    height: 50px; 
+    background-color: #f0f0f0; 
+    border: 1px solid #ccc; 
+    margin-bottom: 10px; 
+    padding: 10px; 
+    box-sizing: border-box; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+}
+
+.info {
+    width: calc(20% - 5px); 
+    height: 50px; 
+    background-color: #f0f0f0; 
+    border: 1px solid #ccc; 
+    margin-bottom: 10px; 
+    padding: 10px; 
+    box-sizing: border-box; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+}
+
+.panel-user-diet {
+    height: 80%;
+    width: 85%;
+    box-shadow: 0 0 5vh rgb(0, 0, 0);
+    background-color: rgb(255, 255, 255, 0.8);
+    padding: 5vh;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.panel-user-diet {
+    
+}

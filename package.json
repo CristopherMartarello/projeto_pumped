@@ -1,0 +1,21 @@
+{
+  "name": "pumped",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "start": "nodemon start.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.20.2",
+    "express.js": "^1.0.0",
+    "mysql2": "^3.9.2",
+    "sequelize": "^6.37.1",
+    "sweetalert2": "^11.10.7"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.0"
+  }
+}
