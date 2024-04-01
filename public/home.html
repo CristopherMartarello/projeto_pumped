@@ -17,6 +17,7 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script type="module" src="js/controller/homeController.js" defer></script>
     <script type="module" src="js/controller/routineController.js"></script>
+    <script type="module" src="js/controller/dietController.js"></script>
 </head>
 
 <body>
@@ -127,7 +128,19 @@
             </div>
         </div>
         <div class="panel-user-diet" id="userDiet" style="display: none;">
-            <h1>Oi</h1>
+            <div class="data-diet-information">
+                <div class="calorie-info">
+    
+                </div>
+                <div class="body-image">
+                    <img src="img/musculature-bg.png" alt="Homem de corpo atlético.">
+                </div>
+            </div>
+            <div class="diet-list">
+                <div class="diets" onclick="addOrEnterDiet(false)">
+                    <i class="fa fa-plus" style="color: #000; font-size: xx-large;"></i>
+                </div>
+            </div>
         </div>    
     </div>
 

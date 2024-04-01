@@ -341,9 +341,50 @@ body {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+    flex-direction: row;
+}
+
+.calorie-info {
+    background-color: rgb(0, 0, 44, .5);
+    width: 70%;
+    height: 10%;
+    padding: 5vh;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    margin: 0vh 3vh 3vh 3vh;
     justify-content: center;
 }
 
-.panel-user-diet {
-    
+.data-diet-information {
+    display: flex;
+    flex-direction: column; 
+    flex: 1; 
+}
+
+.diet-list {
+    display: flex;
+    flex-direction: row; 
+    flex-wrap: wrap;
+    flex: 1; 
+}
+
+.diets {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    margin: 0vh 1vh 1vh 1vh;
+    width: 20%;
+    height: 30%;
+    justify-content: center;
+    align-items: center;
+    background-color: #fff;
+    transition: background-color 0.2s ease-in-out, transform 0.2s ease-in-out;
+    position: relative;
+}
+
+.diets:hover {
+    background: rgb(85, 98, 217);
+    transform: scale(1.05);
+    cursor: pointer;
 }

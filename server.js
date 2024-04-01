@@ -3,12 +3,13 @@ const path = require('path');
 const bodyParser = require('body-parser');
 
 //Pegando os dados do Mock (exercicios)
-const mock = require('./mock/mock');
+const mockExercises = require('./mock/mockExercises');
 
 //Estabelecendo conexões com o banco de dados
 const { User } = require('./models/User'); //a tabela só é criada caso não exista
 const { Routine } = require('./models/Routine'); //a tabela só é criada caso não exista
 const { Exercise } = require('./models/Exercise'); //a tabela só é criada caso não exista
+const { Diet } = require('./models/Diet'); //a tabela só é criada caso não exista
 
 const app = express(); 
 
@@ -88,7 +89,6 @@ app.post('/update-user', async (req, res) => {
 
     try {
         const newUser = new User(name, username, email, password, age, weight, height, birth, bio);
-        //testar o get e set
 
         await User.update(newUser, id);
 
@@ -199,14 +199,73 @@ app.put('/update-routine', async (req, res) => {
     try {
         const newRoutine = req.body;
         let routine = new Routine();
+
         newRoutine.routine = await routine.incrementCompletedCount(newRoutine.routine);
-        console.log('NOVA ROTINA', newRoutine.routine);
+
         await Routine.update(newRoutine);
 
         res.status(200).send('Rotina atualizada com sucesso!');
     } catch (error) {
         console.error('Erro ao atualizar a rotina:', error);
         res.status(500).send('Erro ao atualizar a rotina.');
+    }
+});
+
+app.post('/create-diet', async (req, res) => {
+    const { name, focus, calories, userId} = req.body;
+    console.log('REQ', req.body);
+
+    try {
+        const newDiet = new Diet(name, calories, focus);
+        
+        await Diet.create(newDiet, userId);
+
+        return res.json({erro: false, mensagem: 'Dieta cadastrado com sucesso!!!'});
+    } catch (error) {
+        console.error('Erro ao criar o Dieta:', error);
+        return res.status(500).json({ erro: true, mensagem: 'Erro ao criar Dieta...' });
+    }
+})
+
+app.get('/user-diet/:userId/:dietId?', async (req, res) => {
+    try {
+        const userId = req.params.userId;
+        const dietId = req.params.routineId;
+
+        let diet;
+
+        if (dietId) {
+            diet = await Diet.findByUserIdAndDietId(userId, dietId);
+        } else {
+            diet = await Diet.findByUserId(userId);
+        }
+
+        if (!diet) {
+            return res.status(404).json({ error: 'Dieta não encontrada' });
+        }
+
+    } catch (error) {
+        console.error('Erro ao buscar rotina do usuário:', error);
+        res.status(500).json({ error: 'Erro ao buscar rotina do usuário' });
+    }
+});
+
+app.delete('/user-diet/:userId/:dietId', async (req, res) => {
+    try {
+        const userId = req.params.userId;
+        const dietId = req.params.routineId;
+
+        const diet = await Routine.findByUserIdAndRoutineId(userId, dietId);
+        if (!diet) {
+            return res.status(404).json({ error: 'Dieta não encontrado' });
+        }
+
+        await diet.destroy();
+
+        res.json({ message: 'Dieta excluída com sucesso' });
+    } catch (error) {
+        console.error('Erro ao excluir dieta:', error);
+        res.status(500).json({ error: 'Erro ao excluir dieta' });
     }
 });
 
@@ -227,7 +286,7 @@ async function checkAndCreateExampleExercises() {
 }
 
 async function createExampleExercises() {
-    const exampleExercises = mock;
+    const exampleExercises = mockExercises;
     try {
         for (const exerciseData of exampleExercises) {
             const newExercise = new Exercise(exerciseData.name, exerciseData.focus, exerciseData.rep, exerciseData.series, exerciseData.rest);

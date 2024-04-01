@@ -64,7 +64,6 @@ class Routine {
     }
 
     static async create(newRoutine) {
-        console.log('newRoutine', newRoutine);
         try {
             const routine = await db.models.Routine.create({
                 name: newRoutine.name,
