@@ -50,6 +50,18 @@ class DietIngredient {
             throw error;
         }
     }
+
+    static async findByDietId(dietId) {
+        try {
+            const dietIngredients = await DietIngredientModel.findAll({
+                where: { dietId: dietId }
+            });
+            return dietIngredients;
+        } catch (error) {
+            console.error('Erro ao encontrar as relações de Dieta e Ingrediente pelo ID da Dieta:', error);
+            throw error;
+        }
+    }
 }
 
 const DietIngredientModel = db.define('DietIngredient', {

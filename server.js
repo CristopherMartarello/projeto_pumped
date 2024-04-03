@@ -340,6 +340,32 @@ app.get('/get-mockDiets/', async (req, res) => {
 });
 
 
+// Pegar os ingredientes associados a essa dieta
+app.get('/api/dietas/:dietaId/ingredientes', async (req, res) => {
+    try {
+        const dietaId = req.params.dietaId;
+        const ingredientesSelecionados = await DietIngredient.findByDietId(dietaId);
+        res.json(ingredientesSelecionados);
+    } catch (error) {
+        console.error('Erro ao obter os ingredientes selecionados da dieta:', error);
+        res.status(500).json({ error: 'Erro ao obter os ingredientes selecionados da dieta.' });
+    }
+});
+
+
+// Pegar o objeto dos ingredientes
+app.get('/api/get-ingredient-details/:id', async (req, res) => {
+    const ingredientId = req.params.id;
+    try {
+        const ingredient = await Ingredient.findOneById(ingredientId);
+        res.json(ingredient);
+    } catch (error) {
+        console.error('Erro ao encontrar detalhes do ingrediente:', error);
+        res.status(500).json({ error: 'Erro ao encontrar detalhes do ingrediente' });
+    }
+});
+
+
 // OUTRAS FUNÇÕES
 async function checkAndCreateExampleExercises() {
     try {

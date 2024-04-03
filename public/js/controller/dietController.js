@@ -40,6 +40,27 @@ export const addOrEnterDiet = async function (boolean, dietId) {
 
             if (data) {
                 console.log('DATA', data);
+
+                getIngredients(data.id).then(async function (response) {
+                    const ingredientDetails = [];
+                    
+                    for (const ingredient of response) {
+                        try {
+                            const foundedIngredient = await getIngredientDetails(ingredient.ingredientId);
+                            ingredientDetails.push(foundedIngredient);
+                        } catch (error) {
+                            console.error('Erro ao encontrar detalhes do ingrediente:', error);
+                        }
+                    }
+                
+                    ingredientDetails.forEach(function (ingredient) {
+                        const checkbox = document.querySelector(`input[type="checkbox"][data-nome="${ingredient.name}"]`);
+                        if (checkbox) {
+                            checkbox.checked = true;
+                        }
+                    });
+                });
+                
                 try {
                     mockDiets = await fetch('/get-mockDiets/')
                         .then(response => response.json())
@@ -114,7 +135,7 @@ export const addOrEnterDiet = async function (boolean, dietId) {
                         // Checkbox
                         const checkbox = document.createElement('input');
                         checkbox.type = 'checkbox';
-                        checkbox.id = `ingredient-${ingredient.id}`;
+                        checkbox.id = `ingredient-${ingredient.nome}`;
                         checkbox.classList.add('ingredient-checkbox');
                         checkbox.dataset.nome = ingredient.nome;
                     
@@ -318,6 +339,36 @@ const updateDiet = async function(diet) {
     } catch (error) {
         console.error('Erro ao atualizar o dieta:', error);
         Swal.fire('Erro ao atualizar o dieta!', '', 'error');
+    }
+}
+
+// Função para obter os ingredientes da dieta
+async function getIngredients(dietaId) {
+    try {
+        const response = await fetch(`/api/dietas/${dietaId}/ingredientes`);
+        if (!response.ok) {
+            throw new Error('Erro ao obter os ingredientes selecionados da dieta');
+        }
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error('Erro:', error);
+        throw error;
+    }
+}
+
+// Função para obter o objeto dos ingredientes com os ids vindos da tabela relação
+async function getIngredientDetails(ingredientId) {
+    try {
+        const response = await fetch(`/api/get-ingredient-details/${ingredientId}`);
+        if (!response.ok) {
+            throw new Error('Erro ao obter os detalhes do ingrediente');
+        }
+        const ingredient = await response.json();
+        return ingredient;
+    } catch (error) {
+        console.error('Erro ao obter os detalhes do ingrediente:', error);
+        throw error;
     }
 }
 

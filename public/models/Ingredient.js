@@ -14,6 +14,16 @@ class Ingredient {
         }
     }
 
+    static async findOneById(id) {
+        try {
+            const ingredient = await IngredientModel.findOne({ where: { id } });
+            return ingredient;
+        } catch (error) {
+            console.error('Erro ao encontrar o ingrediente:', error);
+            throw error;
+        }
+    }
+
     static async create(newIngredient) {
         const {name, calories, userId} = newIngredient;
         try {
@@ -39,22 +49,15 @@ class Ingredient {
         }
     }
 
-    // static async findOrCreate(name, calories, userId) {
-    //     try {
-    //         let ingredient = await IngredientModel.findOne({ where: { name } });
-
-    //         if (ingredient) {
-    //             return ingredient;
-    //         }
-            
-    //         ingredient = await IngredientModel.create({ name, calories, userId });
-
-    //         return ingredient;
-    //     } catch (error) {
-    //         console.error('Erro ao encontrar ou criar o ingrediente:', error);
-    //         throw error;
-    //     }
-    // }
+    static async findAll() {
+        try {
+            const ingredients = await IngredientModel.findAll();
+            return ingredients;
+        } catch (error) {
+            console.error('Erro ao buscar todos os ingredientes:', error);
+            throw error;
+        }
+    }
 }
 
 const IngredientModel = db.define('Ingredient', {
