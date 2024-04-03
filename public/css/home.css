@@ -359,7 +359,7 @@ body {
 .data-diet-information {
     display: flex;
     flex-direction: column; 
-    flex: 1; 
+    /* flex: 1;  */
 }
 
 .diet-list {
@@ -374,7 +374,7 @@ body {
     flex-direction: column;
     flex-wrap: wrap;
     margin: 0vh 1vh 1vh 1vh;
-    width: 20%;
+    width: 30%;
     height: 30%;
     justify-content: center;
     align-items: center;
@@ -387,4 +387,67 @@ body {
     background: rgb(85, 98, 217);
     transform: scale(1.05);
     cursor: pointer;
+}
+
+.diet-calories {
+    position: absolute;
+    bottom: 8px;
+    right: 8px;
+    cursor: pointer;
+    color: rgb(0, 255, 0);
+    font-weight: bolder;
+}
+
+.ingredient-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    flex: 1;
+}
+
+.ingredient-checkbox {
+    height: 100%; 
+    border-radius: 5px; 
+    border: 1px solid #ccc; 
+    width: 20px; 
+    cursor: pointer; 
+}
+
+.ingredient {
+    width: calc(40% - 5px); 
+    height: 50px; 
+    background-color: #f0f0f0; 
+    border: 1px solid #ccc; 
+    margin-bottom: 10px; 
+    padding: 10px; 
+    box-sizing: border-box; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+}
+
+.info-diet-name {
+    width: calc(40% - 5px); 
+    height: 50px; 
+    background-color: #f0f0f0; 
+    border: 1px solid #ccc; 
+    margin-bottom: 10px; 
+    padding: 10px; 
+    box-sizing: border-box; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+}
+
+.info-diet {
+    width: calc(25% - 5px); 
+    height: 50px; 
+    background-color: #f0f0f0; 
+    border: 1px solid #ccc; 
+    margin-bottom: 10px; 
+    padding: 10px; 
+    box-sizing: border-box; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
 }

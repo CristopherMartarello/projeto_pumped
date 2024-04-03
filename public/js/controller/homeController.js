@@ -1,4 +1,5 @@
 import { addOrEnterRoutine } from './routineController.js';
+import { addOrEnterDiet } from './dietController.js';
 const userString = localStorage.getItem('user');
 const user = JSON.parse(userString);
 
@@ -61,9 +62,57 @@ function fillUserData() {
         } else {
             console.log('Usuário não tem treinos associados.');
         }
+        
+    })
+
+    // verificar se o usuário tem dietas associadas
+    fetch('/user-diets/' + user.id)
+    .then(response => response.json())
+    .then(dietas => {
+        const panelUserWorkout = document.getElementById('dietList');
+        if (dietas.length > 0) {
+            dietas.forEach(diet => {
+                // Criar a div da dieta
+                var divDiet = document.createElement('div');
+                divDiet.classList.add('diets');
+                divDiet.setAttribute('data-diet-id', diet.id);
+                divDiet.addEventListener('click', () => addOrEnterDiet(true, diet.id));
+
+                //Adicionar o nome da dieta
+                var dietName = document.createElement('span');
+                dietName.textContent = diet.name;
+                divDiet.appendChild(dietName);
+
+                //Adicionando o focus da dieta
+                var dietFocus = document.createElement('span');
+                dietFocus.textContent = diet.focus.toUpperCase();
+                divDiet.appendChild(dietFocus);
+
+                // Adicionar o ícone de exclusão
+                var icon = document.createElement('i');
+                icon.classList.add('fas', 'fa-times', 'remove-icon');
+                icon.addEventListener('click', (event) => {
+                    event.stopPropagation();
+                    removeDiet(diet.id);
+                });
+
+                //Adicionando o feedback do treino
+                var dietCalories = document.createElement('span');
+                dietCalories.classList.add('diet-calories');
+                dietCalories.textContent = diet.calories ? diet.calories + 'kcal' : 'xkcal';
+                divDiet.appendChild(dietCalories);
+
+                divDiet.appendChild(icon);
+                
+                panelUserWorkout.appendChild(divDiet);
+            });
+        } else {
+            console.log('Usuário não tem dietas associadas.');
+        }
+        
     })
     .catch(error => {
-        console.error('Erro ao buscar treinos do usuário:', error);
+        console.error('Erro ao buscar dietas do usuário:', error);
     });
 }
 
@@ -124,7 +173,6 @@ function init () {
     fillUserData();
     window.saveData = saveData;
     window.addOrEnterRoutine = addOrEnterRoutine;
-    window.removeRoutine = removeRoutine;
 }
 
 init();

@@ -126,7 +126,6 @@ class Routine {
     }
 
     static async update(routine) {
-        console.log('ROTINA ID', routine.routine.id);
         try {
             const updatedRoutine = await db.models.Routine.update(routine.routine, {
                 where: {

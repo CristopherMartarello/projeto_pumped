@@ -262,7 +262,6 @@ const createRoutine = function (name, focus) {
 }
 
 async function contabilizarTreino(routine) {
-    console.log('routine', routine);
     try {
         const response = await fetch('/update-routine', {
             method: 'PUT', 

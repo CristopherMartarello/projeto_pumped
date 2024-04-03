@@ -2,14 +2,17 @@ const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
 
-//Pegando os dados do Mock (exercicios)
+//Pegando os dados dos Mocks
 const mockExercises = require('./mock/mockExercises');
+const mockDiets = require('./mock/mockDiets');
 
 //Estabelecendo conexões com o banco de dados
-const { User } = require('./models/User'); //a tabela só é criada caso não exista
-const { Routine } = require('./models/Routine'); //a tabela só é criada caso não exista
-const { Exercise } = require('./models/Exercise'); //a tabela só é criada caso não exista
-const { Diet } = require('./models/Diet'); //a tabela só é criada caso não exista
+const { User } = require('./public/models/User'); //a tabela só é criada caso não exista
+const { Routine } = require('./public/models/Routine'); //a tabela só é criada caso não exista
+const { Exercise } = require('./public/models/Exercise'); //a tabela só é criada caso não exista
+const { Diet } = require('./public/models/Diet'); //a tabela só é criada caso não exista
+const { DietIngredient } = require('./public/models/DietIngredient'); //a tabela só é criada caso não exista
+const { Ingredient } = require('./public/models/Ingredient');//a tabela só é criada caso não exista
 
 const app = express(); 
 
@@ -25,6 +28,7 @@ app.get('/home', (req, res) => {
     res.sendFile(path.join(initialPath, "home.html"));
 })
 
+//USUÁRIO
 app.post('/register-user', async (req, res) => {
     console.log(req.body);
     const { name, username, email, password } = req.body;
@@ -99,6 +103,7 @@ app.post('/update-user', async (req, res) => {
     }
 })
 
+//TREINO
 app.post('/create-routine', async (req, res) => {
     const { name, focus, userId } = req.body;
 
@@ -211,9 +216,10 @@ app.put('/update-routine', async (req, res) => {
     }
 });
 
+
+//DIETA
 app.post('/create-diet', async (req, res) => {
     const { name, focus, calories, userId} = req.body;
-    console.log('REQ', req.body);
 
     try {
         const newDiet = new Diet(name, calories, focus);
@@ -227,10 +233,21 @@ app.post('/create-diet', async (req, res) => {
     }
 })
 
+app.get('/user-diets/:userId', async (req, res) => {
+    try {
+        const userId = req.params.userId;
+        const diets = await Diet.findByUserId(userId);
+        res.json(diets);
+    } catch (error) {
+        console.error('Erro ao buscar dietas do usuário:', error);
+        res.status(500).json({ error: 'Erro ao buscar dietas do usuário' });
+    }
+});
+
 app.get('/user-diet/:userId/:dietId?', async (req, res) => {
     try {
         const userId = req.params.userId;
-        const dietId = req.params.routineId;
+        const dietId = req.params.dietId;
 
         let diet;
 
@@ -244,18 +261,20 @@ app.get('/user-diet/:userId/:dietId?', async (req, res) => {
             return res.status(404).json({ error: 'Dieta não encontrada' });
         }
 
+        return res.json(diet);
+
     } catch (error) {
-        console.error('Erro ao buscar rotina do usuário:', error);
-        res.status(500).json({ error: 'Erro ao buscar rotina do usuário' });
+        console.error('Erro ao buscar dieta do usuário:', error);
+        res.status(500).json({ error: 'Erro ao buscar dieta do usuário' });
     }
 });
 
 app.delete('/user-diet/:userId/:dietId', async (req, res) => {
     try {
         const userId = req.params.userId;
-        const dietId = req.params.routineId;
+        const dietId = req.params.dietId;
 
-        const diet = await Routine.findByUserIdAndRoutineId(userId, dietId);
+        const diet = await Diet.findByUserIdAndDietId(userId, dietId);
         if (!diet) {
             return res.status(404).json({ error: 'Dieta não encontrado' });
         }
@@ -269,6 +288,59 @@ app.delete('/user-diet/:userId/:dietId', async (req, res) => {
     }
 });
 
+app.put('/update-diet', async (req, res) => {
+    try {
+        const { id, userId, name, calories, focus, ingredientesSelecionados } = req.body;
+
+        const updatedDiet = await Diet.update({ name, calories, focus }, id);
+
+        await Promise.all(ingredientesSelecionados.map(async ingrediente => {
+            const ingredienteEncontrado = mockDiets.find(item => item.nome === ingrediente);
+
+            let ingredientModel;
+
+            const existingIngredient = await Ingredient.findOne(ingredienteEncontrado.nome);
+
+            if (existingIngredient) {
+                await Ingredient.update(existingIngredient.id, { calories: ingredienteEncontrado.calorias });
+                ingredientModel = existingIngredient;
+            } else {
+                ingredientModel = await Ingredient.create({
+                    name: ingredienteEncontrado.nome,
+                    calories: ingredienteEncontrado.calorias,
+                    userId: userId
+                });
+            }
+            
+            try {
+                console.log('id DIETA', id);
+                console.log('id Ingrediente', ingredientModel.id);
+                await DietIngredient.findOrCreate(id, ingredientModel.id);
+            } catch (error) {
+                console.error('Erro ao criar ou atualizar a entrada DietIngredient:', error);
+            }
+        }));
+        
+        res.status(200).json(updatedDiet);
+    } catch (error) {
+        console.error('Erro ao atualizar a dieta:', error);
+        res.status(500).json({ error: 'Erro ao atualizar a dieta.' });
+    }
+});
+
+
+app.get('/get-mockDiets/', async (req, res) => {
+    try {
+        console.log(mockDiets);
+        return res.json(mockDiets);
+    } catch (error) {
+        console.error('Erro ao buscar dietas do usuário:', error);
+        res.status(500).json({ error: 'Erro ao buscar dietas do usuário' });
+    }
+});
+
+
+// OUTRAS FUNÇÕES
 async function checkAndCreateExampleExercises() {
     try {
         const exercisesCount = await Exercise.count();

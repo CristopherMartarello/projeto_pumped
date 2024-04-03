@@ -72,13 +72,67 @@ class Diet {
         }
     }
 
-    static async findAll() {
+    static async findByUserId(userId) {
         try {
-            const diets = await db.models.Diet.findAll();
+            const diets = await db.models.Diet.findAll({
+                where: {
+                    userId: userId
+                }
+            });
+
             return diets;
         } catch (error) {
-            console.error('Erro ao buscar refeições:', error);
+            console.error('Erro ao buscar dietas pelo ID do usuário:', error);
             throw error;
+        }
+    }
+
+    static async findByUserIdAndDietId(userId, dietId) {
+        try {
+            const diet = await db.models.Diet.findOne({
+                where: {
+                    userId: userId,
+                    id: dietId
+                }
+            });
+
+            return diet;
+        } catch (error) {
+            console.error('Erro ao buscar dieta pelo ID do usuário e ID da dieta:', error);
+            throw error;
+        }
+    }
+
+    static async update(newDiet, dietId) {
+        console.log(dietId);
+        console.log(newDiet.name, newDiet.focus, newDiet.calories);
+        try {
+            const updatedDiet = await db.models.Diet.update(newDiet, {
+                where: {
+                    id: dietId
+                }
+            });
+    
+            return updatedDiet;
+        } catch (error) {
+            console.error('Erro ao atualizar a dieta:', error);
+            throw error;
+        }
+    }
+
+    static async deleteDiet(userId, dietId) {
+        try {
+            const response = await fetch(`/user-diet/${userId}/${dietId}`, {
+                method: 'DELETE'
+            });
+            if (response.ok) {
+                const data = await response.json();
+                console.log(data.message);
+            } else {
+                console.error('Erro ao excluir dieta:', response.status);
+            }
+        } catch (error) {
+            console.error('Erro ao excluir dieta:', error);
         }
     }
 
@@ -94,7 +148,6 @@ class Diet {
 
     //função para adicionar ingredients
 
-    //função para calcular total de calorias com os ingredientes adicionados
 }
 
 const DietModel = db.define('Diet', {
@@ -129,9 +182,12 @@ const DietModel = db.define('Diet', {
     tableName: 'diets'
 });
 
+module.exports = { Diet, DietModel };
+
 // Syncar a model caso não exista
 DietModel.sync();
 DietModel.belongsTo(UserModel, { foreignKey: 'userId' });
 
-
-module.exports = { Diet, DietModel };
+const { IngredientModel } = require('./Ingredient');
+const { DietIngredientModel } = require('./DietIngredient');
+DietModel.belongsToMany(IngredientModel, { through: DietIngredientModel });
