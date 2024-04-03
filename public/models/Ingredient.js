@@ -1,6 +1,6 @@
 const Sequelize = require('sequelize');
 const db = require('./database');
-// const { DietIngredientModel } = require('./DietIngredient'); 
+const { DietIngredientModel } = require('./DietIngredient'); 
 const { DietModel } = require('./Diet');
 
 class Ingredient {
@@ -77,6 +77,6 @@ const IngredientModel = db.define('Ingredient', {
 IngredientModel.sync();
 module.exports = { Ingredient, IngredientModel };
 
-// IngredientModel.belongsToMany(DietModel, { through: DietIngredientModel });
+IngredientModel.belongsToMany(DietModel, { through: DietIngredientModel });
 
 

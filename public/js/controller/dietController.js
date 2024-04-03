@@ -39,6 +39,7 @@ export const addOrEnterDiet = async function (boolean, dietId) {
             }
 
             if (data) {
+                console.log('DATA', data);
                 try {
                     mockDiets = await fetch('/get-mockDiets/')
                         .then(response => response.json())
@@ -223,7 +224,7 @@ export const addOrEnterDiet = async function (boolean, dietId) {
                     cancelButtonText: 'Cancelar'
                 }).then((result) => {
                     if (result.isConfirmed) {
-                        createDiet(formValue, 1250, focus);
+                        createDiet(formValue, 0, focus);
                     } else if (result.isDenied) {
                         Swal.fire("Dieta cancelada!", "", "info");
                     }
@@ -310,7 +311,7 @@ const updateDiet = async function(diet) {
         });
 
         if (response.ok) {
-            Swal.fire('Dieta atualizado com sucesso!', '', 'success');
+            Swal.fire('Dieta atualizada com sucesso!', '', 'success');
         } else {
             Swal.fire('Erro ao atualizar o dieta!', '', 'error');
         }

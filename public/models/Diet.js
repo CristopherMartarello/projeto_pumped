@@ -189,5 +189,5 @@ DietModel.sync();
 DietModel.belongsTo(UserModel, { foreignKey: 'userId' });
 
 const { IngredientModel } = require('./Ingredient');
-// const { DietIngredientModel } = require('./DietIngredient');
-// DietModel.belongsToMany(IngredientModel, { through: DietIngredientModel });
+const { DietIngredientModel } = require('./DietIngredient');
+DietModel.belongsToMany(IngredientModel, { through: DietIngredientModel });

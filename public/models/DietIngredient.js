@@ -78,7 +78,7 @@ const DietIngredientModel = db.define('DietIngredient', {
 });
 
 //Syncar a model caso não exista
-DietIngredientModel.sync({force: true});
+DietIngredientModel.sync();
 
 
 module.exports = { DietIngredient, DietIngredientModel };

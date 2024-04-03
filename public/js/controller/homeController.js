@@ -99,7 +99,7 @@ function fillUserData() {
                 //Adicionando o feedback do treino
                 var dietCalories = document.createElement('span');
                 dietCalories.classList.add('diet-calories');
-                dietCalories.textContent = diet.calories ? diet.calories + 'kcal' : 'xkcal';
+                dietCalories.textContent = diet.calories > 0 ? diet.calories + 'kcal' : '0kcal';
                 divDiet.appendChild(dietCalories);
 
                 divDiet.appendChild(icon);
