@@ -62,9 +62,10 @@ const DietIngredientModel = db.define('DietIngredient', {
         type: Sequelize.INTEGER,
         allowNull: true,
         references: {
-            model: 'Diets', 
+            model: 'diets', 
             key: 'id'
-        }
+        },
+        onDelete: 'CASCADE'
     },
     ingredientId: {
         type: Sequelize.INTEGER,
@@ -77,6 +78,7 @@ const DietIngredientModel = db.define('DietIngredient', {
 });
 
 //Syncar a model caso não exista
-DietIngredientModel.sync();
+DietIngredientModel.sync({force: true});
+
 
 module.exports = { DietIngredient, DietIngredientModel };
