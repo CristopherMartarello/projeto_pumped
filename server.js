@@ -315,8 +315,6 @@ app.put('/update-diet', async (req, res) => {
             }
             
             try {
-                console.log('id DIETA', id);
-                console.log('id Ingrediente', ingredientModel.id);
                 await DietIngredient.findOrCreate(id, ingredientModel.id);
             } catch (error) {
                 console.error('Erro ao criar ou atualizar a entrada DietIngredient:', error);
@@ -373,16 +371,12 @@ app.post('/calculate-calories', (req, res) => {
     const heightCm = height * 100;
 
     const metabolismoMale = CalorieCalculator.calculateTMBMale(weight, heightCm, age);
-    console.log(metabolismoMale);
 
     const metabolismoFem = CalorieCalculator.calculateTMBFemale(weight, heightCm, age);
-    console.log(metabolismoFem);
 
     const caloriesEmagrecimento = CalorieCalculator.caloriesForWeightLoss(metabolismoMale, 1.55, 500);
-    console.log(caloriesEmagrecimento);
 
     const caloriesGanharMassa = CalorieCalculator.caloriesForMuscleGain(metabolismoMale, 1.55, 300);
-    console.log(caloriesEmagrecimento);
 
     const waterIntake = WaterIntakeCalculator.calculateWaterIntake(weight);
 

@@ -204,6 +204,22 @@ const UserModel = db.define('User', {
     bio: {
         type: Sequelize.STRING,
         allowNull: true
+    },
+    gender: {
+        type: Sequelize.STRING,
+        allowNull: true
+    },
+    activity: {
+        type: Sequelize.FLOAT,
+        allowNull: true
+    },
+    imc: {
+        type: Sequelize.FLOAT,
+        allowNull: true
+    }, 
+    waterIntake: {
+        type: Sequelize.FLOAT,
+        allowNull: true
     }
 }, {
     tableName: 'users'

@@ -39,8 +39,6 @@ export const addOrEnterDiet = async function (boolean, dietId) {
             }
 
             if (data) {
-                console.log('DATA', data);
-
                 getIngredients(data.id).then(async function (response) {
                     const ingredientDetails = [];
                     
@@ -97,7 +95,6 @@ export const addOrEnterDiet = async function (boolean, dietId) {
                 amountDiv.setAttribute('id', 'total-calories'); 
 
                 if (data.calories > 0) {
-                    console.log('CALORIES', data.calories);
                     totalCalorias = data.calories;
                     amountDiv.textContent = `${data.calories}kcal`;
                 } else {
@@ -233,23 +230,50 @@ export const addOrEnterDiet = async function (boolean, dietId) {
                 }
             });
             if (focus) {
-                Swal.fire({
-                    title: "Deseja criar a sua dieta?",
-                    html: `
-                      ${formValue} - ${focus}
-                    `,
-                    showDenyButton: true,
+                const { value: activity } = await Swal.fire({
+                    title: "Como você se considera ativo fisicamente?",
+                    input: "select",
+                    inputOptions: {
+                        Classificação: {
+                            1.2: "Pouco ou Inativo",
+                            1.375: "Exercícios Leves (1 a 3 dias / semana)",
+                            1.55: "Exercícios Moderados (3 a 5 dias / semana)",
+                            1.725: "Exercícios Pesados (6 a 7 dias / semana)",
+                            1.9: "Exercícios Intensos / Atletas",
+                        }
+                    },
+                    inputPlaceholder: "Selecione o seu perfil...",
                     showCancelButton: true,
-                    confirmButtonText: "Salvar",
-                    denyButtonText: 'Descartar',
-                    cancelButtonText: 'Cancelar'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        createDiet(formValue, 0, focus);
-                    } else if (result.isDenied) {
-                        Swal.fire("Dieta cancelada!", "", "info");
+                    inputValidator: (value) => {
+                        return new Promise((resolve) => {
+                            if (value !== '') {
+                                resolve();
+                            } else {
+                                resolve("Você precisa selecionar um perfil!");
+                            }
+                        });
                     }
                 });
+                if (activity) {
+                    activityFactor = activity;
+                    Swal.fire({
+                        title: "Deseja criar a sua dieta?",
+                        html: `
+                          ${formValue} - ${focus}
+                        `,
+                        showDenyButton: true,
+                        showCancelButton: true,
+                        confirmButtonText: "Salvar",
+                        denyButtonText: 'Descartar',
+                        cancelButtonText: 'Cancelar'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            createDiet(formValue, 0, focus);
+                        } else if (result.isDenied) {
+                            Swal.fire("Dieta cancelada!", "", "info");
+                        }
+                    });
+                }
             }
         } else {
             Swal.fire({
@@ -410,9 +434,11 @@ function handleCheckboxClick(checkbox, ingrediente) {
 }
 
 function init () {
+    let activityFactor = 0;
     window.addOrEnterDiet = addOrEnterDiet;
     window.removeDiet = removeDiet;
     window.updateDiet = updateDiet;
+    window.activityFactor = activityFactor;
 }
 
 init();

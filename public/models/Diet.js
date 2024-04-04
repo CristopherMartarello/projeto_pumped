@@ -146,8 +146,6 @@ class Diet {
         }
     }
 
-    //função para adicionar ingredients
-
 }
 
 const DietModel = db.define('Diet', {
@@ -190,4 +188,4 @@ DietModel.belongsTo(UserModel, { foreignKey: 'userId' });
 
 const { IngredientModel } = require('./Ingredient');
 const { DietIngredientModel } = require('./DietIngredient');
-DietModel.belongsToMany(IngredientModel, { through: DietIngredientModel });
+DietModel.belongsToMany(IngredientModel, { through: DietIngredientModel })

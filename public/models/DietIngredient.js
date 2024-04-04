@@ -62,6 +62,22 @@ class DietIngredient {
             throw error;
         }
     }
+
+    static async destroy(dietId, ingredientIds) {
+        try {
+            await DietIngredientModel.destroy({
+                where: {
+                    dietId: dietId,
+                    ingredientId: ingredientIds
+                }
+            });
+
+            console.log(`Relações de Dieta e Ingrediente removidas para a Dieta ID ${dietId}`);
+        } catch (error) {
+            console.error('Erro ao remover relações de Dieta e Ingrediente:', error);
+            throw error;
+        }
+    }
 }
 
 const DietIngredientModel = db.define('DietIngredient', {
@@ -91,6 +107,5 @@ const DietIngredientModel = db.define('DietIngredient', {
 
 //Syncar a model caso não exista
 DietIngredientModel.sync();
-
 
 module.exports = { DietIngredient, DietIngredientModel };
