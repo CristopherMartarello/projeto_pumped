@@ -13,6 +13,8 @@ const { Exercise } = require('./public/models/Exercise'); //a tabela só é cria
 const { Diet } = require('./public/models/Diet'); //a tabela só é criada caso não exista
 const { DietIngredient } = require('./public/models/DietIngredient'); //a tabela só é criada caso não exista
 const { Ingredient } = require('./public/models/Ingredient');//a tabela só é criada caso não exista
+const CalorieCalculator = require('./public/models/CalorieCalculator');
+const WaterIntakeCalculator = require('./public/models/WaterIntakeCalculator');
 
 const app = express(); 
 
@@ -85,14 +87,14 @@ app.post('/login-user', async (req, res) => {
 
 app.post('/update-user', async (req, res) => {
     console.log(req.body);
-    const { name, username, email, password, age, weight, height, birth, bio, id } = req.body;
+    const { name, username, email, password, age, weight, height, birth, bio, id, gender } = req.body;
     
     if (!name || !email || !age || !weight || !height || !birth || !bio) {
         return res.json({ erro: true, mensagem: 'Por favor, preencha todos os campos...' });
     }
 
     try {
-        const newUser = new User(name, username, email, password, age, weight, height, birth, bio);
+        const newUser = new User(name, username, email, password, age, weight, height, birth, bio, gender);
 
         await User.update(newUser, id);
 
@@ -363,6 +365,30 @@ app.get('/api/get-ingredient-details/:id', async (req, res) => {
         console.error('Erro ao encontrar detalhes do ingrediente:', error);
         res.status(500).json({ error: 'Erro ao encontrar detalhes do ingrediente' });
     }
+});
+
+// CALCULADORA DE CALORIAS
+app.post('/calculate-calories', (req, res) => {
+    const { age, height, weight } = req.body;
+    const heightCm = height * 100;
+
+    const metabolismoMale = CalorieCalculator.calculateTMBMale(weight, heightCm, age);
+    console.log(metabolismoMale);
+
+    const metabolismoFem = CalorieCalculator.calculateTMBFemale(weight, heightCm, age);
+    console.log(metabolismoFem);
+
+    const caloriesEmagrecimento = CalorieCalculator.caloriesForWeightLoss(metabolismoMale, 1.55, 500);
+    console.log(caloriesEmagrecimento);
+
+    const caloriesGanharMassa = CalorieCalculator.caloriesForMuscleGain(metabolismoMale, 1.55, 300);
+    console.log(caloriesEmagrecimento);
+
+    const waterIntake = WaterIntakeCalculator.calculateWaterIntake(weight);
+
+    const response = [metabolismoMale, metabolismoFem, caloriesEmagrecimento, caloriesGanharMassa, waterIntake];
+
+    res.json(response);
 });
 
 

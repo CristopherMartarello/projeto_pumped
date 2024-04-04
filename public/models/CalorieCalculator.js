@@ -1,4 +1,8 @@
 class CalorieCalculator {
+
+    constructor () {
+
+    }
     // taxa de metabolismo basal (TMB) para homens
     static calculateTMBMale(weight, height, age) {
         return 88.362 + (13.397 * weight) + (4.799 * height) - (5.677 * age);
@@ -19,4 +23,6 @@ class CalorieCalculator {
         return (TMB * activityFactor) + superavit;
     }
 }
+
+module.exports = CalorieCalculator;
 

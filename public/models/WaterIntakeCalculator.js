@@ -6,3 +6,5 @@ class WaterIntakeCalculator {
         return weight * intakeFactor;
     }
 }
+
+module.exports = WaterIntakeCalculator;

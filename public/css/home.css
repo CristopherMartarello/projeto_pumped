@@ -216,9 +216,13 @@ body {
 
 .user-data-image {
     margin-top: 3vh;
-    background-color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* background-color: black; */
     width: 12rem;
     height: 12rem;
+    font-size: 20vh;
 }
 
 .user-bio {
@@ -227,6 +231,15 @@ body {
     flex-direction: column;
     font-weight: bold;
     margin-bottom: 1.5vh;
+}
+
+.user-gender {
+    margin-top: 3vh;
+    display: flex;
+    flex-direction: column;
+    font-weight: bold;
+    margin-bottom: 1.5vh;
+    width: 85%;
 }
 
 .user-workout-information {
@@ -250,6 +263,8 @@ body {
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: flex-start;
+    box-shadow: 0 0 5vh rgb(0, 0, 0);
+    background-color: rgba(1, 1, 85, 0.5);
 }
 
 .routines {
@@ -336,18 +351,17 @@ body {
     height: 80%;
     width: 85%;
     box-shadow: 0 0 5vh rgb(0, 0, 0);
-    background-color: rgb(255, 255, 255, 0.8);
+    background-color: rgba(1, 1, 85, 0.5);
     padding: 5vh;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    flex-direction: row;
 }
 
 .calorie-info {
-    background-color: rgb(0, 0, 44, .5);
+    background-color: rgba(255, 255, 255, 0.9);
     width: 70%;
-    height: 10%;
+    height: 20%;
     padding: 5vh;
     border-radius: 5px;
     display: flex;
@@ -359,7 +373,7 @@ body {
 .data-diet-information {
     display: flex;
     flex-direction: column; 
-    /* flex: 1;  */
+    flex: 1; 
 }
 
 .diet-list {

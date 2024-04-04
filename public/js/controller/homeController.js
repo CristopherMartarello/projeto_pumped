@@ -114,12 +114,16 @@ function fillUserData() {
     .catch(error => {
         console.error('Erro ao buscar dietas do usuário:', error);
     });
+
+    calculateAverageCalories(user.age, user.height, user.weight);
 }
 
 function getDataFromInputs() {
     var userData = {};
     var inputs = document.getElementsByTagName('input');
     var bio = document.getElementById('bio').value;
+    var gender = document.getElementById('gender').value;
+    console.log(gender);
 
     for (var i = 0; i < inputs.length; i++) {
         var input = inputs[i];
@@ -134,12 +138,13 @@ function getDataFromInputs() {
     userData['id'] = user.id;
     userData['username'] = user.username;
     userData['password'] = user.password;
+    userData['gender'] = gender;
     return userData;
 }
 
 const saveData = function () {
     var userData = getDataFromInputs();
-    const {name, username, email, password, age, weight, id, height, birth, bio} = userData;
+    const {name, username, email, password, age, weight, id, height, birth, bio, gender} = userData;
     console.log('Dados dos inputs:', userData);
     
     fetch('/update-user', {
@@ -156,6 +161,7 @@ const saveData = function () {
             height: height,
             birth: birth, 
             bio: bio,
+            gender: gender
         })
     })
         .then(res => res.json())
@@ -167,12 +173,34 @@ const saveData = function () {
         });
 }
 
+const calculateAverageCalories = async function(age, height, weight) {
+    console.log(age, height, weight);
+    try {
+        const response = await fetch('/calculate-calories', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ age, height, weight })
+        });
 
+        if (!response.ok) {
+            throw new Error('Erro ao calcular calorias médias');
+        }
+
+        const data = await response.json();
+        console.log(data);
+    } catch (error) {
+        console.error('Erro ao calcular calorias médias:', error);
+        throw error;
+    }
+}
 
 function init () {
     fillUserData();
     window.saveData = saveData;
     window.addOrEnterRoutine = addOrEnterRoutine;
+    window.calculateAverageCalories = calculateAverageCalories;
 }
 
 init();

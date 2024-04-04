@@ -11,8 +11,9 @@ class User {
     #height;
     #birth;
     #bio;
+    #gender;
 
-    constructor(name, username, email, password, age, weight, height, birth, bio) {
+    constructor(name, username, email, password, age, weight, height, birth, bio, gender) {
         this.#name = name;
         this.#username = username;
         this.#email = email;
@@ -22,6 +23,7 @@ class User {
         this.#height = height || 0.0;
         this.#birth = birth || null;
         this.#bio = bio || '';
+        this.#gender = gender || '';
     }
 
     get name() {
@@ -96,6 +98,14 @@ class User {
         this.#birth = value;
     }
 
+    get gender() {
+        return this.#gender;
+    }
+
+    set gender(value) {
+        this.#gender = value;
+    }
+
     static async create(newUser) {
         try {
             const user = await db.models.User.create({
@@ -107,7 +117,8 @@ class User {
                 weight: newUser.weight ? newUser.weight : '0.0',
                 height: newUser.weight ? newUser.height : '0.0',
                 birth: newUser.birth ? newUser.birth : null,
-                bio: newUser.bio ? newUser.bio : ''
+                bio: newUser.bio ? newUser.bio : '',
+                gender: newUser.gender ? newUser.gender : '',
             });
             console.log('Usuário inserido no banco de dados:', user.username);
             return user;
@@ -133,10 +144,10 @@ class User {
     }
 
     static async update(newData, userId) {
-        const { name, username, email, password, age, weight, height, birth, bio } = newData;
+        const { name, username, email, password, age, weight, height, birth, bio, gender } = newData;
         try {
             const updatedUser = await db.models.User.update({name: name, username: username, email: email, password: password, age: age,
-            weight: weight, height: height, birth: birth, bio: bio }, {
+            weight: weight, height: height, birth: birth, bio: bio, gender: gender }, {
                 where: {
                     id: userId
                 }
