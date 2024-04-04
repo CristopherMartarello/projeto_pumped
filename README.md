@@ -25,3 +25,5 @@ Pumped, site para registro de vida fitness, com foco em auxiliar a vida do usuar
 2° - Um feed como de qualquer rede social, quando um usuario concluí um treino ou dieta, ela apareceria no feed dos usurarios que o seguem, assim podendo comentar e curtir a dieta ou treino.
 
 3° - Uma loja do site, com produtos relacionados a vida fitness, como suplementos e acessorios.
+
+4° - Uma aba de evolução, que mostraria a evolução do usuario com base nos treinos, dietas e peso.
