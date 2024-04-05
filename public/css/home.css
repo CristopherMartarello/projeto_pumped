@@ -29,7 +29,7 @@ body {
 .sidebar {
     display: flex;
     flex-direction: column;
-    background-color: rgb(0, 0, 44, .9);
+    background-color: rgb(0, 0, 44);
     position: fixed;
     height: 100%;
     width: 35vh;
@@ -138,7 +138,7 @@ body {
     height: 80%;
     width: 85%;
     box-shadow: 0 0 5vh rgb(0, 0, 0);
-    background-color: rgb(255, 255, 255, 0.8);
+    background-color: rgba(255, 255, 255, 0.1);
     padding: 5vh;
     display: flex;
     flex-direction: row;
@@ -158,15 +158,19 @@ body {
     margin: 0vh 0vh 3vh 0vh;
     width: 30%;
     max-height: 100%;
-    background-color: rgb(0, 0, 44, .5);
+    background-color: rgb(0, 0, 44);
     display: flex;
     flex-direction: column;
     align-items: center;
     border-radius: 5px;
 }
 
+.profile-status label {
+    color: #fff;
+}
+
 .input-block {
-    background-color: rgb(0, 0, 44, .5);
+    background-color: rgb(0, 0, 44);
     width: 25%;
     height: 10%;
     padding: 5vh;
@@ -185,14 +189,11 @@ body {
     font-size: 2vh;
 }
 
-/* .input-block input:focus {
-    border-bottom: 3px solid rgb(0, 0, 44, 1);
-} */
-
 .input-block label {
     margin-bottom: 1.5vh;
     font-weight: bold;
     font-size: medium;
+    color:#fff;
 }
 
 .btn {
@@ -214,6 +215,24 @@ body {
     color: rgb(255, 255, 255, 1);
 }
 
+.btn-data {
+    color: #fff;
+    background: rgb(0, 0, 44);
+    border: none;
+    padding: 1vh 4vh;
+    font-size: 2vh;
+    display: block;
+    margin: auto;
+    cursor: pointer;
+    border-radius: 10px;
+    margin-bottom: 3vh;
+    transition: .5s;
+}
+
+.btn-data:hover {
+    background: rgb(85, 98, 217);
+}
+
 .user-data-image {
     margin-top: 3vh;
     display: flex;
@@ -233,13 +252,17 @@ body {
     margin-bottom: 1.5vh;
 }
 
-.user-gender {
+.user-gender, .user-activity {
     margin-top: 3vh;
     display: flex;
     flex-direction: column;
     font-weight: bold;
     margin-bottom: 1.5vh;
     width: 85%;
+}
+
+.user-gender select, .user-activity select {
+    font-size: 2vh;
 }
 
 .user-workout-information {
@@ -249,10 +272,18 @@ body {
 }
 
 .user-workout-information .square {
-    background-color: black;
+    background-color: rgb(255, 255, 255);
     width: 6rem;
     height: 6rem;
-    margin: 3vh;
+    margin: 2vh;
+    padding: 2vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    align-items: center;
+    font-size: x-large;
+    font-weight: bolder;
 }
 
 .panel-user-workout {
@@ -264,7 +295,7 @@ body {
     flex-wrap: wrap;
     justify-content: flex-start;
     box-shadow: 0 0 5vh rgb(0, 0, 0);
-    background-color: rgba(1, 1, 85, 0.5);
+    background-color: rgba(255, 255, 255, 0.1);
 }
 
 .routines {
@@ -351,23 +382,11 @@ body {
     height: 80%;
     width: 85%;
     box-shadow: 0 0 5vh rgb(0, 0, 0);
-    background-color: rgba(1, 1, 85, 0.5);
+    background-color: rgba(255, 255, 255, 0.1);
     padding: 5vh;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-}
-
-.calorie-info {
-    background-color: rgba(255, 255, 255, 0.9);
-    width: 70%;
-    height: 20%;
-    padding: 5vh;
-    border-radius: 5px;
-    display: flex;
-    flex-direction: column;
-    margin: 0vh 3vh 3vh 3vh;
-    justify-content: center;
 }
 
 .data-diet-information {
@@ -464,4 +483,34 @@ body {
     display: flex; 
     align-items: center; 
     justify-content: center; 
+}
+
+.calorie-info {
+    background-color: rgba(255, 255, 255, 0.9);
+    width: 85%;
+    height: 20%;
+    padding: 1vh;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: row;
+    margin: 0vh 3vh 3vh 3vh;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.calorie-info .square {
+    background-color: #2758d5;
+    width: 6rem;
+    height: 6rem;
+    margin: 1vh;
+    padding: 2vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    align-items: center;
+    flex: 1;
+    font-size: large;
+    font-weight: bolder;
 }

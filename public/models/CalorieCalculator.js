@@ -22,6 +22,18 @@ class CalorieCalculator {
     static caloriesForMuscleGain(TMB, activityFactor, superavit) {
         return (TMB * activityFactor) + superavit;
     }
+
+    // calorias para manter e definir
+    static caloriesForMaintance(TMB, activityFactor) {
+        return (TMB * activityFactor);
+    }
+
+    //calcular o imc
+    static calculateIMC(weight, height) {
+        height = height / 100.0;
+    
+        return weight / (height * height);
+    }
 }
 
 module.exports = CalorieCalculator;

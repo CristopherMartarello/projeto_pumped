@@ -6,7 +6,7 @@ const user = JSON.parse(userString);
 console.log(user);
 
 //Preenchendo os dados do usuário caso correspondam no DB
-function fillUserData() {
+async function fillUserData() {
     for (var key in user) {
         if (user.hasOwnProperty(key)) {
             var inputElement = document.getElementById(key);
@@ -115,7 +115,15 @@ function fillUserData() {
         console.error('Erro ao buscar dietas do usuário:', error);
     });
 
-    calculateAverageCalories(user.age, user.height, user.weight);
+    await getUserById().then(function(foundedUser) {
+        calculateAverageCalories(user.age, user.height, user.weight, foundedUser.activity);
+
+        var genderSelect = document.getElementById('gender');
+        genderSelect.value = foundedUser.gender;
+
+        var activitySelect = document.getElementById('activity');
+        activitySelect.value = foundedUser.activity;
+    });
 }
 
 function getDataFromInputs() {
@@ -123,7 +131,7 @@ function getDataFromInputs() {
     var inputs = document.getElementsByTagName('input');
     var bio = document.getElementById('bio').value;
     var gender = document.getElementById('gender').value;
-    console.log(gender);
+    var activity = document.getElementById('activity').value;
 
     for (var i = 0; i < inputs.length; i++) {
         var input = inputs[i];
@@ -139,12 +147,27 @@ function getDataFromInputs() {
     userData['username'] = user.username;
     userData['password'] = user.password;
     userData['gender'] = gender;
+    userData['activity'] = activity;
     return userData;
+}
+
+const getUserById = async function() {
+    try {
+        const response = await fetch(`/get-user/${user.id}`);
+        if (!response.ok) {
+            throw new Error('Erro ao buscar usuário pelo ID');
+        }
+        const foundedUser = await response.json();
+        return foundedUser;
+    } catch (error) {
+        console.error('Erro ao buscar usuário pelo ID:', error);
+        throw error;
+    }
 }
 
 const saveData = function () {
     var userData = getDataFromInputs();
-    const {name, username, email, password, age, weight, id, height, birth, bio, gender} = userData;
+    const {name, username, email, password, age, weight, id, height, birth, bio, gender, activity} = userData;
     console.log('Dados dos inputs:', userData);
     
     fetch('/update-user', {
@@ -161,7 +184,8 @@ const saveData = function () {
             height: height,
             birth: birth, 
             bio: bio,
-            gender: gender
+            gender: gender,
+            activity: activity
         })
     })
         .then(res => res.json())
@@ -173,15 +197,67 @@ const saveData = function () {
         });
 }
 
-const calculateAverageCalories = async function(age, height, weight) {
-    console.log(age, height, weight);
+const fillAditionalInfo = function(data) {
+    var waterIntake = data[6].waterIntake;
+    var imc = data[5].imc;
+
+    // Preenchendo informações adicionais do perfil
+    var waterIntakeDiv = document.getElementById('water-intake-block');
+    waterIntakeDiv.innerHTML = `
+        <i class="fa fa-coffee" style="color: #000"></i> 
+        <label style="color: #000">Água</label> 
+        <span>${waterIntake.toFixed(2)}ml</span>`;
+
+    var imcDiv = document.getElementById('imc-block');
+    imcDiv.innerHTML = `
+        <i class="fa fa-balance-scale" aria-hidden="true" style="color: #000"></i> 
+        <label style="color: #000">IMC</label> 
+        <span>${imc.toFixed(2)}</span>`;
+}
+
+const fillCaloriesParameters = function(data) {
+    var TMBMale = data[0].TMBMale;
+    var TMBFemale = data[1].TMBFemale;
+    var weightLoss = data[2].weightLoss;
+    var massGain = data[3].massGain;
+    var maintance = data[4].maintance;
+    var imc = data[5].imc;
+    var waterIntake = data[6].waterIntake;
+
+    // Preenchendo informações calóricas do perfil da dieta
+    var TMBMaleDiv = document.getElementById('tmb-male');
+    TMBMaleDiv.innerHTML = `
+        <i class="fa fa-mars" style="color: #000"></i> 
+        <label style="color: #000">TMB</label> 
+        <span>${TMBMale.toFixed(0)} kcal</span>`;
+
+    var TMBFemaleDiv = document.getElementById('tmb-female');
+    TMBFemaleDiv.innerHTML = `
+        <i class="fa fa-venus" aria-hidden="true" style="color: #000"></i> 
+        <label style="color: #000">TMB</label> 
+        <span>${TMBFemale.toFixed(0)} kcal</span>`;
+
+    var imcDiv = document.getElementById('calorie-for-imc');
+    imcDiv.innerHTML = `
+        <i class="fa fa-balance-scale" aria-hidden="true" style="color: #000"></i> 
+        <label style="color: #000">IMC</label> 
+        <span>${imc.toFixed(2)}</span>`;
+
+    var imcDiv = document.getElementById('calorie-for-water');
+    imcDiv.innerHTML = `
+        <i class="fa fa-coffee" aria-hidden="true" style="color: #000"></i> 
+        <label style="color: #000">Água</label> 
+        <span>${waterIntake.toFixed(0)} ml</span>`;
+}
+
+const calculateAverageCalories = async function(age, height, weight, activity) {
     try {
         const response = await fetch('/calculate-calories', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ age, height, weight })
+            body: JSON.stringify({ age, height, weight, activity })
         });
 
         if (!response.ok) {
@@ -189,7 +265,8 @@ const calculateAverageCalories = async function(age, height, weight) {
         }
 
         const data = await response.json();
-        console.log(data);
+        fillAditionalInfo(data);
+        fillCaloriesParameters(data);
     } catch (error) {
         console.error('Erro ao calcular calorias médias:', error);
         throw error;

@@ -87,14 +87,14 @@ app.post('/login-user', async (req, res) => {
 
 app.post('/update-user', async (req, res) => {
     console.log(req.body);
-    const { name, username, email, password, age, weight, height, birth, bio, id, gender } = req.body;
+    const { name, username, email, password, age, weight, height, birth, bio, id, gender, activity } = req.body;
     
     if (!name || !email || !age || !weight || !height || !birth || !bio) {
         return res.json({ erro: true, mensagem: 'Por favor, preencha todos os campos...' });
     }
 
     try {
-        const newUser = new User(name, username, email, password, age, weight, height, birth, bio, gender);
+        const newUser = new User(name, username, email, password, age, weight, height, birth, bio, gender, activity);
 
         await User.update(newUser, id);
 
@@ -104,6 +104,23 @@ app.post('/update-user', async (req, res) => {
         return res.status(500).json({ erro: true, mensagem: 'Erro ao atualizar usuário...' });
     }
 })
+
+app.get('/get-user/:id', async (req, res) => {
+    const userId = req.params.id;
+
+    try {
+        const user = await User.findById(userId);
+        
+        if (!user) {
+            return res.status(404).json({ error: true, message: 'Usuário não encontrado' });
+        }
+
+        return res.json(user);
+    } catch (error) {
+        console.error('Erro ao buscar usuário:', error);
+        return res.status(500).json({ error: true, message: 'Erro ao buscar usuário' });
+    }
+});
 
 //TREINO
 app.post('/create-routine', async (req, res) => {
@@ -367,20 +384,30 @@ app.get('/api/get-ingredient-details/:id', async (req, res) => {
 
 // CALCULADORA DE CALORIAS
 app.post('/calculate-calories', (req, res) => {
-    const { age, height, weight } = req.body;
+    const response = [];
+    const { age, height, weight, activity } = req.body;
     const heightCm = height * 100;
 
     const metabolismoMale = CalorieCalculator.calculateTMBMale(weight, heightCm, age);
+    response.push({TMBMale: metabolismoMale});
 
     const metabolismoFem = CalorieCalculator.calculateTMBFemale(weight, heightCm, age);
+    response.push({TMBFemale: metabolismoFem});
 
-    const caloriesEmagrecimento = CalorieCalculator.caloriesForWeightLoss(metabolismoMale, 1.55, 500);
+    const caloriesEmagrecimento = CalorieCalculator.caloriesForWeightLoss(metabolismoMale, activity, 500);
+    response.push({weightLoss: caloriesEmagrecimento});
 
-    const caloriesGanharMassa = CalorieCalculator.caloriesForMuscleGain(metabolismoMale, 1.55, 300);
+    const caloriesGanharMassa = CalorieCalculator.caloriesForMuscleGain(metabolismoMale, activity, 300);
+    response.push({massGain: caloriesGanharMassa});
+
+    const caloriesManutencao = CalorieCalculator.caloriesForMaintance(metabolismoMale, activity);
+    response.push({maintance: caloriesManutencao});
+
+    const imc = CalorieCalculator.calculateIMC(weight, heightCm);
+    response.push({imc: imc});
 
     const waterIntake = WaterIntakeCalculator.calculateWaterIntake(weight);
-
-    const response = [metabolismoMale, metabolismoFem, caloriesEmagrecimento, caloriesGanharMassa, waterIntake];
+    response.push({waterIntake: waterIntake});
 
     res.json(response);
 });

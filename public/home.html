@@ -82,21 +82,21 @@
                 </div>
                 <div class="input-block" id="input-age">
                     <label for="age">Idade</label>
-                    <input type="text" id="age" name="age">
+                    <input type="number" id="age" name="age">
                 </div>
                 <div class="input-block" id="input-weight">
-                    <label for="weight">Peso Atual</label>
-                    <input type="text" id="weight" name="weight">
+                    <label for="weight">Peso Atual (kg)</label>
+                    <input type="number" id="weight" name="weight">
                 </div>
                 <div class="input-block" id="input-height">
-                    <label for="height">Altura</label>
-                    <input type="text" id="height" name="height">
+                    <label for="height">Altura (metros)</label>
+                    <input type="number" id="height" name="height">
                 </div>
                 <div class="input-block" id="input-birth">
                     <label for="birth">Data de Nascimento</label>
                     <input type="date" id="birth" name="birth">
                 </div>
-                <button class="btn" onclick="saveData()">Salvar Dados</button>
+                <button class="btn-data" onclick="saveData()">Salvar Dados</button>
             </div>
             <div class="profile-status">
                 <div class="user-data-image">
@@ -113,11 +113,21 @@
                         <option value="feminino">Feminino</option>
                     </select>
                 </div>
+                <div class="user-activity">
+                    <label for="activity">Nível de Atividade Física</label>
+                    <select id="activity" class="activity-select" name="activity">
+                        <option value="1.2">Pouco ou nada ativo</option>
+                        <option value="1.375">Leve (1 a 3 dias / semana)</option>
+                        <option value="1.55">Moderado (3 a 5 dias / semana)</option>
+                        <option value="1.725">Pesado (6 a 7 dias / semana)</option>
+                        <option value="1.9">Pesado (6 a 7 dias / semana)</option>
+                    </select>
+                </div>
                 <div class="user-workout-information">
-                    <div class="square">
+                    <div class="square" id="water-intake-block">
 
                     </div>
-                    <div class="square">
+                    <div class="square" id="imc-block">
 
                     </div>
                 </div>
@@ -130,21 +140,44 @@
         </div>
         <div class="panel-user-diet" id="userDiet" style="display: none;">
             <div class="data-diet-information">
-                <div class="calorie-info">
-    
+                <div class="calorie-info" id="calorie-for-weightloss">
+                    <div class="square" id="calorie-for-weightloss-male">
+
+                    </div>
+                    <div class="square" id="calorie-for-weightloss-female">
+
+                    </div>
                 </div>
-                <div class="calorie-info">
-    
+                <div class="calorie-info" id="calorie-for-massgain">
+                    <div class="square" id="calorie-for-massgain-male">
+
+                    </div>
+                    <div class="square" id="calorie-for-massgain-female">
+
+                    </div>
                 </div>
-                <div class="calorie-info">
-    
+                <div class="calorie-info" id="calorie-for-maintance">
+                    <div class="square" id="calorie-for-maintance-male">
+
+                    </div>
+                    <div class="square" id="calorie-for-maintance-female">
+
+                    </div>
                 </div>
-                <div class="calorie-info">
-    
+                <div class="calorie-info" id="calorie-for-imc-water">
+                    <div class="square" id="tmb-male">
+
+                    </div>
+                    <div class="square" id="tmb-female">
+
+                    </div>
+                    <div class="square" id="calorie-for-imc">
+
+                    </div>
+                    <div class="square" id="calorie-for-water">
+
+                    </div>
                 </div>
-                <!-- <div class="body-image">
-                    <img src="img/musculature-bg.png" alt="Homem de corpo atlético.">
-                </div> -->
             </div>
             <div class="diet-list" id="dietList">
                 <div class="diets" onclick="addOrEnterDiet(false)">
