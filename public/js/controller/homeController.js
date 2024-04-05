@@ -198,15 +198,15 @@ const saveData = function () {
 }
 
 const fillAditionalInfo = function(data) {
-    var waterIntake = data[6].waterIntake;
-    var imc = data[5].imc;
+    var imc = data[8].imc;
+    var waterIntake = data[9].waterIntake;
 
     // Preenchendo informações adicionais do perfil
     var waterIntakeDiv = document.getElementById('water-intake-block');
     waterIntakeDiv.innerHTML = `
         <i class="fa fa-coffee" style="color: #000"></i> 
         <label style="color: #000">Água</label> 
-        <span>${waterIntake.toFixed(2)}ml</span>`;
+        <span>${waterIntake.toFixed(0)}ml</span>`;
 
     var imcDiv = document.getElementById('imc-block');
     imcDiv.innerHTML = `
@@ -216,13 +216,17 @@ const fillAditionalInfo = function(data) {
 }
 
 const fillCaloriesParameters = function(data) {
+    console.log(data);
     var TMBMale = data[0].TMBMale;
     var TMBFemale = data[1].TMBFemale;
-    var weightLoss = data[2].weightLoss;
-    var massGain = data[3].massGain;
-    var maintance = data[4].maintance;
-    var imc = data[5].imc;
-    var waterIntake = data[6].waterIntake;
+    var weightLossMale = data[2].weightLossMale;
+    var weightLossFemale = data[3].weightLossFemale;
+    var massGainMale = data[4].massGainMale;
+    var massGainFemale = data[5].massGainFemale;
+    var maintanceMale = data[6].maintanceMale;
+    var maintanceFemale = data[7].maintanceFemale;
+    var imc = data[8].imc;
+    var waterIntake = data[9].waterIntake;
 
     // Preenchendo informações calóricas do perfil da dieta
     var TMBMaleDiv = document.getElementById('tmb-male');
@@ -248,6 +252,42 @@ const fillCaloriesParameters = function(data) {
         <i class="fa fa-coffee" aria-hidden="true" style="color: #000"></i> 
         <label style="color: #000">Água</label> 
         <span>${waterIntake.toFixed(0)} ml</span>`;
+
+    var WLMaleDiv = document.getElementById('calorie-for-weightloss-male');
+    WLMaleDiv.innerHTML = `
+        <i class="fa fa-mars" style="color: #000"></i> 
+        <label style="color: #000">Emagrecimento</label> 
+        <span>${weightLossMale.toFixed(0)} kcal</span>`;
+
+    var WLFemaleDiv = document.getElementById('calorie-for-weightloss-female');
+    WLFemaleDiv.innerHTML = `
+        <i class="fa fa-venus" aria-hidden="true" style="color: #000"></i> 
+        <label style="color: #000">Emagrecimento</label> 
+        <span>${weightLossFemale.toFixed(0)} kcal</span>`;
+
+    var MGMaleDiv = document.getElementById('calorie-for-massgain-male');
+    MGMaleDiv.innerHTML = `
+        <i class="fa fa-mars" style="color: #000"></i> 
+        <label style="color: #000">Hipertrofia</label> 
+        <span>${massGainMale.toFixed(0)} kcal</span>`;
+
+    var MGFemaleDiv = document.getElementById('calorie-for-massgain-female');
+    MGFemaleDiv.innerHTML = `
+        <i class="fa fa-venus" aria-hidden="true" style="color: #000"></i> 
+        <label style="color: #000">Hipertrofia</label> 
+        <span>${massGainFemale.toFixed(0)} kcal</span>`;
+
+    var MaintanceMaleDiv = document.getElementById('calorie-for-maintance-male');
+    MaintanceMaleDiv.innerHTML = `
+        <i class="fa fa-mars" style="color: #000"></i> 
+        <label style="color: #000">Definição (manter)</label> 
+        <span>${maintanceMale.toFixed(0)} kcal</span>`;
+
+    var MaintanceFemaleDiv = document.getElementById('calorie-for-maintance-female');
+    MaintanceFemaleDiv.innerHTML = `
+        <i class="fa fa-venus" aria-hidden="true" style="color: #000"></i> 
+        <label style="color: #000">Definição (manter)</label> 
+        <span>${maintanceFemale.toFixed(0)} kcal</span>`;
 }
 
 const calculateAverageCalories = async function(age, height, weight, activity) {

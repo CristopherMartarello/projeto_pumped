@@ -151,7 +151,7 @@ export const addOrEnterDiet = async function (boolean, dietId) {
                 Swal.fire({
                     title: `<strong>${data.name} - ${data.focus}</strong>`,
                     iconHtml: `${
-                        data.focus === 'Emagrecimento' ? '🥗' : '🍗'
+                        data.focus === 'Emagrecer' ? '🥗' : '🍗'
                     }`,
                     width: 800,
                     html: modalContent,
@@ -214,7 +214,7 @@ export const addOrEnterDiet = async function (boolean, dietId) {
                     Focos: {
                         Hipertrofia: "Hipertrofia",
                         Definição: "Definição",
-                        Emagrecimento: "Emagrecimento",
+                        Emagrecer: "Emagrecer",
                     }
                 },
                 inputPlaceholder: "Qual o foco da sua dieta?",
@@ -230,50 +230,23 @@ export const addOrEnterDiet = async function (boolean, dietId) {
                 }
             });
             if (focus) {
-                const { value: activity } = await Swal.fire({
-                    title: "Como você se considera ativo fisicamente?",
-                    input: "select",
-                    inputOptions: {
-                        Classificação: {
-                            1.2: "Pouco ou Inativo",
-                            1.375: "Exercícios Leves (1 a 3 dias / semana)",
-                            1.55: "Exercícios Moderados (3 a 5 dias / semana)",
-                            1.725: "Exercícios Pesados (6 a 7 dias / semana)",
-                            1.9: "Exercícios Intensos / Atletas",
-                        }
-                    },
-                    inputPlaceholder: "Selecione o seu perfil...",
+                Swal.fire({
+                    title: "Deseja criar a sua dieta?",
+                    html: `
+                      ${formValue} - ${focus}
+                    `,
+                    showDenyButton: true,
                     showCancelButton: true,
-                    inputValidator: (value) => {
-                        return new Promise((resolve) => {
-                            if (value !== '') {
-                                resolve();
-                            } else {
-                                resolve("Você precisa selecionar um perfil!");
-                            }
-                        });
+                    confirmButtonText: "Salvar",
+                    denyButtonText: 'Descartar',
+                    cancelButtonText: 'Cancelar'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        createDiet(formValue, 0, focus);
+                    } else if (result.isDenied) {
+                        Swal.fire("Dieta cancelada!", "", "info");
                     }
                 });
-                if (activity) {
-                    activityFactor = activity;
-                    Swal.fire({
-                        title: "Deseja criar a sua dieta?",
-                        html: `
-                          ${formValue} - ${focus}
-                        `,
-                        showDenyButton: true,
-                        showCancelButton: true,
-                        confirmButtonText: "Salvar",
-                        denyButtonText: 'Descartar',
-                        cancelButtonText: 'Cancelar'
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                            createDiet(formValue, 0, focus);
-                        } else if (result.isDenied) {
-                            Swal.fire("Dieta cancelada!", "", "info");
-                        }
-                    });
-                }
             }
         } else {
             Swal.fire({

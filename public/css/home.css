@@ -273,8 +273,8 @@ body {
 
 .user-workout-information .square {
     background-color: rgb(255, 255, 255);
-    width: 6rem;
-    height: 6rem;
+    width: 5rem;
+    height: 4.5rem;
     margin: 2vh;
     padding: 2vh;
     display: flex;
@@ -282,7 +282,7 @@ body {
     align-items: center;
     text-align: center;
     align-items: center;
-    font-size: x-large;
+    font-size: large;
     font-weight: bolder;
 }
 
@@ -502,7 +502,7 @@ body {
 .calorie-info .square {
     background-color: #2758d5;
     width: 6rem;
-    height: 6rem;
+    height: 4.5rem;
     margin: 1vh;
     padding: 2vh;
     display: flex;
@@ -511,6 +511,6 @@ body {
     text-align: center;
     align-items: center;
     flex: 1;
-    font-size: large;
+    font-size: medium;
     font-weight: bolder;
 }

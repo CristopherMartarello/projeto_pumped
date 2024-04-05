@@ -394,14 +394,23 @@ app.post('/calculate-calories', (req, res) => {
     const metabolismoFem = CalorieCalculator.calculateTMBFemale(weight, heightCm, age);
     response.push({TMBFemale: metabolismoFem});
 
-    const caloriesEmagrecimento = CalorieCalculator.caloriesForWeightLoss(metabolismoMale, activity, 500);
-    response.push({weightLoss: caloriesEmagrecimento});
+    const caloriesEmagrecimentoMale = CalorieCalculator.caloriesForWeightLoss(metabolismoMale, activity, 500);
+    response.push({weightLossMale: caloriesEmagrecimentoMale});
 
-    const caloriesGanharMassa = CalorieCalculator.caloriesForMuscleGain(metabolismoMale, activity, 300);
-    response.push({massGain: caloriesGanharMassa});
+    const caloriesEmagrecimentoFemale = CalorieCalculator.caloriesForWeightLoss(metabolismoFem, activity, 500);
+    response.push({weightLossFemale: caloriesEmagrecimentoFemale});
 
-    const caloriesManutencao = CalorieCalculator.caloriesForMaintance(metabolismoMale, activity);
-    response.push({maintance: caloriesManutencao});
+    const caloriesGanharMassaMale = CalorieCalculator.caloriesForMuscleGain(metabolismoMale, activity, 300);
+    response.push({massGainMale: caloriesGanharMassaMale});
+
+    const caloriesGanharMassaFemale = CalorieCalculator.caloriesForMuscleGain(metabolismoFem, activity, 300);
+    response.push({massGainFemale: caloriesGanharMassaFemale});
+
+    const caloriesManutencaoMale = CalorieCalculator.caloriesForMaintance(metabolismoMale, activity);
+    response.push({maintanceMale: caloriesManutencaoMale});
+
+    const caloriesManutencaoFemale = CalorieCalculator.caloriesForMaintance(metabolismoFem, activity);
+    response.push({maintanceFemale: caloriesManutencaoFemale});
 
     const imc = CalorieCalculator.calculateIMC(weight, heightCm);
     response.push({imc: imc});
