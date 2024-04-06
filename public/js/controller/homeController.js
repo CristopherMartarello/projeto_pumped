@@ -100,7 +100,7 @@ async function fillUserData() {
                 var dietCalories = document.createElement('span');
                 dietCalories.classList.add('diet-calories');
                 dietCalories.textContent = diet.calories > 0 ? diet.calories + 'kcal' : '0kcal';
-                dietCalories.setAttribute('id', 'diet-calories');
+                dietCalories.setAttribute('id', `diet-calories-${diet.name}`);
                 divDiet.appendChild(dietCalories);
 
                 divDiet.appendChild(icon);
