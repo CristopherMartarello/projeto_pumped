@@ -4,9 +4,9 @@ const { DietIngredientModel } = require('./DietIngredient');
 const { DietModel } = require('./Diet');
 
 class Ingredient {
-    static async findOne(name) {
+    static async findOne(nome) {
         try {
-            const ingredient = await IngredientModel.findOne({ where: { name } });
+            const ingredient = await IngredientModel.findOne({ where: { nome } });
             return ingredient;
         } catch (error) {
             console.error('Erro ao encontrar o ingrediente:', error);
@@ -26,8 +26,9 @@ class Ingredient {
 
     static async create(newIngredient) {
         const {name, calories, userId} = newIngredient;
+        const nome = name;
         try {
-            const newIngredient = await IngredientModel.create({ name, calories, userId });
+            const newIngredient = await IngredientModel.create({ nome, calories, userId });
             console.log('Ingrediente criado no banco de dados:', newIngredient);
             return newIngredient;
         } catch (error) {
@@ -66,7 +67,7 @@ const IngredientModel = db.define('Ingredient', {
         primaryKey: true,
         autoIncrement: true
     },
-    name: {
+    nome: {
         type: Sequelize.STRING,
         allowNull: false
     },
