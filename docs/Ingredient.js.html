@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: Ingredient.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: Ingredient.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>const Sequelize = require('sequelize');
+const db = require('./database');
+
+/**
+ * Modelo para interação com a tabela de ingredientes da dieta.
+ * @const {DietIngredientModel}
+ */
+const { DietIngredientModel } = require('./DietIngredient'); 
+
+/**
+ * Modelo para interação com a tabela de dietas.
+ * @const {DietModel}
+ */
+const { DietModel } = require('./Diet');
+
+
+/**
+ * Classe que representa os ingredientes para as dietas. A partir dela os ingredientes sao criados e salvos.
+ */
+class Ingredient {
+
+    /**
+    * Encontra um ingrediente pelo nome no banco de dados.
+    * @async
+    * @param {string} name - O nome do ingrediente a ser encontrado.
+    * @returns {Promise&lt;Object|null>} Uma Promise que resolve para o objeto do ingrediente encontrado ou null se não for encontrado.
+    * @throws {Error} Lança um erro se houver algum problema ao encontrar o ingrediente.
+    */
+    static async findOne(name) {
+        try {
+            const ingredient = await IngredientModel.findOne({ where: { name } });
+            return ingredient;
+        } catch (error) {
+            console.error('Erro ao encontrar o ingrediente:', error);
+            throw error;
+        }
+    }
+
+    /**
+    * Encontra um ingrediente pelo ID do ingrediente no banco de dados.
+    * @async
+    * @param {int} id - O ID do ingrediente a ser encontrado.
+    * @returns {Promise&lt;Object|null>} Uma Promise que resolve para o objeto do ingrediente encontrado ou null se não for encontrado.
+    * @throws {Error} Lança um erro se houver algum problema ao encontrar o ingrediente.
+    */
+    static async findOneById(id) {
+        try {
+            const ingredient = await IngredientModel.findOne({ where: { id } });
+            return ingredient;
+        } catch (error) {
+            console.error('Erro ao encontrar o ingrediente:', error);
+            throw error;
+        }
+    }
+
+    /**
+    * Cria um novo ingrediente no banco de dados.
+    * @async
+    * @param {Object} newIngredient - Objeto contendo os detalhes do novo ingrediente a ser criado.
+    * @returns {Promise&lt;Object>} Uma Promise que resolve para o objeto do ingrediente criado.
+    * @throws {Error} Lança um erro se houver algum problema ao criar o ingrediente.
+    */
+    static async create(newIngredient) {
+        const {name, calories, userId} = newIngredient;
+        try {
+            const newIngredient = await IngredientModel.create({ name, calories, userId });
+            console.log('Ingrediente criado no banco de dados:', newIngredient);
+            return newIngredient;
+        } catch (error) {
+            console.error('Erro ao criar o ingrediente:', error);
+            throw error;
+        }
+    }
+
+    /**
+    * Atualiza um ingrediente no banco de dados.
+    * @async
+    * @param {int} id - O ID do ingrediente a ser atualizado.
+    * @param {Object} dataToUpdate - Objeto contendo os dados a serem atualizados no ingrediente.
+    * @returns {Promise&lt;void>} Uma Promise que resolve quando o ingrediente é atualizado com sucesso.
+    * @throws {Error} Lança um erro se nenhum ingrediente for atualizado ou se houver algum problema ao atualizar o ingrediente.
+    */
+    static async update(id, dataToUpdate) {
+        try {
+            const [updatedRows] = await IngredientModel.update(dataToUpdate, { where: { id } });
+            if (updatedRows === 0) {
+                throw new Error('Nenhum ingrediente foi atualizado. Verifique o ID fornecido.');
+            }
+            console.log('Ingrediente atualizado com sucesso.');
+        } catch (error) {
+            console.error('Erro ao atualizar o ingrediente:', error);
+            throw error;
+        }
+    }
+
+    /**
+    * Busca todos os ingredientes no banco de dados.
+    * @async
+    * @returns {Promise&lt;Array&lt;Object>>} Uma Promise que resolve para um array de objetos contendo todos os ingredientes encontrados.
+    * @throws {Error} Lança um erro se houver algum problema ao buscar os ingredientes.
+    */
+    static async findAll() {
+        try {
+            const ingredients = await IngredientModel.findAll();
+            return ingredients;
+        } catch (error) {
+            console.error('Erro ao buscar todos os ingredientes:', error);
+            throw error;
+        }
+    }
+}
+
+/**
+ * Modelo de tabela para ingredientes.
+ * @typedef {Object} IngredientModel
+ * @property {number} id - Identificador único do ingrediente.
+ * @property {string} name - Nome do ingrediente.
+ * @property {number} calories - Quantidade de calorias do ingrediente a cada 100g.
+ */
+const IngredientModel = db.define('Ingredient', {
+    id: {
+        type: Sequelize.INTEGER,
+        primaryKey: true,
+        autoIncrement: true
+    },
+    name: {
+        type: Sequelize.STRING,
+        allowNull: false
+    },
+    calories: {
+        type: Sequelize.INTEGER,
+        allowNull: false
+    }
+});
+
+//Syncar a model caso não exista
+IngredientModel.sync();
+module.exports = { Ingredient, IngredientModel };
+
+IngredientModel.belongsToMany(DietModel, { through: DietIngredientModel });
+
+
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="CalorieCalculator.html">CalorieCalculator</a></li><li><a href="Diet.html">Diet</a></li><li><a href="DietIngredient.html">DietIngredient</a></li><li><a href="Exercise.html">Exercise</a></li><li><a href="Ingredient.html">Ingredient</a></li><li><a href="Routine.html">Routine</a></li><li><a href="User.html">User</a></li><li><a href="WaterIntakeCalculator.html">WaterIntakeCalculator</a></li></ul><h3>Global</h3><ul><li><a href="global.html#Sequelize">Sequelize</a></li><li><a href="global.html#db">db</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Sat Apr 06 2024 14:01:20 GMT-0300 (Horário Padrão de Brasília)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

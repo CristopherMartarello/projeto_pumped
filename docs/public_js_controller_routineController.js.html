@@ -1,4 +1,32 @@
-console.log('####RoutineController');
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: public/js/controller/routineController.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: public/js/controller/routineController.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>console.log('####RoutineController');
 
 /**
  * Recupera a string do objeto de usuário armazenado localmente no navegador.
@@ -81,57 +109,57 @@ export const addOrEnterRoutine = async function (boolean, treinoId) {
             if (data) {
                 Swal.showLoading();
                 Swal.fire({
-                    title: `<strong>${data.routine.name} - ${data.routine.focus}</strong>`,
+                    title: `&lt;strong>${data.routine.name} - ${data.routine.focus}&lt;/strong>`,
                     iconHtml: `${
                         data.routine.focus === 'Pernas' ? '🦵' : '💪'
                     }`,
                     width: 800,
                     html: `
-                    <div class="exercise-container">
-                        <div class="exercise">1 - ${data.exercises[0].name}</div>
-                        <div class="info">Rep: ${data.exercises[0].rep}</div>
-                        <div class="info">Rest: ${data.exercises[0].rest}</div>
-                        <div class="info">Series: ${data.exercises[0].series}</div>
-                        <input type="checkbox" id="exercise1" class="exercise-checkbox">
-                    </div>
-                    <div class="exercise-container">
-                        <div class="exercise">2 - ${data.exercises[1].name}</div>
-                        <div class="info">Rep: ${data.exercises[1].rep}</div>
-                        <div class="info">Rest: ${data.exercises[1].rest}</div>
-                        <div class="info">Series: ${data.exercises[1].series}</div>
-                        <input type="checkbox" id="exercise2" class="exercise-checkbox">
-                    </div>
-                    <div class="exercise-container">
-                        <div class="exercise">3 - ${data.exercises[2].name}</div>
-                        <div class="info">Rep: ${data.exercises[2].rep}</div>
-                        <div class="info">Rest: ${data.exercises[2].rest}</div>
-                        <div class="info">Series: ${data.exercises[2].series}</div>
-                        <input type="checkbox" id="exercise3" class="exercise-checkbox">
-                    </div>
-                    <div class="exercise-container">
-                        <div class="exercise">4 - ${data.exercises[3].name}</div>
-                        <div class="info">Rep: ${data.exercises[3].rep}</div>
-                        <div class="info">Rest: ${data.exercises[3].rest}</div>
-                        <div class="info">Series: ${data.exercises[3].series}</div>
-                        <input type="checkbox" id="exercise4" class="exercise-checkbox">
-                    </div>
-                    <div class="exercise-container">
-                        <div class="exercise">5 - ${data.exercises[4].name}</div>
-                        <div class="info">Rep: ${data.exercises[4].rep}</div>
-                        <div class="info">Rest: ${data.exercises[4].rest}</div>
-                        <div class="info">Series: ${data.exercises[4].series}</div>
-                        <input type="checkbox" id="exercise5" class="exercise-checkbox">
-                    </div>
+                    &lt;div class="exercise-container">
+                        &lt;div class="exercise">1 - ${data.exercises[0].name}&lt;/div>
+                        &lt;div class="info">Rep: ${data.exercises[0].rep}&lt;/div>
+                        &lt;div class="info">Rest: ${data.exercises[0].rest}&lt;/div>
+                        &lt;div class="info">Series: ${data.exercises[0].series}&lt;/div>
+                        &lt;input type="checkbox" id="exercise1" class="exercise-checkbox">
+                    &lt;/div>
+                    &lt;div class="exercise-container">
+                        &lt;div class="exercise">2 - ${data.exercises[1].name}&lt;/div>
+                        &lt;div class="info">Rep: ${data.exercises[1].rep}&lt;/div>
+                        &lt;div class="info">Rest: ${data.exercises[1].rest}&lt;/div>
+                        &lt;div class="info">Series: ${data.exercises[1].series}&lt;/div>
+                        &lt;input type="checkbox" id="exercise2" class="exercise-checkbox">
+                    &lt;/div>
+                    &lt;div class="exercise-container">
+                        &lt;div class="exercise">3 - ${data.exercises[2].name}&lt;/div>
+                        &lt;div class="info">Rep: ${data.exercises[2].rep}&lt;/div>
+                        &lt;div class="info">Rest: ${data.exercises[2].rest}&lt;/div>
+                        &lt;div class="info">Series: ${data.exercises[2].series}&lt;/div>
+                        &lt;input type="checkbox" id="exercise3" class="exercise-checkbox">
+                    &lt;/div>
+                    &lt;div class="exercise-container">
+                        &lt;div class="exercise">4 - ${data.exercises[3].name}&lt;/div>
+                        &lt;div class="info">Rep: ${data.exercises[3].rep}&lt;/div>
+                        &lt;div class="info">Rest: ${data.exercises[3].rest}&lt;/div>
+                        &lt;div class="info">Series: ${data.exercises[3].series}&lt;/div>
+                        &lt;input type="checkbox" id="exercise4" class="exercise-checkbox">
+                    &lt;/div>
+                    &lt;div class="exercise-container">
+                        &lt;div class="exercise">5 - ${data.exercises[4].name}&lt;/div>
+                        &lt;div class="info">Rep: ${data.exercises[4].rep}&lt;/div>
+                        &lt;div class="info">Rest: ${data.exercises[4].rest}&lt;/div>
+                        &lt;div class="info">Series: ${data.exercises[4].series}&lt;/div>
+                        &lt;input type="checkbox" id="exercise5" class="exercise-checkbox">
+                    &lt;/div>
                     `,
                     showCloseButton: true,
                     showCancelButton: true,
                     focusConfirm: false,
                     confirmButtonText: `
-                      <i class="fa fa-thumbs-up"></i> Finalizar treino
+                      &lt;i class="fa fa-thumbs-up">&lt;/i> Finalizar treino
                     `,
                     confirmButtonAriaLabel: "Treino finalizado com sucesso!",
                     cancelButtonText: `
-                      <i class="fa fa-thumbs-down"></i> Cancelar
+                      &lt;i class="fa fa-thumbs-down">&lt;/i> Cancelar
                     `,
                     cancelButtonAriaLabel: "Cancelar",
                     didOpen: () => {
@@ -158,8 +186,8 @@ export const addOrEnterRoutine = async function (boolean, treinoId) {
         const { value: formValue } = await Swal.fire({
             title: "Cadastrar um novo treino",
             html: `
-              <label for="swal-input-1">Nome do Treino</label>
-              <input id="swal-input1" name="swal-input1" class="swal2-input">
+              &lt;label for="swal-input-1">Nome do Treino&lt;/label>
+              &lt;input id="swal-input1" name="swal-input1" class="swal2-input">
             `,
             focusConfirm: false,
             preConfirm: () => {
@@ -330,3 +358,26 @@ function init () {
 }
 
 init();
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="CalorieCalculator.html">CalorieCalculator</a></li><li><a href="Diet.html">Diet</a></li><li><a href="DietIngredient.html">DietIngredient</a></li><li><a href="Exercise.html">Exercise</a></li><li><a href="Ingredient.html">Ingredient</a></li><li><a href="Routine.html">Routine</a></li><li><a href="User.html">User</a></li><li><a href="WaterIntakeCalculator.html">WaterIntakeCalculator</a></li></ul><h3>Global</h3><ul><li><a href="global.html#Sequelize">Sequelize</a></li><li><a href="global.html#addOrEnterRoutine">addOrEnterRoutine</a></li><li><a href="global.html#clearStorage">clearStorage</a></li><li><a href="global.html#contabilizarTreino">contabilizarTreino</a></li><li><a href="global.html#createRoutine">createRoutine</a></li><li><a href="global.html#db">db</a></li><li><a href="global.html#diets">diets</a></li><li><a href="global.html#exercises">exercises</a></li><li><a href="global.html#formContainer">formContainer</a></li><li><a href="global.html#handleLogin">handleLogin</a></li><li><a href="global.html#handleSubmit">handleSubmit</a></li><li><a href="global.html#init">init</a></li><li><a href="global.html#loginForm">loginForm</a></li><li><a href="global.html#removeRoutine">removeRoutine</a></li><li><a href="global.html#signUpForm">signUpForm</a></li><li><a href="global.html#switchForms">switchForms</a></li><li><a href="global.html#user">user</a></li><li><a href="global.html#userString">userString</a></li><li><a href="global.html#verificarTodosMarcados">verificarTodosMarcados</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Sat Apr 06 2024 16:53:37 GMT-0300 (Horário Padrão de Brasília)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

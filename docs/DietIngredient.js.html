@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: DietIngredient.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: DietIngredient.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>// Tabela que expressa a relação entre Dieta e Ingrediente (Muitos para Muitos)
+
+const Sequelize = require('sequelize');
+const db = require('./database'); 
+
+/**
+ * Modelo para interação com a tabela de dietas.
+ * @const {DietModel}
+ */
+const { DietModel } = require('./Diet');
+
+/**
+ * Modelo para interação com a tabela de ingredientes.
+ * @const {IngredientModel}
+ */
+const { IngredientModel } = require('./Ingredient');
+
+/**
+ * Classe que representa a relação entre a tabela Diet e Ingredient.
+ */
+class DietIngredient {
+
+    /**
+    * Encontra um ingrediente pelo nome no banco de dados.
+    * @async
+    * @param {string} name - O nome do ingrediente a ser encontrado.
+    * @returns {Promise&lt;Object|null>} Uma Promise que resolve para o objeto do ingrediente encontrado ou null se não for encontrado.
+    * @throws {Error} Lança um erro se houver algum problema ao encontrar o ingrediente.
+    */
+    static async findOne(name) {
+        try {
+            const ingredient = await IngredientModel.findOne({ where: { name } });
+            return ingredient;
+        } catch (error) {
+            console.error('Erro ao encontrar o ingrediente:', error);
+            throw error;
+        }
+    }
+
+    /**
+    * Cria uma nova relação entre uma dieta e um ingrediente no banco de dados.
+    * @async
+    * @param {int} dietId - O ID da dieta relacionada.
+    * @param {int} ingredientId - O ID do ingrediente relacionado.
+    * @returns {Promise&lt;Object>} Uma Promise que resolve para o objeto representando a relação de dieta e ingrediente criada.
+    * @throws {Error} Lança um erro se houver algum problema ao criar a relação de dieta e ingrediente.
+    */
+    static async create(dietId, ingredientId) {
+        try {
+            const dietIngredient = await db.models.DietIngredient.create({
+                dietId: dietId,
+                ingredientId: ingredientId
+            });
+
+            console.log('Relação de Dieta e Ingrediente inserida no banco de dados:', dietIngredient);
+
+            return dietIngredient;
+        } catch (error) {
+            console.error('Erro ao inserir relação de Dieta e Ingrediente no banco de dados:', error);
+            throw error;
+        }
+    }
+
+    /**
+    * Encontra ou cria uma relação entre uma dieta e um ingrediente no banco de dados.
+    * Se a relação já existir, retorna a relação existente. Caso contrário, cria uma nova relação e a retorna.
+    * @async
+    * @param {int} dietId - O ID da dieta relacionada.
+    * @param {int} ingredientId - O ID do ingrediente relacionado.
+    * @returns {Promise&lt;Object>} Uma Promise que resolve para o objeto representando a relação de dieta e ingrediente encontrada ou criada.
+    * @throws {Error} Lança um erro se houver algum problema ao encontrar ou criar a relação de dieta e ingrediente.
+    */
+    static async findOrCreate(dietId, ingredientId) {
+        try {
+            const existingRelation = await DietIngredientModel.findOne({
+                where: { dietId: dietId, ingredientId: ingredientId }
+            });
+
+            if (existingRelation) {
+                return existingRelation;
+            }
+
+            const newRelation = await DietIngredient.create(dietId, ingredientId);
+            return newRelation;
+        } catch (error) {
+            console.error('Erro ao encontrar ou criar a relação de Dieta e Ingrediente:', error);
+            throw error;
+        }
+    }
+
+    /**
+    * Encontra as relações entre uma dieta e seus ingredientes pelo ID da dieta no banco de dados.
+    * @async
+    * @param {int} dietId - O ID da dieta para a qual buscar as relações de ingredientes.
+    * @returns {Promise&lt;Array&lt;Object>>} Uma Promise que resolve para um array de objetos representando as relações de dieta e ingrediente encontradas para a dieta especificada.
+    * @throws {Error} Lança um erro se houver algum problema ao encontrar as relações de dieta e ingrediente pelo ID da dieta.
+    */
+    static async findByDietId(dietId) {
+        try {
+            const dietIngredients = await DietIngredientModel.findAll({
+                where: { dietId: dietId }
+            });
+            return dietIngredients;
+        } catch (error) {
+            console.error('Erro ao encontrar as relações de Dieta e Ingrediente pelo ID da Dieta:', error);
+            throw error;
+        }
+    }
+
+    /**
+    * Remove as relações entre uma dieta e seus ingredientes pelo ID da dieta e pelos IDs dos ingredientes no banco de dados.
+    * @async
+    * @param {int} dietId - O ID da dieta da qual remover as relações de ingredientes.
+    * @param {Array&lt;int>} ingredientIds - Um array contendo os IDs dos ingredientes a serem removidos da dieta.
+    * @throws {Error} Lança um erro se houver algum problema ao remover as relações de dieta e ingrediente.
+    */
+    static async destroy(dietId, ingredientIds) {
+        try {
+            await DietIngredientModel.destroy({
+                where: {
+                    dietId: dietId,
+                    ingredientId: ingredientIds
+                }
+            });
+
+            console.log(`Relações de Dieta e Ingrediente removidas para a Dieta ID ${dietId}`);
+        } catch (error) {
+            console.error('Erro ao remover relações de Dieta e Ingrediente:', error);
+            throw error;
+        }
+    }
+}
+
+/**
+ * Modelo de tabela para relações entre dietas e ingredientes.
+ * @typedef {Object} DietIngredientModel
+ * @property {int} id - Identificador único da relação entre dieta e ingrediente.
+ * @property {int|null} dietId - ID da dieta associada à relação. Pode ser nulo se a relação for inválida.
+ * @property {int|null} ingredientId - ID do ingrediente associado à relação. Pode ser nulo se a relação for inválida.
+ */
+const DietIngredientModel = db.define('DietIngredient', {
+    id: {
+        type: Sequelize.INTEGER,
+        primaryKey: true,
+        autoIncrement: true
+    },
+    dietId: {
+        type: Sequelize.INTEGER,
+        allowNull: true,
+        references: {
+            model: 'diets', 
+            key: 'id'
+        },
+        onDelete: 'CASCADE'
+    },
+    ingredientId: {
+        type: Sequelize.INTEGER,
+        allowNull: true,
+        references: {
+            model: 'Ingredients',
+            key: 'id'
+        }
+    }
+});
+
+//Syncar a model caso não exista
+DietIngredientModel.sync();
+
+module.exports = { DietIngredient, DietIngredientModel };
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="CalorieCalculator.html">CalorieCalculator</a></li><li><a href="Diet.html">Diet</a></li><li><a href="DietIngredient.html">DietIngredient</a></li><li><a href="Exercise.html">Exercise</a></li><li><a href="Ingredient.html">Ingredient</a></li><li><a href="Routine.html">Routine</a></li><li><a href="User.html">User</a></li><li><a href="WaterIntakeCalculator.html">WaterIntakeCalculator</a></li></ul><h3>Global</h3><ul><li><a href="global.html#Sequelize">Sequelize</a></li><li><a href="global.html#db">db</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Sat Apr 06 2024 14:01:20 GMT-0300 (Horário Padrão de Brasília)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
