@@ -78,14 +78,6 @@ export const addOrEnterDiet = async function (boolean, dietId) {
                 const ingredientContainer = document.createElement('div');
                 ingredientContainer.classList.add('ingredient-container');
 
-                const recommendedCalories = document.createElement('div');
-                recommendedCalories.classList.add('info-diet');
-                recommendedCalories.textContent = `Desejadas`;
-
-                const amountRecommended = document.createElement('div');
-                amountRecommended.classList.add('info-diet');
-                amountRecommended.textContent = `0kcal`;
-
                 const contadorDiv = document.createElement('div');
                 contadorDiv.classList.add('info-diet');
                 contadorDiv.textContent = `Total de calorias`;
@@ -101,8 +93,6 @@ export const addOrEnterDiet = async function (boolean, dietId) {
                     amountDiv.textContent = `0kcal`;
                 }
 
-                ingredientContainer.appendChild(recommendedCalories);
-                ingredientContainer.appendChild(amountRecommended);
                 ingredientContainer.appendChild(contadorDiv);
                 ingredientContainer.appendChild(amountDiv);
 
@@ -188,7 +178,15 @@ export const addOrEnterDiet = async function (boolean, dietId) {
                             'focus': data.focus,
                             'ingredientesSelecionados': ingredientesSelecionados
                         }
-                        updateDiet(diet);
+                        const loadingSwal = Swal.fire({
+                            title: 'Carregando...',
+                            allowOutsideClick: false, 
+                            showConfirmButton: false, 
+                            didOpen: () => {
+                                Swal.showLoading(); 
+                            }
+                        });
+                        updateDiet(diet, loadingSwal);
                     }
                 });
             }
@@ -306,7 +304,7 @@ const removeDiet = async function(dietId) {
                     const data = await response.json();
                     Swal.fire({
                         title: "Excluído!",
-                        text: "A sua dieta foi excluído com sucesso.",
+                        text: "A sua dieta foi excluída com sucesso.",
                         icon: "success"
                     });
                     console.log(data.message);
@@ -320,7 +318,7 @@ const removeDiet = async function(dietId) {
     });
 }
 
-const updateDiet = async function(diet) {
+const updateDiet = async function(diet, loadingSwal) {
     try {
         const response = await fetch('/update-diet', {
             method: 'PUT', 
@@ -331,7 +329,9 @@ const updateDiet = async function(diet) {
         });
 
         if (response.ok) {
+            loadingSwal.close();
             Swal.fire('Dieta atualizada com sucesso!', '', 'success');
+            document.getElementById('diet-calories').textContent = `${diet.calories}kcal`;
         } else {
             Swal.fire('Erro ao atualizar o dieta!', '', 'error');
         }
