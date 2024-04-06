@@ -1,4 +1,32 @@
-const userString = localStorage.getItem('user');
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: public/js/controller/dietController.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: public/js/controller/dietController.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>const userString = localStorage.getItem('user');
 const user = JSON.parse(userString);
 
 /**
@@ -164,7 +192,7 @@ export const addOrEnterDiet = async function (boolean, dietId) {
 
                 Swal.showLoading();
                 Swal.fire({
-                    title: `<strong>${data.name} - ${data.focus}</strong>`,
+                    title: `&lt;strong>${data.name} - ${data.focus}&lt;/strong>`,
                     iconHtml: `${
                         data.focus === 'Emagrecer' ? '🥗' : '🍗'
                     }`,
@@ -174,11 +202,11 @@ export const addOrEnterDiet = async function (boolean, dietId) {
                     showCancelButton: true,
                     focusConfirm: false,
                     confirmButtonText: `
-                      <i class="fa fa-thumbs-up"></i> Finalizar Dieta
+                      &lt;i class="fa fa-thumbs-up">&lt;/i> Finalizar Dieta
                     `,
                     confirmButtonAriaLabel: "Dieta finalizada com sucesso!",
                     cancelButtonText: `
-                      <i class="fa fa-thumbs-down"></i> Cancelar
+                      &lt;i class="fa fa-thumbs-down">&lt;/i> Cancelar
                     `,
                     cancelButtonAriaLabel: "Cancelar",
                     didOpen: () => {
@@ -222,8 +250,8 @@ export const addOrEnterDiet = async function (boolean, dietId) {
         const { value: formValue } = await Swal.fire({
             title: "Cadastrar uma nova dieta",
             html: `
-              <label for="swal-input-1">Nome da Dieta</label>
-              <input id="swal-input1" name="swal-input1" class="swal2-input">
+              &lt;label for="swal-input-1">Nome da Dieta&lt;/label>
+              &lt;input id="swal-input1" name="swal-input1" class="swal2-input">
             `,
             focusConfirm: false,
             preConfirm: () => {
@@ -385,7 +413,7 @@ const updateDiet = async function(diet, loadingSwal) {
 /**
  * Obtém os ingredientes selecionados de uma dieta específica.
  * @param {int} dietaId - O ID da dieta da qual os ingredientes serão obtidos.
- * @returns {Promise<Array>} - Uma Promise que resolve para um array contendo os ingredientes selecionados da dieta.
+ * @returns {Promise&lt;Array>} - Uma Promise que resolve para um array contendo os ingredientes selecionados da dieta.
  * @throws {Error} - Lança um erro se houver um problema ao obter os ingredientes selecionados da dieta.
  */
 async function getIngredients(dietaId) {
@@ -405,7 +433,7 @@ async function getIngredients(dietaId) {
 /**
  * Obtém os detalhes de um ingrediente com base em seu ID vindo da tabela relação.
  * @param {int} ingredientId - O ID do ingrediente do qual os detalhes serão obtidos.
- * @returns {Promise<Object>} - Uma Promise que resolve para um objeto contendo os detalhes do ingrediente.
+ * @returns {Promise&lt;Object>} - Uma Promise que resolve para um objeto contendo os detalhes do ingrediente.
  * @throws {Error} - Lança um erro se houver um problema ao obter os detalhes do ingrediente.
  */
 async function getIngredientDetails(ingredientId) {
@@ -498,4 +526,26 @@ function init () {
     window.updateDiet = updateDiet;
 }
 
-init();
+init();</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="CalorieCalculator.html">CalorieCalculator</a></li><li><a href="Diet.html">Diet</a></li><li><a href="DietIngredient.html">DietIngredient</a></li><li><a href="Exercise.html">Exercise</a></li><li><a href="Ingredient.html">Ingredient</a></li><li><a href="Routine.html">Routine</a></li><li><a href="User.html">User</a></li><li><a href="WaterIntakeCalculator.html">WaterIntakeCalculator</a></li></ul><h3>Global</h3><ul><li><a href="global.html#Sequelize">Sequelize</a></li><li><a href="global.html#addOrEnterDiet">addOrEnterDiet</a></li><li><a href="global.html#addOrEnterRoutine">addOrEnterRoutine</a></li><li><a href="global.html#adicionarIngrediente">adicionarIngrediente</a></li><li><a href="global.html#clearStorage">clearStorage</a></li><li><a href="global.html#contabilizarTreino">contabilizarTreino</a></li><li><a href="global.html#createDiet">createDiet</a></li><li><a href="global.html#createRoutine">createRoutine</a></li><li><a href="global.html#db">db</a></li><li><a href="global.html#diets">diets</a></li><li><a href="global.html#exercises">exercises</a></li><li><a href="global.html#formContainer">formContainer</a></li><li><a href="global.html#getIngredientDetails">getIngredientDetails</a></li><li><a href="global.html#getIngredients">getIngredients</a></li><li><a href="global.html#handleCheckboxClick">handleCheckboxClick</a></li><li><a href="global.html#handleLogin">handleLogin</a></li><li><a href="global.html#handleSubmit">handleSubmit</a></li><li><a href="global.html#ingredientesSelecionados">ingredientesSelecionados</a></li><li><a href="global.html#init">init</a></li><li><a href="global.html#loginForm">loginForm</a></li><li><a href="global.html#mockDiets">mockDiets</a></li><li><a href="global.html#removeDiet">removeDiet</a></li><li><a href="global.html#removeRoutine">removeRoutine</a></li><li><a href="global.html#removerIngrediente">removerIngrediente</a></li><li><a href="global.html#signUpForm">signUpForm</a></li><li><a href="global.html#switchForms">switchForms</a></li><li><a href="global.html#totalCalorias">totalCalorias</a></li><li><a href="global.html#updateDiet">updateDiet</a></li><li><a href="global.html#user">user</a></li><li><a href="global.html#userString">userString</a></li><li><a href="global.html#verificarTodosMarcados">verificarTodosMarcados</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Sat Apr 06 2024 19:25:23 GMT-0300 (Horário Padrão de Brasília)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
