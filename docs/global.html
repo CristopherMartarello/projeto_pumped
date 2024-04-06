@@ -2097,6 +2097,182 @@ Se todos estiverem marcados, habilita o botão de confirmação; caso contrário
 
         
                 
+<h4 class="name" id="DietIngredientModel">DietIngredientModel</h4>
+
+
+
+
+<div class="description">
+    <p>Modelo de tabela para relações entre dietas e ingredientes.</p>
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">Object</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+    <h5 class="subsection-title">Properties:</h5>
+
+    
+
+<table class="props">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>id</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">int</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Identificador único da relação entre dieta e ingrediente.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>dietId</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">int</span>
+|
+
+<span class="param-type">null</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>ID da dieta associada à relação. Pode ser nulo se a relação for inválida.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>ingredientId</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">int</span>
+|
+
+<span class="param-type">null</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>ID do ingrediente associado à relação. Pode ser nulo se a relação for inválida.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="public_models_DietIngredient.js.html">public/models/DietIngredient.js</a>, <a href="public_models_DietIngredient.js.html#line111">line 111</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+            
+                
 <h4 class="name" id="DietModel">DietModel</h4>
 
 
@@ -2564,6 +2740,176 @@ Se todos estiverem marcados, habilita o botão de confirmação; caso contrário
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
         <a href="public_models_Exercise.js.html">public/models/Exercise.js</a>, <a href="public_models_Exercise.js.html#line139">line 139</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+            
+                
+<h4 class="name" id="IngredientModel">IngredientModel</h4>
+
+
+
+
+<div class="description">
+    <p>Modelo de tabela para ingredientes.</p>
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">Object</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+    <h5 class="subsection-title">Properties:</h5>
+
+    
+
+<table class="props">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>id</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">int</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Identificador único do ingrediente.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>nome</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Nome do ingrediente.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>calories</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">int</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Quantidade de calorias do ingrediente a cada 100g.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="public_models_Ingredient.js.html">public/models/Ingredient.js</a>, <a href="public_models_Ingredient.js.html#line113">line 113</a>
     </li></ul></dd>
     
 
@@ -3549,13 +3895,13 @@ Se todos estiverem marcados, habilita o botão de confirmação; caso contrário
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="CalorieCalculator.html">CalorieCalculator</a></li><li><a href="Diet.html">Diet</a></li><li><a href="Exercise.html">Exercise</a></li><li><a href="Routine.html">Routine</a></li><li><a href="User.html">User</a></li><li><a href="WaterIntakeCalculator.html">WaterIntakeCalculator</a></li></ul><h3>Global</h3><ul><li><a href="global.html#Sequelize">Sequelize</a></li><li><a href="global.html#addOrEnterRoutine">addOrEnterRoutine</a></li><li><a href="global.html#clearStorage">clearStorage</a></li><li><a href="global.html#contabilizarTreino">contabilizarTreino</a></li><li><a href="global.html#createRoutine">createRoutine</a></li><li><a href="global.html#db">db</a></li><li><a href="global.html#diets">diets</a></li><li><a href="global.html#exercises">exercises</a></li><li><a href="global.html#formContainer">formContainer</a></li><li><a href="global.html#handleLogin">handleLogin</a></li><li><a href="global.html#handleSubmit">handleSubmit</a></li><li><a href="global.html#init">init</a></li><li><a href="global.html#loginForm">loginForm</a></li><li><a href="global.html#removeRoutine">removeRoutine</a></li><li><a href="global.html#signUpForm">signUpForm</a></li><li><a href="global.html#switchForms">switchForms</a></li><li><a href="global.html#user">user</a></li><li><a href="global.html#userString">userString</a></li><li><a href="global.html#verificarTodosMarcados">verificarTodosMarcados</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="CalorieCalculator.html">CalorieCalculator</a></li><li><a href="Diet.html">Diet</a></li><li><a href="DietIngredient.html">DietIngredient</a></li><li><a href="Exercise.html">Exercise</a></li><li><a href="Ingredient.html">Ingredient</a></li><li><a href="Routine.html">Routine</a></li><li><a href="User.html">User</a></li><li><a href="WaterIntakeCalculator.html">WaterIntakeCalculator</a></li></ul><h3>Global</h3><ul><li><a href="global.html#Sequelize">Sequelize</a></li><li><a href="global.html#addOrEnterRoutine">addOrEnterRoutine</a></li><li><a href="global.html#clearStorage">clearStorage</a></li><li><a href="global.html#contabilizarTreino">contabilizarTreino</a></li><li><a href="global.html#createRoutine">createRoutine</a></li><li><a href="global.html#db">db</a></li><li><a href="global.html#diets">diets</a></li><li><a href="global.html#exercises">exercises</a></li><li><a href="global.html#formContainer">formContainer</a></li><li><a href="global.html#handleLogin">handleLogin</a></li><li><a href="global.html#handleSubmit">handleSubmit</a></li><li><a href="global.html#init">init</a></li><li><a href="global.html#loginForm">loginForm</a></li><li><a href="global.html#removeRoutine">removeRoutine</a></li><li><a href="global.html#signUpForm">signUpForm</a></li><li><a href="global.html#switchForms">switchForms</a></li><li><a href="global.html#user">user</a></li><li><a href="global.html#userString">userString</a></li><li><a href="global.html#verificarTodosMarcados">verificarTodosMarcados</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Sat Apr 06 2024 18:28:49 GMT-0300 (Horário Padrão de Brasília)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Sat Apr 06 2024 19:04:04 GMT-0300 (Horário Padrão de Brasília)
 </footer>
 
 <script> prettyPrint(); </script>
