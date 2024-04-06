@@ -314,8 +314,7 @@ app.put('/update-diet', async (req, res) => {
         const updatedDiet = await Diet.update({ name, calories, focus }, id);
 
         await Promise.all(ingredientesSelecionados.map(async ingrediente => {
-            const ingredienteEncontrado = mockDiets.find(item => item.nome === ingrediente);
-
+            const ingredienteEncontrado = mockDiets.find(item => item.nome === ingrediente.nome);
             let ingredientModel;
 
             const existingIngredient = await Ingredient.findOne(ingredienteEncontrado.nome);
@@ -379,6 +378,30 @@ app.get('/api/get-ingredient-details/:id', async (req, res) => {
     } catch (error) {
         console.error('Erro ao encontrar detalhes do ingrediente:', error);
         res.status(500).json({ error: 'Erro ao encontrar detalhes do ingrediente' });
+    }
+});
+
+// Rota para remover a relação de ingrediente de uma dieta
+app.delete('/dietIngredient/:dietId/:ingredientName', async (req, res) => {
+    try {
+        const dietId = req.params.dietId;
+        const ingredientName = req.params.ingredientName;
+
+        const ingredient = await Ingredient.findOne(ingredientName);
+
+        if (!ingredient) {
+            return res.status(404).json({ error: 'Ingrediente não encontrado.' });
+        }
+
+        const ingredientId = ingredient.id;
+
+        const relation = await DietIngredient.findOrCreate(dietId, ingredientId);
+        await relation.destroy();
+
+        res.status(200).json({ message: 'Relação de ingrediente removida com sucesso.' });
+    } catch (error) {
+        console.error('Erro ao remover a relação de ingrediente:', error);
+        res.status(500).json({ error: 'Erro ao remover a relação de ingrediente.' });
     }
 });
 

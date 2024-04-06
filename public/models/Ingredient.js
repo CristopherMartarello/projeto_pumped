@@ -4,9 +4,9 @@ const { DietIngredientModel } = require('./DietIngredient');
 const { DietModel } = require('./Diet');
 
 class Ingredient {
-    static async findOne(name) {
+    static async findOne(nome) {
         try {
-            const ingredient = await IngredientModel.findOne({ where: { name } });
+            const ingredient = await IngredientModel.findOne({ where: { nome } });
             return ingredient;
         } catch (error) {
             console.error('Erro ao encontrar o ingrediente:', error);
@@ -66,7 +66,7 @@ const IngredientModel = db.define('Ingredient', {
         primaryKey: true,
         autoIncrement: true
     },
-    name: {
+    nome: {
         type: Sequelize.STRING,
         allowNull: false
     },

@@ -40,19 +40,19 @@ export const addOrEnterDiet = async function (boolean, dietId) {
 
             if (data) {
                 getIngredients(data.id).then(async function (response) {
-                    const ingredientDetails = [];
+                    ingredientesSelecionados = [];
                     
                     for (const ingredient of response) {
                         try {
                             const foundedIngredient = await getIngredientDetails(ingredient.ingredientId);
-                            ingredientDetails.push(foundedIngredient);
+                            ingredientesSelecionados.push(foundedIngredient);
                         } catch (error) {
                             console.error('Erro ao encontrar detalhes do ingrediente:', error);
                         }
                     }
-                
-                    ingredientDetails.forEach(function (ingredient) {
-                        const checkbox = document.querySelector(`input[type="checkbox"][data-nome="${ingredient.name}"]`);
+
+                    ingredientesSelecionados.forEach(function (ingredient) {
+                        const checkbox = document.querySelector(`input[type="checkbox"][data-nome="${ingredient.nome}"]`);
                         if (checkbox) {
                             checkbox.checked = true;
                         }
@@ -167,11 +167,13 @@ export const addOrEnterDiet = async function (boolean, dietId) {
                     `,
                     cancelButtonAriaLabel: "Cancelar",
                     didOpen: () => {
+                        const dietId = data.id;
                         const checkboxes = document.querySelectorAll('.ingredient-checkbox');
+
                         checkboxes.forEach(checkbox => {
                             checkbox.addEventListener('click', () => {
                                 const ingrediente = checkbox.getAttribute('data-nome');
-                                handleCheckboxClick(checkbox, ingrediente);
+                                handleCheckboxClick(checkbox, ingrediente, dietId);
                                 console.log('Ingredientes selecionados:', ingredientesSelecionados);
                             });
                         });
@@ -370,12 +372,11 @@ async function getIngredientDetails(ingredientId) {
 }
 
 // Função para adicionar um ingrediente à lista de ingredientes selecionados
-function adicionarIngrediente(ingrediente) {
+function adicionarIngrediente(ingrediente, dietId) {
     const ingredienteAchado = mockDiets.find(item => item.nome === ingrediente);
 
     if (ingredienteAchado) {
-        console.log(ingredienteAchado);
-        ingredientesSelecionados.push(ingrediente);
+        ingredientesSelecionados.push(ingredienteAchado);
         totalCalorias += ingredienteAchado.calorias;
         const amountDiv = document.getElementById('total-calories');
         amountDiv.textContent = `${totalCalorias} kcal`;
@@ -383,35 +384,52 @@ function adicionarIngrediente(ingrediente) {
 }
 
 // Função para remover um ingrediente da lista de ingredientes selecionados
-function removerIngrediente(ingrediente) {
+function removerIngrediente(ingrediente, dietId) {
     const ingredienteAchado = mockDiets.find(item => item.nome === ingrediente);
+    if (ingredienteAchado !== undefined) {
+        const indice = ingredientesSelecionados.findIndex(item => item.nome === ingredienteAchado.nome);
+        console.log(indice);
+        
+        if (indice !== -1) {
+            ingredientesSelecionados.splice(indice, 1);
+            totalCalorias -= ingredienteAchado.calorias;
+            console.log(ingredienteAchado);
 
-    if (ingredienteAchado !== -1) {
-        ingredientesSelecionados.splice(ingredienteAchado, 1);
-        console.log('CALORIES', ingredienteAchado.calorias);
-        totalCalorias -= ingredienteAchado.calorias;
+            fetch(`/dietIngredient/${dietId}/${ingredienteAchado.nome}`, {
+                method: 'DELETE'
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Erro ao remover a relação de ingrediente.');
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log(data.message);
+            })
+            .catch(error => {
+                console.error('Erro ao remover a relação de ingrediente:', error);
+            });
 
-        const amountDiv = document.getElementById('total-calories');
-        amountDiv.textContent = `${totalCalorias} kcal`;
+            const amountDiv = document.getElementById('total-calories');
+            amountDiv.textContent = `${totalCalorias} kcal`;
+        }
     }
 }
 
 // Função para lidar com o clique em uma checkbox de ingrediente
-function handleCheckboxClick(checkbox, ingrediente) {
+function handleCheckboxClick(checkbox, ingrediente, dietId) {
     if (checkbox.checked) {
-        adicionarIngrediente(ingrediente);
+        adicionarIngrediente(ingrediente, dietId);
     } else {
-        console.log(ingrediente);
-        removerIngrediente(ingrediente);
+        removerIngrediente(ingrediente, dietId);
     }
 }
 
 function init () {
-    let activityFactor = 0;
     window.addOrEnterDiet = addOrEnterDiet;
     window.removeDiet = removeDiet;
     window.updateDiet = updateDiet;
-    window.activityFactor = activityFactor;
 }
 
 init();
