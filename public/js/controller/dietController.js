@@ -25,6 +25,7 @@ var totalCalorias = 0;
  * Função para verificar quando o usuário entra em uma dieta.
  * Se a dieta ja estiver criada é exibido os ingredientes em um modal carregado do mock para que o usuário selecione e monte a dieta com as calorias desejadas.
  * Caso contrário, outro modal é aberto para o cadastro da dieta, pedindo ao usuário que insira o nome e o foco da dieta.
+ * @method
  * @param {boolean} boolean 
  * @param {int} dietId 
  * @returns {object} Objeto modal swal (sweetalert) que retorna uma mensagem de sucesso, caso a dieta tenha sido criada com sucesso, ou de erro caso ocorra um problema na requisição.

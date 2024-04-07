@@ -39,8 +39,8 @@ function verificarTodosMarcados(checkboxes) {
 /**
  * Função para verificar quando o usuário entra em uma rotina.
  * Se a rotina ja estiver criada é exibido os exercícios em um modal, caso contrário, outro modal é aberto para o cadastro da rotina com um foco específico.
- * @param {boolean} boolean 
- * @param {int} treinoId 
+ * @param {boolean} boolean Verifica se a rotina está ou não criada.
+ * @param {int} treinoId ID do treino.
  * @returns {Object} Objeto modal swal (sweetalert) que retorna uma mensagem de sucesso, caso a rotina tenha sido criada ou finalizada com sucesso, ou de erro caso ocorra um problema na requisição.
  * @method
  */
