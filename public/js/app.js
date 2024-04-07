@@ -130,10 +130,12 @@ const handleLogin = function () {
                 loadingSwal.close();
                 localStorage.setItem('user', JSON.stringify(data.data[0]));
                 window.location.href = '/home';
+            } else {
+                Swal.fire("Erro ao entrar na conta, verifique o usuário e/ou a senha!", "", "error");
             }
         })
         .catch(error => {
-            Swal.fire("Erro ao criar treino!", "", "error");
+            Swal.fire("Erro ao entrar na conta, verifique o usuário e a senha!", "", "error");
         });
 }
 
