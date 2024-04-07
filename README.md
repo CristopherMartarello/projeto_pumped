@@ -15,6 +15,7 @@ Pumped, site para registro de vida fitness, com foco em auxiliar a vida do usuar
 6° - Rodar o script 'nodemon start.js' para iniciar o servidor.
 
 Caso não consiga rodar o script:
+
 7°- Abra o terminal (POWERSHELL) para verificar as permissões do usuário e veja se possui permissão para rodar scripts, usando o comando 'Get-ExecutionPolicy', se for 'Restricted': rode o comando 'Set-ExecutionPolicy RemoteSigned'
 
 # Lista de Funcionalidades
