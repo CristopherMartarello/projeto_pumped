@@ -288,7 +288,10 @@ const createRoutine = function (name, focus) {
     })
     .then(res => res.json())
     .then(data => {
-        Swal.fire("Treino criado!", "", "success");
+        Swal.fire("Treino criado!", "", "success").then(function() {
+            location.reload();
+            window.location.href = 'home#userRoutine';
+        });
     })
     .catch(error => {
         Swal.fire("Erro ao criar treino!", "", "error");
@@ -310,7 +313,13 @@ async function contabilizarTreino(routine) {
         });
 
         if (response.ok) {
-            Swal.fire('Treino atualizado com sucesso!', '', 'success');
+            Swal.fire({
+                title: 'Treino atualizado com sucesso!',
+                icon: 'success'
+            }).then((result) => {
+                location.reload();
+                window.location.href = 'home#userRoutine';
+            });
         } else {
             Swal.fire('Erro ao atualizar o treino!', '', 'error');
         }

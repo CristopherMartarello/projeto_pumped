@@ -169,7 +169,14 @@ const getUserById = async function() {
 const saveData = function () {
     var userData = getDataFromInputs();
     const {name, username, email, password, age, weight, id, height, birth, bio, gender, activity} = userData;
-    console.log('Dados dos inputs:', userData);
+    const loadingSwal = Swal.fire({
+        title: 'Carregando...',
+        allowOutsideClick: false, 
+        showConfirmButton: false, 
+        didOpen: () => {
+            Swal.showLoading(); 
+        }
+    });
     
     fetch('/update-user', {
         method: 'post',
@@ -188,10 +195,15 @@ const saveData = function () {
             gender: gender,
             activity: activity
         })
-    })
-        .then(res => res.json())
+    }).then(res => res.json())
         .then(data => {
-            console.log('Novo usuário:', data);
+            loadingSwal.close();
+            localStorage.removeItem('user');
+            localStorage.setItem('user', JSON.stringify(userData));
+            Swal.fire("Dados atualizados!", "", "success").then(function() {
+                location.reload();
+                window.location.href = 'home#userData';
+            });
         })
         .catch(error => {
             console.error('Erro:', error);

@@ -303,7 +303,10 @@ const createDiet = function (name, calories, focus) {
     })
     .then(res => res.json())
     .then(data => {
-        Swal.fire("Dieta criada!", "", "success");
+        Swal.fire("Dieta criada!", "", "success").then(function() {
+            location.reload();
+            window.location.href = 'home#Diet';
+        });
     })
     .catch(error => {
         Swal.fire("Erro ao criar dieta!", "", "error");
@@ -371,8 +374,11 @@ const updateDiet = async function(diet, loadingSwal) {
 
         if (response.ok) {
             loadingSwal.close();
-            Swal.fire('Dieta atualizada com sucesso!', '', 'success');
-            document.getElementById('diet-calories').textContent = `${diet.calories}kcal`;
+            Swal.fire('Dieta atualizada com sucesso!', '', 'success').then(function() {
+                document.getElementById(`diet-calories-${diet.name}`).textContent = `${diet.calories}kcal`;
+                location.reload();
+                window.location.href = 'home#Diet';
+            });
         } else {
             Swal.fire('Erro ao atualizar o dieta!', '', 'error');
         }

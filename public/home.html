@@ -199,5 +199,20 @@
             });
         }
     </script>
+
+    <script>
+        function exibirPainelCorrespondenteAoHash() {
+            var hash = window.location.hash.substring(1); 
+            if (hash) {
+                var panel = document.getElementById(hash);
+                if (panel) {
+                    showPanel(hash); 
+                }
+            }
+        }
+
+        window.onload = exibirPainelCorrespondenteAoHash;
+        window.onhashchange = exibirPainelCorrespondenteAoHash;
+    </script>
 </body>
 </html>

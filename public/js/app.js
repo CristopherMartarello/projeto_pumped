@@ -68,6 +68,15 @@ const handleSubmit = function () {
     let email = document.querySelector('.email').value;
     let password = document.querySelector('.password').value;
 
+    const loadingSwal = Swal.fire({
+        title: 'Carregando...',
+        allowOutsideClick: false, 
+        showConfirmButton: false, 
+        didOpen: () => {
+            Swal.showLoading(); 
+        }
+    });
+
     fetch('/register-user', {
         method: 'post',
         headers: { 'Content-Type': 'application/json' },
@@ -80,10 +89,11 @@ const handleSubmit = function () {
     })
         .then(res => res.json())
         .then(data => {
-            console.log('DATA', data);
+            loadingSwal.close();
+            Swal.fire("Usuário Cadastrado!", "", "success");
         })
         .catch(error => {
-            console.error('Erro:', error);
+            Swal.fire("Erro ao cadastrar usuário!", "", "error");
         });
 }
 
@@ -97,6 +107,15 @@ const handleLogin = function () {
     let username = document.querySelector('.usernameLogin').value;
     let password = document.querySelector('.passwordLogin').value;
 
+    const loadingSwal = Swal.fire({
+        title: 'Carregando...',
+        allowOutsideClick: false, 
+        showConfirmButton: false, 
+        didOpen: () => {
+            Swal.showLoading(); 
+        }
+    });
+
     fetch('/login-user', {
         method: 'post',
         headers: { 'Content-Type': 'application/json' },
@@ -108,23 +127,26 @@ const handleLogin = function () {
         .then(res => res.json())
         .then(data => {
             if(!data.erro) {
-                console.log('DATA', data.data[0]);
+                loadingSwal.close();
                 localStorage.setItem('user', JSON.stringify(data.data[0]));
                 window.location.href = '/home';
             }
         })
         .catch(error => {
-            console.error('Erro:', error);
+            Swal.fire("Erro ao criar treino!", "", "error");
         });
 }
 
 /**
  * Inicializa a aplicação, realizando as operações necessárias no início.
- * Neste caso, limpa o armazenamento local (localStorage).
+ * Neste caso, limpa o armazenamento local (localStorage) e inicializa as funções do objeto window.
  * @function init
  */
 function init() {
     clearStorage();
+    window.handleLogin = handleLogin;
+    window.handleSubmit = handleSubmit;
+    window.switchForms = switchForms;
 }
 
 init();

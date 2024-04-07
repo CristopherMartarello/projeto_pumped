@@ -46,13 +46,13 @@ class User {
         this.#username = username;
         this.#email = email;
         this.#password = password;
-        this.#age = age || 0;
-        this.#weight = weight || 0.0;
-        this.#height = height || 0.0;
+        this.#age = age || 20;
+        this.#weight = weight || 60;
+        this.#height = height || 1.60;
         this.#birth = birth || null;
         this.#bio = bio || '';
         this.#gender = gender || '';
-        this.#activity = activity || '';
+        this.#activity = activity || 1.1;
     }
 
     get name() {
@@ -157,13 +157,13 @@ class User {
                 username: newUser.username,
                 email: newUser.email,
                 password: newUser.password,
-                age: newUser.age ? newUser.age : 0,
-                weight: newUser.weight ? newUser.weight : '0.0',
-                height: newUser.weight ? newUser.height : '0.0',
+                age: newUser.age ? newUser.age : 20,
+                weight: newUser.weight ? newUser.weight : '60',
+                height: newUser.weight ? newUser.height : '1.60',
                 birth: newUser.birth ? newUser.birth : null,
                 bio: newUser.bio ? newUser.bio : '',
                 gender: newUser.gender ? newUser.gender : '',
-                activity: newUser.activity ? newUser.activity : '',
+                activity: newUser.activity ? newUser.activity : 1.1,
             });
             console.log('Usuário inserido no banco de dados:', user.username);
             return user;
