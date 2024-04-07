@@ -2,13 +2,20 @@
 Pumped, site para registro de vida fitness, com foco em auxiliar a vida do usuario com a criação de rotinas de treinos, dietas com base no seu objetivo e registros pessoais para acompanhar sua evolução.
 
 # Instalações necessárias
-1° - Baixar node.js (versão 20.9 ou 20.12 / com o node package manager - npm)
+1°- Clonar esse projeto para o seu computador ultilizando o Git. Todas as pastas da aplicação se encontram na branch 'MASTER'.
 
-2° - Instalar dependencias do projeto (comando: npm install)
+2°- Abra o projeto no VSCODE, abra o terminal do VSCODE e entre na branch MASTER atraves do comando 'git checkout master'. Agora você está na branch principal do projeto.
 
-3° - Configurar o nodemon para que rode de forma correta (comando: npm install -g nodemon) e (comando: npm install --save-dev nodemon)
+3° - Baixar node.js (versão 20.9 ou 20.12 / com o node package manager - npm)
 
-4° - Rodar o script 'nodemon start.js' para iniciar o servidor (caso não consiga rodar o script, abra o terminal (POWERSHELL) para verificar as permissões do usuário e veja se possui permissão para rodar scripts, usando o comando 'Get-ExecutionPolicy', se for 'Restricted': rode o comando 'Set-ExecutionPolicy RemoteSigned')
+4° - Instalar dependencias do projeto (comando: npm install)
+
+5° - Configurar o nodemon para que rode de forma correta (comando: npm install -g nodemon) e (comando: npm install --save-dev nodemon)
+
+6° - Rodar o script 'nodemon start.js' para iniciar o servidor.
+
+Caso não consiga rodar o script
+7°- Abra o terminal (POWERSHELL) para verificar as permissões do usuário e veja se possui permissão para rodar scripts, usando o comando 'Get-ExecutionPolicy', se for 'Restricted': rode o comando 'Set-ExecutionPolicy RemoteSigned'
 
 # Lista de Funcionalidades
 1° - Sistema de login e criação de contas: Cada usuario tem sua propria conta, com seus registros pessoais (se existirem) salvos em nosso Banco de Dados, se o usuario tentar entrar sem ter uma conta ele não conseguirá, assim tendo que ir para a aba de criação de conta, e após cria-la, pode agora entrar no site.
