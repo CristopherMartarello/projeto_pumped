@@ -1,4 +1,32 @@
-import { addOrEnterRoutine } from './routineController.js';
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: public/js/controller/homeController.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: public/js/controller/homeController.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import { addOrEnterRoutine } from './routineController.js';
 import { addOrEnterDiet } from './dietController.js';
 const userString = localStorage.getItem('user');
 const user = JSON.parse(userString);
@@ -7,8 +35,7 @@ console.log(user);
 
 
 /**
- * Função que preenche os dados do usuário caso correspondam no Banco de dados.
- * @async
+ * Preenchendo os dados do usuário caso correspondam no Banco de dados.
  */
 async function fillUserData() {
     for (var key in user) {
@@ -104,7 +131,7 @@ async function fillUserData() {
                 var dietCalories = document.createElement('span');
                 dietCalories.classList.add('diet-calories');
                 dietCalories.textContent = diet.calories > 0 ? diet.calories + 'kcal' : '0kcal';
-                dietCalories.setAttribute('id', `diet-calories-${diet.name}`);
+                dietCalories.setAttribute('id', 'diet-calories');
                 divDiet.appendChild(dietCalories);
 
                 divDiet.appendChild(icon);
@@ -142,7 +169,7 @@ function getDataFromInputs() {
     var gender = document.getElementById('gender').value;
     var activity = document.getElementById('activity').value;
 
-    for (var i = 0; i < inputs.length; i++) {
+    for (var i = 0; i &lt; inputs.length; i++) {
         var input = inputs[i];
         var key = input.id; 
 
@@ -162,7 +189,7 @@ function getDataFromInputs() {
 
 /**
  * Busca um usuário pelo seu ID.
- * @returns {Promise<Object>} Uma Promise que resolve para o objeto do usuário encontrado.
+ * @returns {Promise&lt;Object>} Uma Promise que resolve para o objeto do usuário encontrado.
  * @throws {Error} Se ocorrer um erro ao buscar o usuário pelo ID.
  */
 const getUserById = async function() {
@@ -185,14 +212,7 @@ const getUserById = async function() {
 const saveData = function () {
     var userData = getDataFromInputs();
     const {name, username, email, password, age, weight, id, height, birth, bio, gender, activity} = userData;
-    const loadingSwal = Swal.fire({
-        title: 'Carregando...',
-        allowOutsideClick: false, 
-        showConfirmButton: false, 
-        didOpen: () => {
-            Swal.showLoading(); 
-        }
-    });
+    console.log('Dados dos inputs:', userData);
     
     fetch('/update-user', {
         method: 'post',
@@ -211,15 +231,10 @@ const saveData = function () {
             gender: gender,
             activity: activity
         })
-    }).then(res => res.json())
+    })
+        .then(res => res.json())
         .then(data => {
-            loadingSwal.close();
-            localStorage.removeItem('user');
-            localStorage.setItem('user', JSON.stringify(userData));
-            Swal.fire("Dados atualizados!", "", "success").then(function() {
-                location.reload();
-                window.location.href = 'home#userData';
-            });
+            console.log('Novo usuário:', data);
         })
         .catch(error => {
             console.error('Erro:', error);
@@ -227,7 +242,7 @@ const saveData = function () {
 }
 
 /**
- * Preenche as informações adicionais do perfil do usuário, como IMC e ingestão de água.
+ * Preenche as informações adicionais do perfil do usuário.
  * @param {Array} data - Array contendo as informações adicionais do perfil, onde o índice 8 contém o IMC e o índice 9 contém a ingestão de água.
  */
 const fillAditionalInfo = function(data) {
@@ -237,20 +252,20 @@ const fillAditionalInfo = function(data) {
     // Preenchendo informações adicionais do perfil
     var waterIntakeDiv = document.getElementById('water-intake-block');
     waterIntakeDiv.innerHTML = `
-        <i class="fa fa-coffee" style="color: #000"></i> 
-        <label style="color: #000">Água</label> 
-        <span>${waterIntake.toFixed(0)}ml</span>`;
+        &lt;i class="fa fa-coffee" style="color: #000">&lt;/i> 
+        &lt;label style="color: #000">Água&lt;/label> 
+        &lt;span>${waterIntake.toFixed(0)}ml&lt;/span>`;
 
     var imcDiv = document.getElementById('imc-block');
     imcDiv.innerHTML = `
-        <i class="fa fa-balance-scale" aria-hidden="true" style="color: #000"></i> 
-        <label style="color: #000">IMC</label> 
-        <span>${imc.toFixed(2)}</span>`;
+        &lt;i class="fa fa-balance-scale" aria-hidden="true" style="color: #000">&lt;/i> 
+        &lt;label style="color: #000">IMC&lt;/label> 
+        &lt;span>${imc.toFixed(2)}&lt;/span>`;
 }
 
 /**
- * Preenche as informações calóricas do perfil da dieta na interface de dietas.
- * @param {Array} data - Array contendo as informações calóricas do perfil da dieta, tanto para homens, quanto para mulheres.
+ * Preenche as informações calóricas do perfil da dieta na interface do usuário.
+ * @param {Array} data - Array contendo as informações calóricas do perfil da dieta, onde:
  */
 const fillCaloriesParameters = function(data) {
     console.log(data);
@@ -268,70 +283,70 @@ const fillCaloriesParameters = function(data) {
     // Preenchendo informações calóricas do perfil da dieta
     var TMBMaleDiv = document.getElementById('tmb-male');
     TMBMaleDiv.innerHTML = `
-        <i class="fa fa-mars" style="color: #000"></i> 
-        <label style="color: #000">TMB</label> 
-        <span>${TMBMale.toFixed(0)} kcal</span>`;
+        &lt;i class="fa fa-mars" style="color: #000">&lt;/i> 
+        &lt;label style="color: #000">TMB&lt;/label> 
+        &lt;span>${TMBMale.toFixed(0)} kcal&lt;/span>`;
 
     var TMBFemaleDiv = document.getElementById('tmb-female');
     TMBFemaleDiv.innerHTML = `
-        <i class="fa fa-venus" aria-hidden="true" style="color: #000"></i> 
-        <label style="color: #000">TMB</label> 
-        <span>${TMBFemale.toFixed(0)} kcal</span>`;
+        &lt;i class="fa fa-venus" aria-hidden="true" style="color: #000">&lt;/i> 
+        &lt;label style="color: #000">TMB&lt;/label> 
+        &lt;span>${TMBFemale.toFixed(0)} kcal&lt;/span>`;
 
     var imcDiv = document.getElementById('calorie-for-imc');
     imcDiv.innerHTML = `
-        <i class="fa fa-balance-scale" aria-hidden="true" style="color: #000"></i> 
-        <label style="color: #000">IMC</label> 
-        <span>${imc.toFixed(2)}</span>`;
+        &lt;i class="fa fa-balance-scale" aria-hidden="true" style="color: #000">&lt;/i> 
+        &lt;label style="color: #000">IMC&lt;/label> 
+        &lt;span>${imc.toFixed(2)}&lt;/span>`;
 
     var imcDiv = document.getElementById('calorie-for-water');
     imcDiv.innerHTML = `
-        <i class="fa fa-coffee" aria-hidden="true" style="color: #000"></i> 
-        <label style="color: #000">Água</label> 
-        <span>${waterIntake.toFixed(0)} ml</span>`;
+        &lt;i class="fa fa-coffee" aria-hidden="true" style="color: #000">&lt;/i> 
+        &lt;label style="color: #000">Água&lt;/label> 
+        &lt;span>${waterIntake.toFixed(0)} ml&lt;/span>`;
 
     var WLMaleDiv = document.getElementById('calorie-for-weightloss-male');
     WLMaleDiv.innerHTML = `
-        <i class="fa fa-mars" style="color: #000"></i> 
-        <label style="color: #000">Emagrecimento</label> 
-        <span>${weightLossMale.toFixed(0)} kcal</span>`;
+        &lt;i class="fa fa-mars" style="color: #000">&lt;/i> 
+        &lt;label style="color: #000">Emagrecimento&lt;/label> 
+        &lt;span>${weightLossMale.toFixed(0)} kcal&lt;/span>`;
 
     var WLFemaleDiv = document.getElementById('calorie-for-weightloss-female');
     WLFemaleDiv.innerHTML = `
-        <i class="fa fa-venus" aria-hidden="true" style="color: #000"></i> 
-        <label style="color: #000">Emagrecimento</label> 
-        <span>${weightLossFemale.toFixed(0)} kcal</span>`;
+        &lt;i class="fa fa-venus" aria-hidden="true" style="color: #000">&lt;/i> 
+        &lt;label style="color: #000">Emagrecimento&lt;/label> 
+        &lt;span>${weightLossFemale.toFixed(0)} kcal&lt;/span>`;
 
     var MGMaleDiv = document.getElementById('calorie-for-massgain-male');
     MGMaleDiv.innerHTML = `
-        <i class="fa fa-mars" style="color: #000"></i> 
-        <label style="color: #000">Hipertrofia</label> 
-        <span>${massGainMale.toFixed(0)} kcal</span>`;
+        &lt;i class="fa fa-mars" style="color: #000">&lt;/i> 
+        &lt;label style="color: #000">Hipertrofia&lt;/label> 
+        &lt;span>${massGainMale.toFixed(0)} kcal&lt;/span>`;
 
     var MGFemaleDiv = document.getElementById('calorie-for-massgain-female');
     MGFemaleDiv.innerHTML = `
-        <i class="fa fa-venus" aria-hidden="true" style="color: #000"></i> 
-        <label style="color: #000">Hipertrofia</label> 
-        <span>${massGainFemale.toFixed(0)} kcal</span>`;
+        &lt;i class="fa fa-venus" aria-hidden="true" style="color: #000">&lt;/i> 
+        &lt;label style="color: #000">Hipertrofia&lt;/label> 
+        &lt;span>${massGainFemale.toFixed(0)} kcal&lt;/span>`;
 
     var MaintanceMaleDiv = document.getElementById('calorie-for-maintance-male');
     MaintanceMaleDiv.innerHTML = `
-        <i class="fa fa-mars" style="color: #000"></i> 
-        <label style="color: #000">Definição (manter)</label> 
-        <span>${maintanceMale.toFixed(0)} kcal</span>`;
+        &lt;i class="fa fa-mars" style="color: #000">&lt;/i> 
+        &lt;label style="color: #000">Definição (manter)&lt;/label> 
+        &lt;span>${maintanceMale.toFixed(0)} kcal&lt;/span>`;
 
     var MaintanceFemaleDiv = document.getElementById('calorie-for-maintance-female');
     MaintanceFemaleDiv.innerHTML = `
-        <i class="fa fa-venus" aria-hidden="true" style="color: #000"></i> 
-        <label style="color: #000">Definição (manter)</label> 
-        <span>${maintanceFemale.toFixed(0)} kcal</span>`;
+        &lt;i class="fa fa-venus" aria-hidden="true" style="color: #000">&lt;/i> 
+        &lt;label style="color: #000">Definição (manter)&lt;/label> 
+        &lt;span>${maintanceFemale.toFixed(0)} kcal&lt;/span>`;
 }
 
 /**
  * Calcula as calorias médias com base na idade, altura, peso e nível de atividade fornecidos,
- * e preenche as informações adicionais e parâmetros de calorias na interface de dietas e usuário.
+ * e preenche as informações adicionais e parâmetros de calorias na interface do usuário.
  * @param {int} age - Idade do usuário.
- * @param {float} height - Altura do usuário em metros.
+ * @param {float} height - Altura do usuário em centímetros.
  * @param {float} weight - Peso do usuário em quilogramas.
  * @param {string} activity - Nível de atividade do usuário (sedentário, moderado, ativo).
  * @throws {Error} Se houver um erro ao calcular as calorias médias.
@@ -370,4 +385,26 @@ function init () {
     window.calculateAverageCalories = calculateAverageCalories;
 }
 
-init();
+init();</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="CalorieCalculator.html">CalorieCalculator</a></li><li><a href="Diet.html">Diet</a></li><li><a href="DietIngredient.html">DietIngredient</a></li><li><a href="Exercise.html">Exercise</a></li><li><a href="Ingredient.html">Ingredient</a></li><li><a href="Routine.html">Routine</a></li><li><a href="User.html">User</a></li><li><a href="WaterIntakeCalculator.html">WaterIntakeCalculator</a></li></ul><h3>Global</h3><ul><li><a href="global.html#Sequelize">Sequelize</a></li><li><a href="global.html#addOrEnterDiet">addOrEnterDiet</a></li><li><a href="global.html#addOrEnterRoutine">addOrEnterRoutine</a></li><li><a href="global.html#adicionarIngrediente">adicionarIngrediente</a></li><li><a href="global.html#calculateAverageCalories">calculateAverageCalories</a></li><li><a href="global.html#clearStorage">clearStorage</a></li><li><a href="global.html#contabilizarTreino">contabilizarTreino</a></li><li><a href="global.html#createDiet">createDiet</a></li><li><a href="global.html#createRoutine">createRoutine</a></li><li><a href="global.html#db">db</a></li><li><a href="global.html#diets">diets</a></li><li><a href="global.html#exercises">exercises</a></li><li><a href="global.html#fillAditionalInfo">fillAditionalInfo</a></li><li><a href="global.html#fillCaloriesParameters">fillCaloriesParameters</a></li><li><a href="global.html#fillUserData">fillUserData</a></li><li><a href="global.html#formContainer">formContainer</a></li><li><a href="global.html#getDataFromInputs">getDataFromInputs</a></li><li><a href="global.html#getIngredientDetails">getIngredientDetails</a></li><li><a href="global.html#getIngredients">getIngredients</a></li><li><a href="global.html#getUserById">getUserById</a></li><li><a href="global.html#handleCheckboxClick">handleCheckboxClick</a></li><li><a href="global.html#handleLogin">handleLogin</a></li><li><a href="global.html#handleSubmit">handleSubmit</a></li><li><a href="global.html#ingredientesSelecionados">ingredientesSelecionados</a></li><li><a href="global.html#init">init</a></li><li><a href="global.html#loginForm">loginForm</a></li><li><a href="global.html#mockDiets">mockDiets</a></li><li><a href="global.html#removeDiet">removeDiet</a></li><li><a href="global.html#removeRoutine">removeRoutine</a></li><li><a href="global.html#removerIngrediente">removerIngrediente</a></li><li><a href="global.html#saveData">saveData</a></li><li><a href="global.html#signUpForm">signUpForm</a></li><li><a href="global.html#switchForms">switchForms</a></li><li><a href="global.html#totalCalorias">totalCalorias</a></li><li><a href="global.html#updateDiet">updateDiet</a></li><li><a href="global.html#user">user</a></li><li><a href="global.html#userString">userString</a></li><li><a href="global.html#verificarTodosMarcados">verificarTodosMarcados</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Sun Apr 07 2024 01:03:41 GMT-0300 (Horário Padrão de Brasília)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
