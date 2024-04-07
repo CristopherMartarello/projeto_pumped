@@ -28,7 +28,7 @@ Pumped, site para registro de vida fitness, com foco em auxiliar a vida do usuar
 
 4° - Uma aba de evolução, que mostraria a evolução do usuario com base nos treinos, dietas e peso.
 
-5° - A possibilidade do usuário poder selecionar a quandida em gramas dos alimentos que ele consumiu da dieta, assim um calculo seria feito para a relação gramas e calorias.
+5° - A possibilidade do usuário poder selecionar a quandidade em gramas dos alimentos que ele consumiu da dieta, assim um calculo seria feito para a relação gramas e calorias.
 
 # Como abrir a documentação
 A documentação foi feita usando o JSDoc, ela se encontra na pasta /doc , é o arquivo index.html.
