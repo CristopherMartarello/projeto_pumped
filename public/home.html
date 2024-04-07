@@ -47,30 +47,11 @@
         </div>
 
         <div class="sidebar-exit">
-            <i class="fas fa-sign-out-alt"></i> <a href="#leave">Sair</a>
+            <i class="fas fa-sign-out-alt"></i> <a href="#leave" onclick="logoutUser()">Sair</a>
         </div>
     </div>
     <div class="page-content" id="page-content">
-        <div class="panel-main-feed" id="home">
-            <div class="header-feed">
-                <div class="user-image"></div>
-                <div class="user-name">Nome do usuário</div>
-            </div>
-            <div class="body-feed">
-                <div class="post-image">
-                    
-                </div>
-            </div>
-            <div class="footer-feed">
-                <div class="like-icon">
-                    <i class="fas fa-heart"></i>
-                </div>
-                <div class="comments">
-                    <i class="fas fa-comments"></i>
-                </div>
-            </div>
-        </div>
-        <div class="panel-user-data" id="userData" style="display: none;">
+        <div class="panel-user-data" id="userData">
             <div class="data-information">
                 <div class="input-block" id="input-name">
                     <label for="name">Nome</label>
@@ -133,6 +114,26 @@
                 </div>
             </div>
         </div>
+        <div class="panel-main-feed" id="home" style="display: none;">
+            <h1 style="padding: 1vh; color: #fff">O feed está em construção!!!</h1>
+            <!-- <div class="header-feed">
+                <div class="user-image"></div>
+                <div class="user-name">Nome do usuário</div>
+            </div> -->
+            <!-- <div class="body-feed">
+                <div class="post-image">
+                    
+                </div>
+            </div>
+            <div class="footer-feed">
+                <div class="like-icon">
+                    <i class="fas fa-heart"></i>
+                </div>
+                <div class="comments">
+                    <i class="fas fa-comments"></i>
+                </div>
+            </div> -->
+        </div>
         <div class="panel-user-workout" id="userWorkout" style="display: none;">
             <div class="routines" onclick="addOrEnterRoutine(false)">
                 <i class="fa fa-plus" style="color: #000; font-size: xx-large;"></i>
@@ -184,7 +185,47 @@
                     <i class="fa fa-plus" style="color: #000; font-size: xx-large;"></i>
                 </div>
             </div>
-        </div>    
+        </div>
+        <div class="panel-main-feed" id="userEvolution" style="display: none;">
+            <h1 style="padding: 1vh; color: #fff">A evolução de usuário está em construção!!!</h1>
+            <!-- <div class="header-feed">
+                <div class="user-image"></div>
+                <div class="user-name">Nome do usuário</div>
+            </div> -->
+            <!-- <div class="body-feed">
+                <div class="post-image">
+                    
+                </div>
+            </div>
+            <div class="footer-feed">
+                <div class="like-icon">
+                    <i class="fas fa-heart"></i>
+                </div>
+                <div class="comments">
+                    <i class="fas fa-comments"></i>
+                </div>
+            </div> -->
+        </div>
+        <div class="panel-main-feed" id="store" style="display: none;">
+            <h1 style="padding: 1vh; color: #fff">A loja de produtos está em construção!!!</h1>
+            <!-- <div class="header-feed">
+                <div class="user-image"></div>
+                <div class="user-name">Nome do usuário</div>
+            </div> -->
+            <!-- <div class="body-feed">
+                <div class="post-image">
+                    
+                </div>
+            </div>
+            <div class="footer-feed">
+                <div class="like-icon">
+                    <i class="fas fa-heart"></i>
+                </div>
+                <div class="comments">
+                    <i class="fas fa-comments"></i>
+                </div>
+            </div> -->
+        </div>     
     </div>
 
     <script>
@@ -213,6 +254,13 @@
 
         window.onload = exibirPainelCorrespondenteAoHash;
         window.onhashchange = exibirPainelCorrespondenteAoHash;
+    </script>
+
+    <script>
+        function logoutUser() {
+        localStorage.clear();
+        window.location.href = "http://localhost:3000";
+    }
     </script>
 </body>
 </html>
