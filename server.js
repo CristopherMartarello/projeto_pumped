@@ -822,7 +822,7 @@ app.get('/get-mockDiets/', async (req, res) => {
 
 /**
  * @swagger
- * /user-diet/{:dietaId}/ingredientes:
+ * /api/user-diet/{:dietaId}/ingredientes:
  *   get:
  *     tags:
  *       - Diet
@@ -841,7 +841,7 @@ app.get('/get-mockDiets/', async (req, res) => {
  *       '500':
  *         description: Erro ao buscar ingredientes data dieta, erro interno.
  */
-app.get('/user-diet/:dietaId/ingredientes', async (req, res) => {
+app.get('/api/user-diet/:dietaId/ingredientes', async (req, res) => {
     try {
         const dietaId = req.params.dietaId;
         const ingredientesSelecionados = await DietIngredient.findByDietId(dietaId);
@@ -855,7 +855,7 @@ app.get('/user-diet/:dietaId/ingredientes', async (req, res) => {
 
 /**
  * @swagger
- * /user-diet/get-ingredient-details/{:id}:
+ * /api/get-ingredient-details/{:id}:
  *   get:
  *     tags:
  *       - Diet
@@ -874,7 +874,7 @@ app.get('/user-diet/:dietaId/ingredientes', async (req, res) => {
  *       '500':
  *         description: Erro ao buscar objeto do ingrediente, erro interno.
  */
-app.get('/user-diet/get-ingredient-details/:id', async (req, res) => {
+app.get('/api/get-ingredient-details/:id', async (req, res) => {
     const ingredientId = req.params.id;
     try {
         const ingredient = await Ingredient.findOneById(ingredientId);
