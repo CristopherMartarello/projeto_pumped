@@ -1,0 +1,75 @@
+{
+    "User": {
+        "type": "object",
+        "properties": {
+            "id": {
+                "type": "integer"
+            },
+            "name": {
+                "type": "string"
+            },
+            "username": {
+                "type": "string"
+            },
+            "email": {
+                "type": "string"
+            },
+            "password": {
+                "type": "string"
+            },
+            "age": {
+                "type": "integer"
+            },
+            "weight": {
+                "type": "number"
+            },
+            "height": {
+                "type": "number"
+            },
+            "birth": {
+                "type": "string",
+                "format": "date"
+            },
+            "bio": {
+                "type": "string"
+            },
+            "gender": {
+                "type": "string"
+            },
+            "activity": {
+                "type": "number"
+            }
+        }
+    },
+    "Routine": {
+        "type": "object",
+        "properties": {
+            "name": {
+                "type": "string"
+            },
+            "focus": {
+                "type": "string"
+            },
+            "userId": {
+                "type": "integer"
+            }
+        }
+    },
+    "Diet": {
+        "type": "object",
+        "properties": {
+            "name": {
+                "type": "string"
+            },
+            "calories": {
+                "type": "integer"
+            },
+            "focus": {
+                "type": "string"
+            },
+            "userId": {
+                "type": "integer"
+            }
+        }
+    }
+}

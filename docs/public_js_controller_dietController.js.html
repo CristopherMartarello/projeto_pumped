@@ -424,7 +424,7 @@ const updateDiet = async function(diet, loadingSwal) {
  */
 async function getIngredients(dietaId) {
     try {
-        const response = await fetch(`/api/dietas/${dietaId}/ingredientes`);
+        const response = await fetch(`/user-diet/${dietaId}/ingredientes`);
         if (!response.ok) {
             throw new Error('Erro ao obter os ingredientes selecionados da dieta');
         }
@@ -444,7 +444,7 @@ async function getIngredients(dietaId) {
  */
 async function getIngredientDetails(ingredientId) {
     try {
-        const response = await fetch(`/api/get-ingredient-details/${ingredientId}`);
+        const response = await fetch(`/user-diet/get-ingredient-details/${ingredientId}`);
         if (!response.ok) {
             throw new Error('Erro ao obter os detalhes do ingrediente');
         }
