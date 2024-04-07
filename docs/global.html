@@ -170,70 +170,6 @@
 
         
             
-<h4 class="name" id="addOrEnterDiet"><span class="type-signature">(constant) </span>addOrEnterDiet<span class="type-signature"></span></h4>
-
-
-
-
-<div class="description">
-    <p>Função para verificar quando o usuário entra em uma dieta.
-Se a dieta ja estiver criada é exibido os ingredientes em um modal carregado do mock para que o usuário selecione e monte a dieta com as calorias desejadas.
-Caso contrário, outro modal é aberto para o cadastro da dieta, pedindo ao usuário que insira o nome e o foco da dieta.</p>
-</div>
-
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="public_js_controller_dietController.js.html">public/js/controller/dietController.js</a>, <a href="public_js_controller_dietController.js.html#line32">line 32</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-        
-            
 <h4 class="name" id="db"><span class="type-signature">(constant) </span>db<span class="type-signature"> :<a href="global.html#Sequelize">Sequelize</a></span></h4>
 
 
@@ -1040,6 +976,190 @@ Esta variável é utilizada para armazenar o total de calorias calculadas de uma
     
 
     
+    <h4 class="name" id="addOrEnterDiet"><span class="type-signature"></span>addOrEnterDiet<span class="signature">(boolean, dietId)</span><span class="type-signature"> &rarr; {object}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>Função para verificar quando o usuário entra em uma dieta.
+Se a dieta ja estiver criada é exibido os ingredientes em um modal carregado do mock para que o usuário selecione e monte a dieta com as calorias desejadas.
+Caso contrário, outro modal é aberto para o cadastro da dieta, pedindo ao usuário que insira o nome e o foco da dieta.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>boolean</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">boolean</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>dietId</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">int</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="public_js_controller_dietController.js.html">public/js/controller/dietController.js</a>, <a href="public_js_controller_dietController.js.html#line33">line 33</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>Objeto modal swal (sweetalert) que retorna uma mensagem de sucesso, caso a dieta tenha sido criada com sucesso, ou de erro caso ocorra um problema na requisição.</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">object</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
     <h4 class="name" id="addOrEnterRoutine"><span class="type-signature"></span>addOrEnterRoutine<span class="signature">(boolean, treinoId)</span><span class="type-signature"> &rarr; {Object}</span></h4>
     
 
@@ -1101,7 +1221,7 @@ Se a rotina ja estiver criada é exibido os exercícios em um modal, caso contr�
 
             
 
-            <td class="description last"></td>
+            <td class="description last"><p>Verifica se a rotina está ou não criada.</p></td>
         </tr>
 
     
@@ -1124,7 +1244,7 @@ Se a rotina ja estiver criada é exibido os exercícios em um modal, caso contr�
 
             
 
-            <td class="description last"></td>
+            <td class="description last"><p>ID do treino.</p></td>
         </tr>
 
     
@@ -1347,7 +1467,7 @@ Se a rotina ja estiver criada é exibido os exercícios em um modal, caso contr�
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="public_js_controller_dietController.js.html">public/js/controller/dietController.js</a>, <a href="public_js_controller_dietController.js.html#line436">line 436</a>
+        <a href="public_js_controller_dietController.js.html">public/js/controller/dietController.js</a>, <a href="public_js_controller_dietController.js.html#line437">line 437</a>
     </li></ul></dd>
     
 
@@ -1392,7 +1512,7 @@ Se a rotina ja estiver criada é exibido os exercícios em um modal, caso contr�
 
 <div class="description">
     <p>Calcula as calorias médias com base na idade, altura, peso e nível de atividade fornecidos,
-e preenche as informações adicionais e parâmetros de calorias na interface do usuário.</p>
+e preenche as informações adicionais e parâmetros de calorias na interface de dietas e usuário.</p>
 </div>
 
 
@@ -1467,7 +1587,7 @@ e preenche as informações adicionais e parâmetros de calorias na interface do
 
             
 
-            <td class="description last"><p>Altura do usuário em centímetros.</p></td>
+            <td class="description last"><p>Altura do usuário em metros.</p></td>
         </tr>
 
     
@@ -1554,7 +1674,7 @@ e preenche as informações adicionais e parâmetros de calorias na interface do
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="public_js_controller_homeController.js.html">public/js/controller/homeController.js</a>, <a href="public_js_controller_homeController.js.html#line326">line 326</a>
+        <a href="public_js_controller_homeController.js.html">public/js/controller/homeController.js</a>, <a href="public_js_controller_homeController.js.html#line339">line 339</a>
     </li></ul></dd>
     
 
@@ -1606,6 +1726,94 @@ e preenche as informações adicionais e parâmetros de calorias na interface do
 
 
     
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="checkAndCreateExampleExercises"><span class="type-signature">(async) </span>checkAndCreateExampleExercises<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>Verifica se existem exercícios no banco de dados. Se não houver, cria exercícios de exemplo.</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="server.js.html">server.js</a>, <a href="server.js.html#line1028">line 1028</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -1991,7 +2199,7 @@ e preenche as informações adicionais e parâmetros de calorias na interface do
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="public_js_controller_dietController.js.html">public/js/controller/dietController.js</a>, <a href="public_js_controller_dietController.js.html#line293">line 293</a>
+        <a href="public_js_controller_dietController.js.html">public/js/controller/dietController.js</a>, <a href="public_js_controller_dietController.js.html#line294">line 294</a>
     </li></ul></dd>
     
 
@@ -2043,6 +2251,94 @@ e preenche as informações adicionais e parâmetros de calorias na interface do
 
 
     
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="createExampleExercises"><span class="type-signature">(async) </span>createExampleExercises<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>Cria exercícios de exemplo no banco de dados com base nos dados fornecidos.</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="server.js.html">server.js</a>, <a href="server.js.html#line1047">line 1047</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -2224,7 +2520,7 @@ e preenche as informações adicionais e parâmetros de calorias na interface do
 
 
 <div class="description">
-    <p>Preenche as informações adicionais do perfil do usuário.</p>
+    <p>Preenche as informações adicionais do perfil do usuário, como IMC e ingestão de água.</p>
 </div>
 
 
@@ -2317,7 +2613,7 @@ e preenche as informações adicionais e parâmetros de calorias na interface do
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="public_js_controller_homeController.js.html">public/js/controller/homeController.js</a>, <a href="public_js_controller_homeController.js.html#line220">line 220</a>
+        <a href="public_js_controller_homeController.js.html">public/js/controller/homeController.js</a>, <a href="public_js_controller_homeController.js.html#line233">line 233</a>
     </li></ul></dd>
     
 
@@ -2361,7 +2657,7 @@ e preenche as informações adicionais e parâmetros de calorias na interface do
 
 
 <div class="description">
-    <p>Preenche as informações calóricas do perfil da dieta na interface do usuário.</p>
+    <p>Preenche as informações calóricas do perfil da dieta na interface de dietas.</p>
 </div>
 
 
@@ -2413,7 +2709,7 @@ e preenche as informações adicionais e parâmetros de calorias na interface do
 
             
 
-            <td class="description last"><p>Array contendo as informações calóricas do perfil da dieta, onde:</p></td>
+            <td class="description last"><p>Array contendo as informações calóricas do perfil da dieta, tanto para homens, quanto para mulheres.</p></td>
         </tr>
 
     
@@ -2454,7 +2750,7 @@ e preenche as informações adicionais e parâmetros de calorias na interface do
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="public_js_controller_homeController.js.html">public/js/controller/homeController.js</a>, <a href="public_js_controller_homeController.js.html#line242">line 242</a>
+        <a href="public_js_controller_homeController.js.html">public/js/controller/homeController.js</a>, <a href="public_js_controller_homeController.js.html#line255">line 255</a>
     </li></ul></dd>
     
 
@@ -2498,7 +2794,7 @@ e preenche as informações adicionais e parâmetros de calorias na interface do
 
 
 <div class="description">
-    <p>Preenchendo os dados do usuário caso correspondam no Banco de dados.</p>
+    <p>Função que preenche os dados do usuário caso correspondam no Banco de dados.</p>
 </div>
 
 
@@ -2542,7 +2838,7 @@ e preenche as informações adicionais e parâmetros de calorias na interface do
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="public_js_controller_homeController.js.html">public/js/controller/homeController.js</a>, <a href="public_js_controller_homeController.js.html#line12">line 12</a>
+        <a href="public_js_controller_homeController.js.html">public/js/controller/homeController.js</a>, <a href="public_js_controller_homeController.js.html#line13">line 13</a>
     </li></ul></dd>
     
 
@@ -2630,7 +2926,7 @@ e preenche as informações adicionais e parâmetros de calorias na interface do
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="public_js_controller_homeController.js.html">public/js/controller/homeController.js</a>, <a href="public_js_controller_homeController.js.html#line137">line 137</a>
+        <a href="public_js_controller_homeController.js.html">public/js/controller/homeController.js</a>, <a href="public_js_controller_homeController.js.html#line138">line 138</a>
     </li></ul></dd>
     
 
@@ -2789,7 +3085,7 @@ e preenche as informações adicionais e parâmetros de calorias na interface do
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="public_js_controller_dietController.js.html">public/js/controller/dietController.js</a>, <a href="public_js_controller_dietController.js.html#line417">line 417</a>
+        <a href="public_js_controller_dietController.js.html">public/js/controller/dietController.js</a>, <a href="public_js_controller_dietController.js.html#line418">line 418</a>
     </li></ul></dd>
     
 
@@ -2981,7 +3277,7 @@ e preenche as informações adicionais e parâmetros de calorias na interface do
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="public_js_controller_dietController.js.html">public/js/controller/dietController.js</a>, <a href="public_js_controller_dietController.js.html#line397">line 397</a>
+        <a href="public_js_controller_dietController.js.html">public/js/controller/dietController.js</a>, <a href="public_js_controller_dietController.js.html#line398">line 398</a>
     </li></ul></dd>
     
 
@@ -3124,7 +3420,7 @@ e preenche as informações adicionais e parâmetros de calorias na interface do
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="public_js_controller_homeController.js.html">public/js/controller/homeController.js</a>, <a href="public_js_controller_homeController.js.html#line167">line 167</a>
+        <a href="public_js_controller_homeController.js.html">public/js/controller/homeController.js</a>, <a href="public_js_controller_homeController.js.html#line168">line 168</a>
     </li></ul></dd>
     
 
@@ -3360,7 +3656,7 @@ Se a checkbox estiver desmarcada, remove o ingrediente da lista de ingredientes 
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="public_js_controller_dietController.js.html">public/js/controller/dietController.js</a>, <a href="public_js_controller_dietController.js.html#line493">line 493</a>
+        <a href="public_js_controller_dietController.js.html">public/js/controller/dietController.js</a>, <a href="public_js_controller_dietController.js.html#line494">line 494</a>
     </li></ul></dd>
     
 
@@ -3628,7 +3924,7 @@ Neste caso, limpa o armazenamento local (localStorage) e inicializa as funções
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="public_js_app.js.html">public/js/app.js</a>, <a href="public_js_app.js.html#line140">line 140</a>
+        <a href="public_js_app.js.html">public/js/app.js</a>, <a href="public_js_app.js.html#line142">line 142</a>
     </li></ul></dd>
     
 
@@ -3717,7 +4013,7 @@ para salvar dados do usuário, adicionar ou entrar em uma rotina, e calcular as 
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="public_js_controller_homeController.js.html">public/js/controller/homeController.js</a>, <a href="public_js_controller_homeController.js.html#line353">line 353</a>
+        <a href="public_js_controller_homeController.js.html">public/js/controller/homeController.js</a>, <a href="public_js_controller_homeController.js.html#line366">line 366</a>
     </li></ul></dd>
     
 
@@ -3807,6 +4103,94 @@ Essas funções são utilizadas para adicionar ou entrar em uma rotina e remover
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
         <a href="public_js_controller_routineController.js.html">public/js/controller/routineController.js</a>, <a href="public_js_controller_routineController.js.html#line336">line 336</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="initializeApp"><span class="type-signature">(async) </span>initializeApp<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>Inicializa a aplicação, verificando e criando exercícios de exemplo e iniciando o servidor.</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="server.js.html">server.js</a>, <a href="server.js.html#line1063">line 1063</a>
     </li></ul></dd>
     
 
@@ -3943,7 +4327,7 @@ Essas funções são utilizadas para adicionar ou entrar em uma rotina e remover
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="public_js_controller_dietController.js.html">public/js/controller/dietController.js</a>, <a href="public_js_controller_dietController.js.html#line320">line 320</a>
+        <a href="public_js_controller_dietController.js.html">public/js/controller/dietController.js</a>, <a href="public_js_controller_dietController.js.html#line321">line 321</a>
     </li></ul></dd>
     
 
@@ -4240,7 +4624,7 @@ Essas funções são utilizadas para adicionar ou entrar em uma rotina e remover
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="public_js_controller_dietController.js.html">public/js/controller/dietController.js</a>, <a href="public_js_controller_dietController.js.html#line452">line 452</a>
+        <a href="public_js_controller_dietController.js.html">public/js/controller/dietController.js</a>, <a href="public_js_controller_dietController.js.html#line453">line 453</a>
     </li></ul></dd>
     
 
@@ -4328,7 +4712,7 @@ Essas funções são utilizadas para adicionar ou entrar em uma rotina e remover
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="public_js_controller_homeController.js.html">public/js/controller/homeController.js</a>, <a href="public_js_controller_homeController.js.html#line184">line 184</a>
+        <a href="public_js_controller_homeController.js.html">public/js/controller/homeController.js</a>, <a href="public_js_controller_homeController.js.html#line185">line 185</a>
     </li></ul></dd>
     
 
@@ -4625,7 +5009,7 @@ Essas funções são utilizadas para adicionar ou entrar em uma rotina e remover
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="public_js_controller_dietController.js.html">public/js/controller/dietController.js</a>, <a href="public_js_controller_dietController.js.html#line365">line 365</a>
+        <a href="public_js_controller_dietController.js.html">public/js/controller/dietController.js</a>, <a href="public_js_controller_dietController.js.html#line366">line 366</a>
     </li></ul></dd>
     
 
@@ -6599,13 +6983,13 @@ Se todos estiverem marcados, habilita o botão de confirmação; caso contrário
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="CalorieCalculator.html">CalorieCalculator</a></li><li><a href="Diet.html">Diet</a></li><li><a href="DietIngredient.html">DietIngredient</a></li><li><a href="Exercise.html">Exercise</a></li><li><a href="Ingredient.html">Ingredient</a></li><li><a href="Routine.html">Routine</a></li><li><a href="User.html">User</a></li><li><a href="WaterIntakeCalculator.html">WaterIntakeCalculator</a></li></ul><h3>Global</h3><ul><li><a href="global.html#Sequelize">Sequelize</a></li><li><a href="global.html#addOrEnterDiet">addOrEnterDiet</a></li><li><a href="global.html#addOrEnterRoutine">addOrEnterRoutine</a></li><li><a href="global.html#adicionarIngrediente">adicionarIngrediente</a></li><li><a href="global.html#calculateAverageCalories">calculateAverageCalories</a></li><li><a href="global.html#clearStorage">clearStorage</a></li><li><a href="global.html#contabilizarTreino">contabilizarTreino</a></li><li><a href="global.html#createDiet">createDiet</a></li><li><a href="global.html#createRoutine">createRoutine</a></li><li><a href="global.html#db">db</a></li><li><a href="global.html#diets">diets</a></li><li><a href="global.html#exercises">exercises</a></li><li><a href="global.html#fillAditionalInfo">fillAditionalInfo</a></li><li><a href="global.html#fillCaloriesParameters">fillCaloriesParameters</a></li><li><a href="global.html#fillUserData">fillUserData</a></li><li><a href="global.html#formContainer">formContainer</a></li><li><a href="global.html#getDataFromInputs">getDataFromInputs</a></li><li><a href="global.html#getIngredientDetails">getIngredientDetails</a></li><li><a href="global.html#getIngredients">getIngredients</a></li><li><a href="global.html#getUserById">getUserById</a></li><li><a href="global.html#handleCheckboxClick">handleCheckboxClick</a></li><li><a href="global.html#handleLogin">handleLogin</a></li><li><a href="global.html#handleSubmit">handleSubmit</a></li><li><a href="global.html#ingredientesSelecionados">ingredientesSelecionados</a></li><li><a href="global.html#init">init</a></li><li><a href="global.html#loginForm">loginForm</a></li><li><a href="global.html#mockDiets">mockDiets</a></li><li><a href="global.html#removeDiet">removeDiet</a></li><li><a href="global.html#removeRoutine">removeRoutine</a></li><li><a href="global.html#removerIngrediente">removerIngrediente</a></li><li><a href="global.html#saveData">saveData</a></li><li><a href="global.html#signUpForm">signUpForm</a></li><li><a href="global.html#switchForms">switchForms</a></li><li><a href="global.html#totalCalorias">totalCalorias</a></li><li><a href="global.html#updateDiet">updateDiet</a></li><li><a href="global.html#user">user</a></li><li><a href="global.html#userString">userString</a></li><li><a href="global.html#verificarTodosMarcados">verificarTodosMarcados</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="CalorieCalculator.html">CalorieCalculator</a></li><li><a href="Diet.html">Diet</a></li><li><a href="DietIngredient.html">DietIngredient</a></li><li><a href="Exercise.html">Exercise</a></li><li><a href="Ingredient.html">Ingredient</a></li><li><a href="Routine.html">Routine</a></li><li><a href="User.html">User</a></li><li><a href="WaterIntakeCalculator.html">WaterIntakeCalculator</a></li></ul><h3>Global</h3><ul><li><a href="global.html#Sequelize">Sequelize</a></li><li><a href="global.html#addOrEnterDiet">addOrEnterDiet</a></li><li><a href="global.html#addOrEnterRoutine">addOrEnterRoutine</a></li><li><a href="global.html#adicionarIngrediente">adicionarIngrediente</a></li><li><a href="global.html#calculateAverageCalories">calculateAverageCalories</a></li><li><a href="global.html#checkAndCreateExampleExercises">checkAndCreateExampleExercises</a></li><li><a href="global.html#clearStorage">clearStorage</a></li><li><a href="global.html#contabilizarTreino">contabilizarTreino</a></li><li><a href="global.html#createDiet">createDiet</a></li><li><a href="global.html#createExampleExercises">createExampleExercises</a></li><li><a href="global.html#createRoutine">createRoutine</a></li><li><a href="global.html#db">db</a></li><li><a href="global.html#diets">diets</a></li><li><a href="global.html#exercises">exercises</a></li><li><a href="global.html#fillAditionalInfo">fillAditionalInfo</a></li><li><a href="global.html#fillCaloriesParameters">fillCaloriesParameters</a></li><li><a href="global.html#fillUserData">fillUserData</a></li><li><a href="global.html#formContainer">formContainer</a></li><li><a href="global.html#getDataFromInputs">getDataFromInputs</a></li><li><a href="global.html#getIngredientDetails">getIngredientDetails</a></li><li><a href="global.html#getIngredients">getIngredients</a></li><li><a href="global.html#getUserById">getUserById</a></li><li><a href="global.html#handleCheckboxClick">handleCheckboxClick</a></li><li><a href="global.html#handleLogin">handleLogin</a></li><li><a href="global.html#handleSubmit">handleSubmit</a></li><li><a href="global.html#ingredientesSelecionados">ingredientesSelecionados</a></li><li><a href="global.html#init">init</a></li><li><a href="global.html#initializeApp">initializeApp</a></li><li><a href="global.html#loginForm">loginForm</a></li><li><a href="global.html#mockDiets">mockDiets</a></li><li><a href="global.html#removeDiet">removeDiet</a></li><li><a href="global.html#removeRoutine">removeRoutine</a></li><li><a href="global.html#removerIngrediente">removerIngrediente</a></li><li><a href="global.html#saveData">saveData</a></li><li><a href="global.html#signUpForm">signUpForm</a></li><li><a href="global.html#switchForms">switchForms</a></li><li><a href="global.html#totalCalorias">totalCalorias</a></li><li><a href="global.html#updateDiet">updateDiet</a></li><li><a href="global.html#user">user</a></li><li><a href="global.html#userString">userString</a></li><li><a href="global.html#verificarTodosMarcados">verificarTodosMarcados</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Sun Apr 07 2024 01:03:41 GMT-0300 (Horário Padrão de Brasília)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Sun Apr 07 2024 17:26:57 GMT-0300 (Horário Padrão de Brasília)
 </footer>
 
 <script> prettyPrint(); </script>

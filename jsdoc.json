@@ -1,6 +1,6 @@
 {
     "source": {
-      "include": ["public", "mock"], 
+      "include": ["public", "mock", "server.js"], 
       "includePattern": ".js$", 
       "excludePattern": "(node_modules/|docs)" 
     },
