@@ -39,8 +39,11 @@ Caso não consiga rodar o script:
 5° - A possibilidade do usuário poder selecionar a quandidade em gramas dos alimentos que ele consumiu da dieta, assim um calculo seria feito para a relação gramas e calorias.
 
 # Como abrir a documentação
-A documentação foi feita usando o JSDoc, ela se encontra na pasta /doc , é o arquivo index.html.
+A documentação foi feita usando o JSDoc, ela se encontra na pasta /docs , é o arquivo index.html. 
+
+Para ter acesso a documentação, basta abrir no navegador o arquivo index.html localizado na pasta /docs do projeto.
 
 # Como abrir a documentação das APIs
 1°- Inicializar o servidor caso não esteja inicializado (nodemon start.js).
-2°- Entrar no caminho http://localhost:3000/swagger/ para acessar a interface Swagger com as APIs.
+
+2°- Entrar no caminho http://localhost:3000/swagger/ para acessar a interface Swagger com a documentação das APIs.
