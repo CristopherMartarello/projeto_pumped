@@ -32,3 +32,7 @@ Pumped, site para registro de vida fitness, com foco em auxiliar a vida do usuar
 
 # Como abrir a documentação
 A documentação foi feita usando o JSDoc, ela se encontra na pasta /doc , é o arquivo index.html.
+
+# Como abrir a documentação das APIs
+1°- Inicializar o servidor caso não esteja inicializado (nodemon start.js).
+2°- Entrar no caminho http://localhost:3000/swagger/ para acessar a interface Swagger com as APIs.
