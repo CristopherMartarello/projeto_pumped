@@ -6,15 +6,15 @@ const Sequelize = require('sequelize');
  * @typedef {Object} connection
  * @property {string} database - O nome do banco de dados (railway).
  * @property {string} username - O nome de usuário para acessar o banco de dados (root).
- * @property {string} password - A senha para acessar o banco de dados (CiDrFbNtBRDVUqWjRVpdEqtOAmCGDjjo).
+ * @property {string} password - A senha para acessar o banco de dados (xSFrOugsTfdurkVbZMNoxPAacHcFrMSD).
  * @property {Object} options - As opções de configuração para a conexão.
- * @property {string} options.host - O host do banco de dados (roundhouse.proxy.rlwy.net).
- * @property {string} options.port - A porta de conexão com o banco de dados (40875).
+ * @property {string} options.host - O host do banco de dados (monorail.proxy.rlwy.net).
+ * @property {string} options.port - A porta de conexão com o banco de dados (54941).
  * @property {string} options.dialect - O dialeto do banco de dados (mysql).
  */
-const connection = new Sequelize ("railway", "root", "CiDrFbNtBRDVUqWjRVpdEqtOAmCGDjjo", {
-    host: 'roundhouse.proxy.rlwy.net',
-    port: '40875',
+const connection = new Sequelize ("railway", "root", "xSFrOugsTfdurkVbZMNoxPAacHcFrMSD", {
+    host: 'monorail.proxy.rlwy.net',
+    port: '54941',
     dialect: 'mysql'
 });
 
