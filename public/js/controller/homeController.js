@@ -325,6 +325,138 @@ const fillCaloriesParameters = function(data) {
         <i class="fa fa-venus" aria-hidden="true" style="color: #000"></i> 
         <label style="color: #000">Definição (manter)</label> 
         <span>${maintanceFemale.toFixed(0)} kcal</span>`;
+
+    const ctx = document.getElementById('graph1');
+
+    new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: ['Homens', 'Mulheres',],
+            datasets: [{
+                label: '% de kcal para emagrecimento',
+                data: [weightLossMale, weightLossFemale],
+                backgroundColor: [
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 99, 132, 0.2)',
+                ],
+                borderColor: [
+                    'rgb(54, 162, 235)',
+                    'rgb(255, 99, 132)',
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            },
+            layout: {
+                padding: 20
+            }
+        }
+    });
+    
+    const ctx2 = document.getElementById('graph2');
+
+    new Chart(ctx2, {
+        type: 'bar',
+        data: {
+            labels: ['Homens', 'Mulheres',],
+            datasets: [{
+                label: '% de kcal para hipertrofia',
+                data: [massGainMale, massGainFemale],
+                backgroundColor: [
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 99, 132, 0.2)',
+                ],
+                borderColor: [
+                    'rgb(54, 162, 235)',
+                    'rgb(255, 99, 132)',
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            },
+            layout: {
+                padding: 20
+            }
+        }
+    });
+
+    const ctx3 = document.getElementById('graph3');
+
+    new Chart(ctx3, {
+        type: 'bar',
+        data: {
+            labels: ['Homens', 'Mulheres',],
+            datasets: [{
+                label: '% de kcal para definição',
+                data: [maintanceMale, maintanceFemale],
+                backgroundColor: [
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 99, 132, 0.2)',
+                ],
+                borderColor: [
+                    'rgb(54, 162, 235)',
+                    'rgb(255, 99, 132)',
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            },
+            layout: {
+                padding: 20
+            }
+        }
+    });
+
+    const ctx4 = document.getElementById('graph4');
+
+    new Chart(ctx4, {
+        type: 'pie',
+        data: {
+            labels: ['Homens TMB', 'Mulheres TMB', 'IMC', 'Ingestão de Água'],
+            datasets: [{
+                label: 'Taxa metabólica basal, IMC e Ingestão de Água',
+                data: [TMBMale, TMBFemale, imc, waterIntake],
+                backgroundColor: [
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(255, 205, 86, 0.2)',
+                    'rgba(255, 159, 64, 0.2)',
+                ],
+                borderColor: [
+                    'rgb(54, 162, 235)',
+                    'rgb(255, 99, 132)',
+                    'rgb(255, 205, 86)',
+                    'rgb(255, 159, 64)',
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            },
+            layout: {
+                padding: 20
+            }
+        }
+    });
 }
 
 /**
@@ -353,6 +485,43 @@ const calculateAverageCalories = async function(age, height, weight, activity) {
         const data = await response.json();
         fillAditionalInfo(data);
         fillCaloriesParameters(data);
+
+        const ctx5 = document.getElementById('graph5');
+
+
+        new Chart(ctx5, {
+            type: 'bar',
+            data: {
+                labels: ['Idade', 'Altura', 'Peso', 'Atividade'],
+                datasets: [{
+                    label: 'Informações Gerais',
+                    data: [age, height, weight, activity],
+                    backgroundColor: [
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(255, 205, 86, 0.2)',
+                        'rgba(255, 159, 64, 0.2)',
+                    ],
+                    borderColor: [
+                        'rgb(54, 162, 235)',
+                        'rgb(255, 99, 132)',
+                        'rgb(255, 205, 86)',
+                        'rgb(255, 159, 64)',
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                },
+                layout: {
+                    padding: 20
+                }
+            }
+        });
     } catch (error) {
         console.error('Erro ao calcular calorias médias:', error);
         throw error;

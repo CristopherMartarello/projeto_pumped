@@ -18,6 +18,7 @@
     <script type="module" src="js/controller/homeController.js" defer></script>
     <script type="module" src="js/controller/routineController.js" defer></script>
     <script type="module" src="js/controller/dietController.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
 <body>
@@ -30,16 +31,16 @@
                 <i class="fas fa-home"></i> <a href="#home" onclick="showPanel('home')">Página Inicial</a>
             </li>
             <li>
-                <i class="fas fa-database"></i> <a href="#userData" onclick="showPanel('userData')">Dados</a>
+                <i class="fas fa-database"></i> <a href="#userData" onclick="showPanel('userData')">Meus Dados</a>
             </li>
             <li>
-                <i class="fas fa-heartbeat"></i> <a href="#userWorkout" onclick="showPanel('userWorkout')">Treino</a>
+                <i class="fas fa-heartbeat"></i> <a href="#userWorkout" onclick="showPanel('userWorkout')">Meu Treino</a>
             </li>
             <li>
-                <i class="fas fa-utensils"></i> <a href="#userDiet" onclick="showPanel('userDiet')">Dieta</a>
+                <i class="fas fa-utensils"></i> <a href="#userDiet" onclick="showPanel('userDiet')"> Minha Dieta</a>
             </li>
             <li>
-                <i class="fas fa-chart-line"></i> <a href="#userEvolution">Evolução</a>
+                <i class="fas fa-chart-line"></i> <a href="#userEvolution">Acompanhamento</a>
             </li>
             <li>
                 <i class="fas fa-shopping-cart"></i> <a href="#store">Loja de Produtos</a>
@@ -186,25 +187,37 @@
                 </div>
             </div>
         </div>
-        <div class="panel-main-feed" id="userEvolution" style="display: none;">
-            <h1 style="padding: 1vh; color: #fff">A evolução de usuário está em construção!!!</h1>
-            <!-- <div class="header-feed">
-                <div class="user-image"></div>
-                <div class="user-name">Nome do usuário</div>
-            </div> -->
-            <!-- <div class="body-feed">
-                <div class="post-image">
-                    
+        <div class="panel-user-diet" id="userEvolution" style="display: none;">
+            <div style="display: flex; flex-wrap: wrap; justify-content: space-between; flex-grow: 1; align-items: center;">
+                <div style="width: 400px; height: 400px;">
+                    <canvas id="graph1" style="width: 300px; height: 300px;">
+        
+                    </canvas>
+                </div>
+                <div style="width: 400px; height: 400px;">
+                    <canvas id="graph2" style="width: 300px; height: 300px;">
+        
+                    </canvas>
+                </div>
+                <div style="width: 400px; height: 400px;">
+                    <canvas id="graph3" style="width: 300px; height: 300px;">
+        
+                    </canvas>
                 </div>
             </div>
-            <div class="footer-feed">
-                <div class="like-icon">
-                    <i class="fas fa-heart"></i>
+            <div style="display: flex; flex-wrap: wrap; justify-content: space-around; flex-grow: 1; align-items: center;">
+                <div style="width: 400px; height: 400px;">
+                    <canvas id="graph4" style="width: 300px; height: 300px;">
+        
+                    </canvas>
                 </div>
-                <div class="comments">
-                    <i class="fas fa-comments"></i>
+                <div style="width: 400px; height: 400px;">
+                    <canvas id="graph5" style="width: 300px; height: 300px;">
+        
+                    </canvas>
                 </div>
-            </div> -->
+            </div>
+
         </div>
         <div class="panel-main-feed" id="store" style="display: none;">
             <h1 style="padding: 1vh; color: #fff">A loja de produtos está em construção!!!</h1>
