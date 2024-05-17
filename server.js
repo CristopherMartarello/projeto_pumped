@@ -46,6 +46,46 @@ var options = {
 var swaggerSpec = swaggerJsDoc(options);
 app.use('/swagger', swaggerUI.serve, swaggerUI.setup(swaggerSpec));
 
+app.get('/redirect', (req, res) => {
+    const userLanguage = req.query.lang;
+    console.log(userLanguage);
+
+    let pagePath;
+    switch (userLanguage) {
+        case 'pt-BR':
+            pagePath = '/index-pt.html';
+            break;
+        case 'es':
+            pagePath = '/index-es.html';
+            break;
+        case 'fr':
+            pagePath = '/index-fr.html';
+            break;
+        default:
+            pagePath = '/index-en.html';
+            break;
+    }
+
+    res.redirect(pagePath);
+});
+
+app.get('/index-pt.html', (req, res) => {
+    console.log('bateu na rota');
+    res.sendFile(path.join(__dirname, 'public', 'index-pt.html'));
+});
+
+app.get('/index-es.html', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'index-es.html'));
+});
+
+app.get('/index-fr.html', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'index-fr.html'));
+});
+
+app.get('/index-en.html', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'index-en.html'));
+});
+
 app.get('/', (req, res) => {
     res.sendFile(path.join(initialPath, "index.html"));
 })
