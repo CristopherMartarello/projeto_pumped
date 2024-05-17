@@ -52,14 +52,11 @@ app.get('/redirect', (req, res) => {
 
     let pagePath;
     switch (userLanguage) {
-        case 'pt-BR':
+        case 'pt':
             pagePath = '/index-pt.html';
             break;
         case 'es':
             pagePath = '/index-es.html';
-            break;
-        case 'fr':
-            pagePath = '/index-fr.html';
             break;
         default:
             pagePath = '/index-en.html';
@@ -78,10 +75,6 @@ app.get('/index-es.html', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'index-es.html'));
 });
 
-app.get('/index-fr.html', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'index-fr.html'));
-});
-
 app.get('/index-en.html', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'index-en.html'));
 });
@@ -90,9 +83,31 @@ app.get('/', (req, res) => {
     res.sendFile(path.join(initialPath, "index.html"));
 })
 
+// app.get('/home', (req, res) => {
+//     res.sendFile(path.join(initialPath, "home.html"));
+// })
+
 app.get('/home', (req, res) => {
-    res.sendFile(path.join(initialPath, "home.html"));
-})
+    const userLanguage = req.query.lang || 'pt-BR';
+
+    let pagePath;
+    switch (userLanguage) {
+        case 'pt':
+            pagePath = path.join(__dirname, 'public', 'home-pt.html');
+            break;
+        case 'es':
+            pagePath = path.join(__dirname, 'public', 'home-es.html');
+            break;
+        case 'en-US':
+            pagePath = path.join(__dirname, 'public', 'home-en.html');
+            break;
+        default:
+            pagePath = path.join(__dirname, 'public', 'home.html');
+            break;
+    }
+
+    res.sendFile(pagePath);
+});
 
 //USUÁRIO
 /**

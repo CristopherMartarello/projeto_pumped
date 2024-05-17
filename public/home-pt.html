@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pumped PT</title>
+
+    <!-- FONTAWESOME -->
+    <link rel="stylesheet" href="//use.fontawesome.com/releases/v5.0.7/css/all.css">
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/home.css">
+    <!-- FONT -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <!-- JS -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> 
+    <script type="module" src="js/controller/homeController.js" defer></script>
+    <script type="module" src="js/controller/routineController.js" defer></script>
+    <script type="module" src="js/controller/dietController.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+    <div class="sidebar">
+        <div class="logo">
+            <img style="width: 100%; height: auto; margin-top: auto;" src="img/logo_pumped.png" alt="Logo Pumped">
+        </div>
+        <div class="sidebar-content">
+            <li>
+                <i class="fas fa-home"></i> <a href="#home" onclick="showPanel('home')">Página Inicial</a>
+            </li>
+            <li>
+                <i class="fas fa-database"></i> <a href="#userData" onclick="showPanel('userData')">Meus Dados</a>
+            </li>
+            <li>
+                <i class="fas fa-heartbeat"></i> <a href="#userWorkout" onclick="showPanel('userWorkout')">Meu Treino</a>
+            </li>
+            <li>
+                <i class="fas fa-utensils"></i> <a href="#userDiet" onclick="showPanel('userDiet')"> Minha Dieta</a>
+            </li>
+            <li>
+                <i class="fas fa-chart-line"></i> <a href="#userEvolution">Acompanhamento</a>
+            </li>
+            <li>
+                <i class="fas fa-shopping-cart"></i> <a href="#store">Loja de Produtos</a>
+            </li>
+        </div>
+
+        <div class="sidebar-exit">
+            <i class="fas fa-sign-out-alt"></i> <a href="#leave" onclick="logoutUser()">Sair</a>
+        </div>
+    </div>
+    <div class="page-content" id="page-content">
+        <div class="panel-user-data" id="userData">
+            <div class="data-information">
+                <div class="input-block" id="input-name">
+                    <label for="name">Nome</label>
+                    <input type="text" id="name" name="name">
+                </div>
+                <div class="input-block" id="input-email">
+                    <label for="email">Email</label>
+                    <input type="text" id="email" name="email">
+                </div>
+                <div class="input-block" id="input-age">
+                    <label for="age">Idade</label>
+                    <input type="number" id="age" name="age">
+                </div>
+                <div class="input-block" id="input-weight">
+                    <label for="weight">Peso Atual (kg)</label>
+                    <input type="number" id="weight" name="weight">
+                </div>
+                <div class="input-block" id="input-height">
+                    <label for="height">Altura (metros)</label>
+                    <input type="number" id="height" name="height">
+                </div>
+                <div class="input-block" id="input-birth">
+                    <label for="birth">Data de Nascimento</label>
+                    <input type="date" id="birth" name="birth">
+                </div>
+                <button class="btn-data" onclick="saveData()">Salvar Dados</button>
+            </div>
+            <div class="profile-status">
+                <div class="user-data-image">
+                    <i class="fa fa-user" aria-hidden="true"></i>
+                </div>
+                <div class="user-bio">
+                    <label for="bio">Bio</label>
+                    <textarea name="bio" id="bio" cols="40" rows="5"></textarea>
+                </div>
+                <div class="user-gender">
+                    <label for="gender">Gênero</label>
+                    <select id="gender" class="sexo-select" name="gender">
+                        <option value="masculino">Masculino</option>
+                        <option value="feminino">Feminino</option>
+                    </select>
+                </div>
+                <div class="user-activity">
+                    <label for="activity">Nível de Atividade Física</label>
+                    <select id="activity" class="activity-select" name="activity">
+                        <option value="1.1">Pouco ou nada ativo</option>
+                        <option value="1.25">Leve (1 a 3 dias / semana)</option>
+                        <option value="1.42">Moderado (3 a 5 dias / semana)</option>
+                        <option value="1.62">Pesado (6 a 7 dias / semana)</option>
+                        <option value="1.75">Profissional ou Atleta</option>
+                    </select>
+                </div>
+                <div class="user-workout-information">
+                    <div class="square" id="water-intake-block" style="background-color: #0080ff;">
+
+                    </div>
+                    <div class="square" id="imc-block" style="background-color: #ffaa00;">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panel-main-feed" id="home" style="display: none;">
+            <h1 style="padding: 1vh; color: #fff">O feed está em construção!!!</h1>
+            <!-- <div class="header-feed">
+                <div class="user-image"></div>
+                <div class="user-name">Nome do usuário</div>
+            </div> -->
+            <!-- <div class="body-feed">
+                <div class="post-image">
+                    
+                </div>
+            </div>
+            <div class="footer-feed">
+                <div class="like-icon">
+                    <i class="fas fa-heart"></i>
+                </div>
+                <div class="comments">
+                    <i class="fas fa-comments"></i>
+                </div>
+            </div> -->
+        </div>
+        <div class="panel-user-workout" id="userWorkout" style="display: none;">
+            <div class="routines" onclick="addOrEnterRoutine(false)">
+                <i class="fa fa-plus" style="color: #000; font-size: xx-large;"></i>
+            </div>
+        </div>
+        <div class="panel-user-diet" id="userDiet" style="display: none;">
+            <div class="data-diet-information">
+                <div class="calorie-info" id="calorie-for-weightloss">
+                    <div class="square" id="calorie-for-weightloss-male">
+
+                    </div>
+                    <div class="square" id="calorie-for-weightloss-female" style="background-color: #ff007f;">
+
+                    </div>
+                </div>
+                <div class="calorie-info" id="calorie-for-massgain">
+                    <div class="square" id="calorie-for-massgain-male">
+
+                    </div>
+                    <div class="square" id="calorie-for-massgain-female" style="background-color: #ff007f;">
+
+                    </div>
+                </div>
+                <div class="calorie-info" id="calorie-for-maintance">
+                    <div class="square" id="calorie-for-maintance-male">
+
+                    </div>
+                    <div class="square" id="calorie-for-maintance-female" style="background-color: #ff007f;">
+
+                    </div>
+                </div>
+                <div class="calorie-info" id="calorie-for-imc-water">
+                    <div class="square" id="tmb-male">
+
+                    </div>
+                    <div class="square" id="tmb-female" style="background-color: #ff007f;">
+
+                    </div>
+                    <div class="square" id="calorie-for-imc" style="background-color: #ffaa00;">
+
+                    </div>
+                    <div class="square" id="calorie-for-water" style="background-color: #0080ff;">
+
+                    </div>
+                </div>
+            </div>
+            <div class="diet-list" id="dietList">
+                <div class="diets" onclick="addOrEnterDiet(false)">
+                    <i class="fa fa-plus" style="color: #000; font-size: xx-large;"></i>
+                </div>
+            </div>
+        </div>
+        <div class="panel-user-diet" id="userEvolution" style="display: none;">
+            <div style="display: flex; flex-wrap: wrap; justify-content: space-between; flex-grow: 1; align-items: center;">
+                <div style="width: 400px; height: 400px;">
+                    <canvas id="graph1" style="width: 300px; height: 300px;">
+        
+                    </canvas>
+                </div>
+                <div style="width: 400px; height: 400px;">
+                    <canvas id="graph2" style="width: 300px; height: 300px;">
+        
+                    </canvas>
+                </div>
+                <div style="width: 400px; height: 400px;">
+                    <canvas id="graph3" style="width: 300px; height: 300px;">
+        
+                    </canvas>
+                </div>
+            </div>
+            <div style="display: flex; flex-wrap: wrap; justify-content: space-around; flex-grow: 1; align-items: center;">
+                <div style="width: 400px; height: 400px;">
+                    <canvas id="graph4" style="width: 300px; height: 300px;">
+        
+                    </canvas>
+                </div>
+                <div style="width: 400px; height: 400px;">
+                    <canvas id="graph5" style="width: 300px; height: 300px;">
+        
+                    </canvas>
+                </div>
+            </div>
+
+        </div>
+        <div class="panel-main-feed" id="store" style="display: none;">
+            <h1 style="padding: 1vh; color: #fff">A loja de produtos está em construção!!!</h1>
+            <!-- <div class="header-feed">
+                <div class="user-image"></div>
+                <div class="user-name">Nome do usuário</div>
+            </div> -->
+            <!-- <div class="body-feed">
+                <div class="post-image">
+                    
+                </div>
+            </div>
+            <div class="footer-feed">
+                <div class="like-icon">
+                    <i class="fas fa-heart"></i>
+                </div>
+                <div class="comments">
+                    <i class="fas fa-comments"></i>
+                </div>
+            </div> -->
+        </div>     
+    </div>
+
+    <script>
+        function showPanel(panelId) {
+            var panels = document.querySelectorAll('.page-content > div');
+            panels.forEach(function (panel) {
+                if (panel.id === panelId) {
+                    panel.style.display = 'flex';
+                } else {
+                    panel.style.display = 'none';
+                }
+            });
+        }
+    </script>
+
+    <script>
+        function exibirPainelCorrespondenteAoHash() {
+            var hash = window.location.hash.substring(1); 
+            if (hash) {
+                var panel = document.getElementById(hash);
+                if (panel) {
+                    showPanel(hash); 
+                }
+            }
+        }
+
+        window.onload = exibirPainelCorrespondenteAoHash;
+        window.onhashchange = exibirPainelCorrespondenteAoHash;
+    </script>
+
+    <script>
+        function logoutUser() {
+        localStorage.clear();
+        window.location.href = "http://localhost:3000";
+    }
+    </script>
+</body>
+</html>

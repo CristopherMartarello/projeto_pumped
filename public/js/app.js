@@ -129,7 +129,9 @@ const handleLogin = function () {
             if(!data.erro) {
                 loadingSwal.close();
                 localStorage.setItem('user', JSON.stringify(data.data[0]));
-                window.location.href = '/home';
+
+                const userLanguage = window.navigator.languages ? window.navigator.languages[0] : window.navigator.language;
+                window.location.href = `/home?lang=${userLanguage}`;
             } else {
                 Swal.fire("Erro ao entrar na conta, verifique o usuário e/ou a senha!", "", "error");
             }
