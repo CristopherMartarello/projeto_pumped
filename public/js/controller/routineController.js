@@ -14,6 +14,13 @@ const userString = localStorage.getItem('user');
  */
 const user = JSON.parse(userString);
 
+/**
+ * Declara a string que irá conter a linguagem do usuário.
+ * @type {string}
+ * @let
+ */
+let mainLanguage = '';
+
 
 /**
  * Verifica se todos os checkboxes estão marcados.
@@ -27,7 +34,7 @@ function verificarTodosMarcados(checkboxes) {
             todosMarcados = false;
         }
     });
-    
+
     const confirmButton = document.querySelector('.swal2-confirm');
     if (todosMarcados) {
         confirmButton.removeAttribute('disabled');
@@ -52,11 +59,11 @@ export const addOrEnterRoutine = async function (boolean, treinoId) {
 
             if (treinoId) {
                 const loadingSwal = Swal.fire({
-                    title: 'Carregando...',
-                    allowOutsideClick: false, 
-                    showConfirmButton: false, 
+                    title: mainLanguage === 'pt-BR' ? 'Carregando...' : mainLanguage === 'en' ? 'Loading...' : mainLanguage === 'es' ? 'Cargando...' : 'Carregando...',
+                    allowOutsideClick: false,
+                    showConfirmButton: false,
                     didOpen: () => {
-                        Swal.showLoading(); 
+                        Swal.showLoading();
                     }
                 });
                 const response = await fetch(`/user-routine/${userId}/${treinoId}`);
@@ -82,9 +89,8 @@ export const addOrEnterRoutine = async function (boolean, treinoId) {
                 Swal.showLoading();
                 Swal.fire({
                     title: `<strong>${data.routine.name} - ${data.routine.focus}</strong>`,
-                    iconHtml: `${
-                        data.routine.focus === 'Pernas' ? '🦵' : '💪'
-                    }`,
+                    iconHtml: `${data.routine.focus === 'Pernas' ? '🦵' : '💪'
+                        }`,
                     width: 800,
                     html: `
                     <div class="exercise-container">
@@ -127,21 +133,21 @@ export const addOrEnterRoutine = async function (boolean, treinoId) {
                     showCancelButton: true,
                     focusConfirm: false,
                     confirmButtonText: `
-                      <i class="fa fa-thumbs-up"></i> Finalizar treino
-                    `,
-                    confirmButtonAriaLabel: "Treino finalizado com sucesso!",
+                    <i class="fa fa-thumbs-up"></i> ${mainLanguage === 'pt-BR' ? 'Finalizar treino' : mainLanguage === 'en' ? 'Finish Workout' : mainLanguage === 'es' ? 'Terminar el entrenamiento' : 'Finalizar treino'}
+                     `,
+                    confirmButtonAriaLabel: mainLanguage === 'pt-BR' ? 'Treino finalizado com sucesso!' : mainLanguage === 'en' ? 'Workout finished successfully!' : mainLanguage === 'es' ? 'Entrenamiento terminado con éxito!' : 'Treino finalizado com sucesso!',
                     cancelButtonText: `
-                      <i class="fa fa-thumbs-down"></i> Cancelar
-                    `,
-                    cancelButtonAriaLabel: "Cancelar",
+                     <i class="fa fa-thumbs-down"></i> ${mainLanguage === 'pt-BR' ? 'Cancelar' : mainLanguage === 'en' ? 'Cancel' : mainLanguage === 'es' ? 'Cancelar' : 'Cancelar'}
+                     `,
+                    cancelButtonAriaLabel: mainLanguage === 'pt-BR' ? 'Cancelar' : mainLanguage === 'en' ? 'Cancel' : mainLanguage === 'es' ? 'Cancelar' : 'Cancelar',
                     didOpen: () => {
                         const checkboxes = document.querySelectorAll('.exercise-checkbox');
                         const confirmButton = document.querySelector('.swal2-confirm');
                         confirmButton.setAttribute('disabled', true);
                         checkboxes.forEach(checkbox => {
                             checkbox.addEventListener('click', () => {
-                                checkbox.classList.toggle('checked'); 
-                                verificarTodosMarcados(checkboxes); 
+                                checkbox.classList.toggle('checked');
+                                verificarTodosMarcados(checkboxes);
                             });
                         });
                     }
@@ -156,10 +162,10 @@ export const addOrEnterRoutine = async function (boolean, treinoId) {
         }
     } else {
         const { value: formValue } = await Swal.fire({
-            title: "Cadastrar um novo treino",
+            title: `${mainLanguage === 'pt-BR' ? 'Cadastrar um novo treino' : mainLanguage === 'en' ? 'Register a new workout' : mainLanguage === 'es' ? 'Registrar un nuevo entrenamiento' : 'Cadastrar um novo treino'}`,
             html: `
-              <label for="swal-input-1">Nome do Treino</label>
-              <input id="swal-input1" name="swal-input1" class="swal2-input">
+                ${mainLanguage === 'pt-BR' ? '<label for="swal-input1">Nome do Treino</label>' : mainLanguage === 'en' ? '<label for="swal-input1">Workout Name</label>' : mainLanguage === 'es' ? '<label for="swal-input1">Nombre del Entrenamiento</label>' : '<label for="swal-input1">Nome do Treino</label>'}
+                <input id="swal-input1" name="swal-input1" class="swal2-input">
             `,
             focusConfirm: false,
             preConfirm: () => {
@@ -169,58 +175,58 @@ export const addOrEnterRoutine = async function (boolean, treinoId) {
 
         if (formValue !== '') {
             const { value: focus } = await Swal.fire({
-                title: "Qual o foco do seu treino?",
+                title: `${mainLanguage === 'pt-BR' ? 'Qual o foco do seu treino?' : mainLanguage === 'en' ? 'What is the focus of your workout?' : mainLanguage === 'es' ? '¿Cuál es el foco de tu entrenamiento?' : 'Qual o foco do seu treino?'}`,
                 input: "select",
                 inputOptions: {
                     Superiores: {
-                        Peito: "Peito",
-                        Costas: "Costas",
-                        Ombros: "Ombros",
-                        Biceps: "Biceps",
-                        Tríceps: "Tríceps"
+                        Peito: `${mainLanguage === 'pt-BR' ? 'Peito' : mainLanguage === 'en' ? 'Chest' : mainLanguage === 'es' ? 'Pecho' : 'Peito'}`,
+                        Costas: `${mainLanguage === 'pt-BR' ? 'Costas' : mainLanguage === 'en' ? 'Back' : mainLanguage === 'es' ? 'Espalda' : 'Costas'}`,
+                        Ombros: `${mainLanguage === 'pt-BR' ? 'Ombros' : mainLanguage === 'en' ? 'Shoulders' : mainLanguage === 'es' ? 'Hombros' : 'Ombros'}`,
+                        Biceps: `${mainLanguage === 'pt-BR' ? 'Biceps' : mainLanguage === 'en' ? 'Biceps' : mainLanguage === 'es' ? 'Bíceps' : 'Biceps'}`,
+                        Tríceps: `${mainLanguage === 'pt-BR' ? 'Tríceps' : mainLanguage === 'en' ? 'Triceps' : mainLanguage === 'es' ? 'Tríceps' : 'Tríceps'}`
                     },
                     Inferiores: {
-                        Pernas: "Pernas"
+                        Pernas: `${mainLanguage === 'pt-BR' ? 'Pernas' : mainLanguage === 'en' ? 'Legs' : mainLanguage === 'es' ? 'Piernas' : 'Pernas'}`
                     },
                     Abdomen: {
-                        Abdomen: "Abdomen"
+                        Abdomen: `${mainLanguage === 'pt-BR' ? 'Abdomen' : mainLanguage === 'en' ? 'Abs' : mainLanguage === 'es' ? 'Abdomen' : 'Abdomen'}`
                     }
                 },
-                inputPlaceholder: "Qual o foco do seu treino?",
+                inputPlaceholder: `${mainLanguage === 'pt-BR' ? 'Qual o foco do seu treino?' : mainLanguage === 'en' ? 'What is the focus of your workout?' : mainLanguage === 'es' ? '¿Cuál es el foco de tu entrenamiento?' : 'Qual o foco do seu treino?'}`,
                 showCancelButton: true,
                 inputValidator: (value) => {
                     return new Promise((resolve) => {
                         if (value !== '') {
                             resolve();
                         } else {
-                            resolve("Você precisa selecionar um foco!");
+                            resolve(`${mainLanguage === 'pt-BR' ? 'Você precisa selecionar um foco!' : mainLanguage === 'en' ? 'You need to select a focus!' : mainLanguage === 'es' ? '¡Necesitas seleccionar un foco!' : 'Você precisa selecionar um foco!'}`);
                         }
                     });
                 }
             });
             if (focus) {
                 Swal.fire({
-                    title: "Deseja criar o seu treino?",
+                    title: `${mainLanguage === 'pt-BR' ? 'Deseja criar o seu treino?' : mainLanguage === 'en' ? 'Do you want to create your workout?' : mainLanguage === 'es' ? '¿Deseas crear tu entrenamiento?' : 'Deseja criar o seu treino?'}`,
                     html: `
-                      ${formValue} - ${focus}
+                        ${formValue} - ${focus}
                     `,
                     showDenyButton: true,
                     showCancelButton: true,
-                    confirmButtonText: "Salvar",
-                    denyButtonText: 'Descartar',
-                    cancelButtonText: 'Cancelar'
+                    confirmButtonText: `${mainLanguage === 'pt-BR' ? 'Salvar' : mainLanguage === 'en' ? 'Save' : mainLanguage === 'es' ? 'Guardar' : 'Salvar'}`,
+                    denyButtonText: `${mainLanguage === 'pt-BR' ? 'Descartar' : mainLanguage === 'en' ? 'Discard' : mainLanguage === 'es' ? 'Descartar' : 'Descartar'}`,
+                    cancelButtonText: `${mainLanguage === 'pt-BR' ? 'Cancelar' : mainLanguage === 'en' ? 'Cancel' : mainLanguage === 'es' ? 'Cancelar' : 'Cancelar'}`
                 }).then((result) => {
                     if (result.isConfirmed) {
                         createRoutine(formValue, focus);
                     } else if (result.isDenied) {
-                        Swal.fire("Treino cancelado!", "", "info");
+                        Swal.fire(`${mainLanguage === 'pt-BR' ? 'Treino cancelado!' : mainLanguage === 'en' ? 'Workout cancelled!' : mainLanguage === 'es' ? 'Entrenamiento cancelado!' : 'Treino cancelado!'}`, "", "info");
                     }
                 });
             }
         } else {
             Swal.fire({
-                title: "Ocorreu um erro",
-                text: "Você precisa escolher um nome para o seu treino para prosseguir...",
+                title: `${mainLanguage === 'pt-BR' ? 'Ocorreu um erro' : mainLanguage === 'en' ? 'An error occurred' : mainLanguage === 'es' ? 'Ha ocurrido un error' : 'Ocorreu um erro'}`,
+                text: `${mainLanguage === 'pt-BR' ? 'Você precisa escolher um nome para o seu treino para prosseguir...' : mainLanguage === 'en' ? 'You need to choose a name for your workout to proceed...' : mainLanguage === 'es' ? 'Necesitas elegir un nombre para tu entrenamiento para continuar...' : 'Você precisa escolher um nome para o seu treino para prosseguir...'}`,
                 icon: "error"
             });
         }
@@ -231,17 +237,17 @@ export const addOrEnterRoutine = async function (boolean, treinoId) {
  * Exclui uma rotina criada pelo usuário.
  * @param {int} routineId - O ID da rotina a ser removida.
  */
-const removeRoutine = async function(routineId) {
+const removeRoutine = async function (routineId) {
     const userId = user.id;
     Swal.fire({
-        title: "Você tem certeza?",
-        text: "Não será possível acessar novamente este treino!",
+        title: `${mainLanguage === 'pt-BR' ? 'Você tem certeza?' : mainLanguage === 'en' ? 'Are you sure?' : mainLanguage === 'es' ? '¿Estás seguro?' : 'Você tem certeza?'}`,
+        text: `${mainLanguage === 'pt-BR' ? 'Não será possível acessar novamente este treino!' : mainLanguage === 'en' ? 'You will not be able to access this workout again!' : mainLanguage === 'es' ? '¡No podrás acceder a este entrenamiento nuevamente!' : 'Não será possível acessar novamente este treino!'}`,
         icon: "warning",
         showCancelButton: true,
         confirmButtonColor: "#3085d6",
         cancelButtonColor: "#d33",
-        confirmButtonText: "Sim, excluir!",
-        cancelButtonText: 'Cancelar'
+        confirmButtonText: `${mainLanguage === 'pt-BR' ? 'Sim, excluir!' : mainLanguage === 'en' ? 'Yes, delete it!' : mainLanguage === 'es' ? '¡Sí, eliminar!' : 'Sim, excluir!'}`,
+        cancelButtonText: `${mainLanguage === 'pt-BR' ? 'Cancelar' : mainLanguage === 'en' ? 'Cancel' : mainLanguage === 'es' ? 'Cancelar' : 'Cancelar'}`
     }).then(async (result) => {
         if (result.isConfirmed) {
             try {
@@ -256,8 +262,8 @@ const removeRoutine = async function(routineId) {
                     }
                     const data = await response.json();
                     Swal.fire({
-                        title: "Excluído!",
-                        text: "O seu treino foi excluído com sucesso.",
+                        title: `${mainLanguage === 'pt-BR' ? 'Excluído!' : mainLanguage === 'en' ? 'Deleted!' : mainLanguage === 'es' ? '¡Eliminado!' : 'Excluído!'}`,
+                        text: `${mainLanguage === 'pt-BR' ? 'O seu treino foi excluído com sucesso.' : mainLanguage === 'en' ? 'Your workout has been successfully deleted.' : mainLanguage === 'es' ? 'Tu entrenamiento ha sido eliminado con éxito.' : 'O seu treino foi excluído com sucesso.'}`,
                         icon: "success"
                     });
                     console.log(data.message);
@@ -286,16 +292,23 @@ const createRoutine = function (name, focus) {
             userId: user.id
         })
     })
-    .then(res => res.json())
-    .then(data => {
-        Swal.fire("Treino criado!", "", "success").then(function() {
-            location.reload();
-            window.location.href = 'home#userRoutine';
+        .then(res => res.json())
+        .then(data => {
+            const currentLanguage = new URLSearchParams(window.location.search).get('lang');
+            const redirectUrl = `http://localhost:3000/home?lang=${currentLanguage || mainLanguage}#userRoutine`;
+
+            Swal.fire(`${mainLanguage === 'pt-BR' ? 'Treino criado!' : mainLanguage === 'en' ? 'Workout created!' : mainLanguage === 'es' ? 'Entrenamiento creado!' : 'Treino criado!'}`, "", "success").then(function () {
+                location.reload();
+                location.href = redirectUrl;
+            });
+        })
+        .catch(error => {
+            Swal.fire(
+                `${mainLanguage === 'pt-BR' ? 'Erro ao criar treino!' : mainLanguage === 'en' ? 'Error creating workout!' : mainLanguage === 'es' ? '¡Error al crear el entrenamiento!' : 'Erro ao criar treino!'}`,
+                "",
+                "error"
+            );
         });
-    })
-    .catch(error => {
-        Swal.fire("Erro ao criar treino!", "", "error");
-    });
 }
 
 /**
@@ -305,7 +318,7 @@ const createRoutine = function (name, focus) {
 async function contabilizarTreino(routine) {
     try {
         const response = await fetch('/update-routine', {
-            method: 'PUT', 
+            method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'
             },
@@ -314,18 +327,26 @@ async function contabilizarTreino(routine) {
 
         if (response.ok) {
             Swal.fire({
-                title: 'Treino atualizado com sucesso!',
+                title: `${mainLanguage === 'pt-BR' ? 'Treino atualizado com sucesso!' : mainLanguage === 'en' ? 'Workout updated successfully!' : mainLanguage === 'es' ? '¡Entrenamiento actualizado con éxito!' : 'Treino atualizado com sucesso!'}`,
                 icon: 'success'
             }).then((result) => {
                 location.reload();
                 window.location.href = 'home#userRoutine';
             });
         } else {
-            Swal.fire('Erro ao atualizar o treino!', '', 'error');
+            Swal.fire(
+                `${mainLanguage === 'pt-BR' ? 'Erro ao atualizar o treino!' : mainLanguage === 'en' ? 'Error updating workout!' : mainLanguage === 'es' ? '¡Error al actualizar el entrenamiento!' : 'Erro ao atualizar o treino!'}`,
+                '',
+                'error'
+            );
         }
     } catch (error) {
         console.error('Erro ao atualizar o treino:', error);
-        Swal.fire('Erro ao atualizar o treino!', '', 'error');
+        Swal.fire(
+            `${mainLanguage === 'pt-BR' ? 'Erro ao atualizar o treino!' : mainLanguage === 'en' ? 'Error updating workout!' : mainLanguage === 'es' ? '¡Error al actualizar el entrenamiento!' : 'Erro ao atualizar o treino!'}`,
+            '',
+            'error'
+        );
     }
 }
 
@@ -333,9 +354,10 @@ async function contabilizarTreino(routine) {
  * Inicializa a aplicação atribuindo as funções `addOrEnterRoutine` e `removeRoutine` ao objeto `window`.
  * Essas funções são utilizadas para adicionar ou entrar em uma rotina e remover uma rotina, respectivamente.
  */
-function init () {
+function init() {
     window.addOrEnterRoutine = addOrEnterRoutine;
     window.removeRoutine = removeRoutine;
+    mainLanguage = window.navigator.languages ? window.navigator.languages[0] : window.navigator.language;
 }
 
 init();
