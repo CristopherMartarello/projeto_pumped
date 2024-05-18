@@ -22,6 +22,13 @@ var mockDiets;
 var totalCalorias = 0;
 
 /**
+ * Declara a string que irá conter a linguagem do usuário.
+ * @type {string}
+ * @let
+ */
+let mainLanguage = '';
+
+/**
  * Função para verificar quando o usuário entra em uma dieta.
  * Se a dieta ja estiver criada é exibido os ingredientes em um modal carregado do mock para que o usuário selecione e monte a dieta com as calorias desejadas.
  * Caso contrário, outro modal é aberto para o cadastro da dieta, pedindo ao usuário que insira o nome e o foco da dieta.
@@ -38,13 +45,14 @@ export const addOrEnterDiet = async function (boolean, dietId) {
 
             if (dietId) {
                 const loadingSwal = Swal.fire({
-                    title: 'Carregando...',
-                    allowOutsideClick: false, 
-                    showConfirmButton: false, 
+                    title: `${mainLanguage === 'pt-BR' ? 'Carregando...' : mainLanguage === 'en' ? 'Loading...' : mainLanguage === 'es' ? 'Cargando...' : 'Carregando...'}`,
+                    allowOutsideClick: false,
+                    showConfirmButton: false,
                     didOpen: () => {
-                        Swal.showLoading(); 
+                        Swal.showLoading();
                     }
                 });
+
                 const response = await fetch(`/user-diet/${userId}/${dietId}`);
 
                 if (response.ok) {
@@ -67,7 +75,7 @@ export const addOrEnterDiet = async function (boolean, dietId) {
             if (data) {
                 getIngredients(data.id).then(async function (response) {
                     ingredientesSelecionados = [];
-                    
+
                     for (const ingredient of response) {
                         try {
                             const foundedIngredient = await getIngredientDetails(ingredient.ingredientId);
@@ -84,7 +92,7 @@ export const addOrEnterDiet = async function (boolean, dietId) {
                         }
                     });
                 });
-                
+
                 try {
                     mockDiets = await fetch('/get-mockDiets/')
                         .then(response => response.json())
@@ -92,7 +100,7 @@ export const addOrEnterDiet = async function (boolean, dietId) {
                         .catch(error => {
                             console.error('Erro ao buscar os dados:', error);
                         }
-                    );
+                        );
 
                 } catch (error) {
                     console.error('Erro ao buscar os dados:', error);
@@ -106,11 +114,12 @@ export const addOrEnterDiet = async function (boolean, dietId) {
 
                 const contadorDiv = document.createElement('div');
                 contadorDiv.classList.add('info-diet');
-                contadorDiv.textContent = `Total de calorias`;
+                contadorDiv.textContent = `${mainLanguage === 'pt-BR' ? 'Total de calorias' : mainLanguage === 'en' ? 'Total calories' : mainLanguage === 'es' ? 'Total de calorías' : 'Total de calorias'}`;
+
 
                 const amountDiv = document.createElement('div');
                 amountDiv.classList.add('info-diet');
-                amountDiv.setAttribute('id', 'total-calories'); 
+                amountDiv.setAttribute('id', 'total-calories');
 
                 if (data.calories > 0) {
                     totalCalorias = data.calories;
@@ -129,12 +138,12 @@ export const addOrEnterDiet = async function (boolean, dietId) {
                         // Container
                         const ingredientContainer = document.createElement('div');
                         ingredientContainer.classList.add('ingredient-container');
-                    
+
                         // Nome
                         const nameLabel = document.createElement('div');
                         nameLabel.classList.add('info-diet-name');
                         nameLabel.textContent = `${index + 1} - ${ingredient.nome}`;
-                    
+
                         // Calorias
                         const caloriesDiv = document.createElement('div');
                         caloriesDiv.classList.add('info-diet');
@@ -144,20 +153,20 @@ export const addOrEnterDiet = async function (boolean, dietId) {
                         const gramasDiv = document.createElement('div');
                         gramasDiv.classList.add('info-diet');
                         gramasDiv.textContent = `Gramas: ${ingredient.gramas}`;
-                    
+
                         // Checkbox
                         const checkbox = document.createElement('input');
                         checkbox.type = 'checkbox';
                         checkbox.id = `ingredient-${ingredient.nome}`;
                         checkbox.classList.add('ingredient-checkbox');
                         checkbox.dataset.nome = ingredient.nome;
-                    
+
                         // Adicionando os elementos criados à div do ingrediente
                         ingredientContainer.appendChild(nameLabel);
                         ingredientContainer.appendChild(caloriesDiv);
                         ingredientContainer.appendChild(gramasDiv);
                         ingredientContainer.appendChild(checkbox);
-                    
+
                         // Adicionando a div do ingrediente ao conteúdo do modal
                         modalContent.appendChild(ingredientContainer);
                     });
@@ -166,22 +175,17 @@ export const addOrEnterDiet = async function (boolean, dietId) {
                 Swal.showLoading();
                 Swal.fire({
                     title: `<strong>${data.name} - ${data.focus}</strong>`,
-                    iconHtml: `${
-                        data.focus === 'Emagrecer' ? '🥗' : '🍗'
-                    }`,
+                    iconHtml: `${data.focus === 'Emagrecer' ? '🥗' : '🍗'
+                        }`,
                     width: 800,
                     html: modalContent,
                     showCloseButton: true,
                     showCancelButton: true,
                     focusConfirm: false,
-                    confirmButtonText: `
-                      <i class="fa fa-thumbs-up"></i> Finalizar Dieta
-                    `,
-                    confirmButtonAriaLabel: "Dieta finalizada com sucesso!",
-                    cancelButtonText: `
-                      <i class="fa fa-thumbs-down"></i> Cancelar
-                    `,
-                    cancelButtonAriaLabel: "Cancelar",
+                    confirmButtonText: `${mainLanguage === 'pt-BR' ? '<i class="fa fa-thumbs-up"></i> Finalizar Dieta' : mainLanguage === 'en' ? '<i class="fa fa-thumbs-up"></i> Finish Diet' : mainLanguage === 'es' ? '<i class="fa fa-thumbs-up"></i> Finalizar Dieta' : '<i class="fa fa-thumbs-up"></i> Finalizar Dieta'}`,
+                    confirmButtonText: `${mainLanguage === 'pt-BR' ? '<i class="fa fa-thumbs-up"></i> Finalizar Dieta' : mainLanguage === 'en' ? '<i class="fa fa-thumbs-up"></i> Finish Diet' : mainLanguage === 'es' ? '<i class="fa fa-thumbs-up"></i> Finalizar Dieta' : '<i class="fa fa-thumbs-up"></i> Finalizar Dieta'}`,
+                    cancelButtonText: `${mainLanguage === 'pt-BR' ? '<i class="fa fa-thumbs-down"></i> Cancelar' : mainLanguage === 'en' ? '<i class="fa fa-thumbs-down"></i> Cancel' : mainLanguage === 'es' ? '<i class="fa fa-thumbs-down"></i> Cancelar' : '<i class="fa fa-thumbs-down"></i> Cancelar'}`,
+                    cancelButtonAriaLabel: `${mainLanguage === 'pt-BR' ? 'Cancelar' : mainLanguage === 'en' ? 'Cancel' : mainLanguage === 'es' ? 'Cancelar' : 'Cancelar'}`,
                     didOpen: () => {
                         const dietId = data.id;
                         const checkboxes = document.querySelectorAll('.ingredient-checkbox');
@@ -205,11 +209,11 @@ export const addOrEnterDiet = async function (boolean, dietId) {
                             'ingredientesSelecionados': ingredientesSelecionados
                         }
                         const loadingSwal = Swal.fire({
-                            title: 'Carregando...',
-                            allowOutsideClick: false, 
-                            showConfirmButton: false, 
+                            title: `${mainLanguage === 'pt-BR' ? 'Carregando...' : mainLanguage === 'en' ? 'Loading...' : mainLanguage === 'es' ? 'Cargando...' : 'Carregando...'}`,
+                            allowOutsideClick: false,
+                            showConfirmButton: false,
                             didOpen: () => {
-                                Swal.showLoading(); 
+                                Swal.showLoading();
                             }
                         });
                         updateDiet(diet, loadingSwal);
@@ -221,10 +225,10 @@ export const addOrEnterDiet = async function (boolean, dietId) {
         }
     } else {
         const { value: formValue } = await Swal.fire({
-            title: "Cadastrar uma nova dieta",
+            title: `${mainLanguage === 'pt-BR' ? 'Cadastrar uma nova dieta' : mainLanguage === 'en' ? 'Register a new diet' : mainLanguage === 'es' ? 'Registrar una nueva dieta' : 'Cadastrar uma nova dieta'}`,
             html: `
-              <label for="swal-input-1">Nome da Dieta</label>
-              <input id="swal-input1" name="swal-input1" class="swal2-input">
+                <label for="swal-input-1">${mainLanguage === 'pt-BR' ? 'Nome da Dieta' : mainLanguage === 'en' ? 'Diet Name' : mainLanguage === 'es' ? 'Nombre de la Dieta' : 'Nome da Dieta'}</label>
+                <input id="swal-input1" name="swal-input1" class="swal2-input">
             `,
             focusConfirm: false,
             preConfirm: () => {
@@ -234,50 +238,51 @@ export const addOrEnterDiet = async function (boolean, dietId) {
 
         if (formValue !== '') {
             const { value: focus } = await Swal.fire({
-                title: "Qual o foco da sua dieta?",
+                title: `${mainLanguage === 'pt-BR' ? 'Qual o foco da sua dieta?' : mainLanguage === 'en' ? 'What is the focus of your diet?' : mainLanguage === 'es' ? '¿Cuál es el enfoque de tu dieta?' : 'Qual o foco da sua dieta?'}`,
                 input: "select",
                 inputOptions: {
                     Focos: {
-                        Hipertrofia: "Hipertrofia",
-                        Definição: "Definição",
-                        Emagrecer: "Emagrecer",
+                        Hipertrofia: `${mainLanguage === 'pt-BR' ? 'Hipertrofia' : mainLanguage === 'en' ? 'Hypertrophy' : mainLanguage === 'es' ? 'Hipertrofia' : 'Hipertrofia'}`,
+                        Definição: `${mainLanguage === 'pt-BR' ? 'Definição' : mainLanguage === 'en' ? 'Definition' : mainLanguage === 'es' ? 'Definición' : 'Definição'}`,
+                        Emagrecer: `${mainLanguage === 'pt-BR' ? 'Emagrecer' : mainLanguage === 'en' ? 'Weight Loss' : mainLanguage === 'es' ? 'Perder Peso' : 'Emagrecer'}`,
                     }
                 },
-                inputPlaceholder: "Qual o foco da sua dieta?",
+                inputPlaceholder: `${mainLanguage === 'pt-BR' ? 'Qual o foco da sua dieta?' : mainLanguage === 'en' ? 'What is the focus of your diet?' : mainLanguage === 'es' ? '¿Cuál es el enfoque de tu dieta?' : 'Qual o foco da sua dieta?'}`,
                 showCancelButton: true,
                 inputValidator: (value) => {
                     return new Promise((resolve) => {
                         if (value !== '') {
                             resolve();
                         } else {
-                            resolve("Você precisa selecionar um foco!");
+                            resolve(`${mainLanguage === 'pt-BR' ? 'Você precisa selecionar um foco!' : mainLanguage === 'en' ? 'You need to select a focus!' : mainLanguage === 'es' ? '¡Necesitas seleccionar un enfoque!' : 'Você precisa selecionar um foco!'}`);
                         }
                     });
                 }
             });
+
             if (focus) {
                 Swal.fire({
-                    title: "Deseja criar a sua dieta?",
+                    title: `${mainLanguage === 'pt-BR' ? 'Deseja criar a sua dieta?' : mainLanguage === 'en' ? 'Do you want to create your diet?' : mainLanguage === 'es' ? '¿Quieres crear tu dieta?' : 'Deseja criar a sua dieta?'}`,
                     html: `
-                      ${formValue} - ${focus}
+                        ${formValue} - ${focus}
                     `,
                     showDenyButton: true,
                     showCancelButton: true,
-                    confirmButtonText: "Salvar",
-                    denyButtonText: 'Descartar',
-                    cancelButtonText: 'Cancelar'
+                    confirmButtonText: `${mainLanguage === 'pt-BR' ? 'Salvar' : mainLanguage === 'en' ? 'Save' : mainLanguage === 'es' ? 'Guardar' : 'Salvar'}`,
+                    denyButtonText: `${mainLanguage === 'pt-BR' ? 'Descartar' : mainLanguage === 'en' ? 'Discard' : mainLanguage === 'es' ? 'Descartar' : 'Descartar'}`,
+                    cancelButtonText: `${mainLanguage === 'pt-BR' ? 'Cancelar' : mainLanguage === 'en' ? 'Cancel' : mainLanguage === 'es' ? 'Cancelar' : 'Cancelar'}`
                 }).then((result) => {
                     if (result.isConfirmed) {
                         createDiet(formValue, 0, focus);
                     } else if (result.isDenied) {
-                        Swal.fire("Dieta cancelada!", "", "info");
+                        Swal.fire(`${mainLanguage === 'pt-BR' ? 'Dieta cancelada!' : mainLanguage === 'en' ? 'Diet canceled!' : mainLanguage === 'es' ? 'Dieta cancelada!' : 'Dieta cancelada!'}`, "", "info");
                     }
                 });
             }
         } else {
             Swal.fire({
-                title: "Ocorreu um erro",
-                text: "Você precisa escolher um nome para a sua dieta para prosseguir...",
+                title: `${mainLanguage === 'pt-BR' ? 'Ocorreu um erro' : mainLanguage === 'en' ? 'An error occurred' : mainLanguage === 'es' ? 'Se ha producido un error' : 'Ocorreu um erro'}`,
+                text: `${mainLanguage === 'pt-BR' ? 'Você precisa escolher um nome para a sua dieta para prosseguir...' : mainLanguage === 'en' ? 'You need to choose a name for your diet to proceed...' : mainLanguage === 'es' ? 'Debes elegir un nombre para tu dieta para continuar...' : 'Você precisa escolher um nome para a sua dieta para prosseguir...'}`,
                 icon: "error"
             });
         }
@@ -297,38 +302,41 @@ const createDiet = function (name, calories, focus) {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
             name: name,
-            calories: calories, 
+            calories: calories,
             focus: focus,
             userId: user.id
         })
     })
-    .then(res => res.json())
-    .then(data => {
-        Swal.fire("Dieta criada!", "", "success").then(function() {
-            location.reload();
-            window.location.href = 'home#Diet';
+        .then(res => res.json())
+        .then(data => {
+            const currentLanguage = new URLSearchParams(window.location.search).get('lang');
+            const redirectUrl = `http://localhost:3000/home?lang=${currentLanguage || mainLanguage}#userDiet`;
+
+            Swal.fire(`${mainLanguage === 'pt-BR' ? 'Dieta criada!' : mainLanguage === 'en' ? 'Diet created!' : mainLanguage === 'es' ? 'Dieta creada!' : 'Dieta criada!'}`, "", "success").then(function () {
+                location.reload();
+                location.href = redirectUrl;
+            });
+        })
+        .catch(error => {
+            Swal.fire(`${mainLanguage === 'pt-BR' ? 'Erro ao criar dieta!' : mainLanguage === 'en' ? 'Error creating diet!' : mainLanguage === 'es' ? 'Error al crear dieta!' : 'Erro ao criar dieta!'}`, "", "error");
         });
-    })
-    .catch(error => {
-        Swal.fire("Erro ao criar dieta!", "", "error");
-    });
 }
 
 /**
  * Envia uma requisição para excluir uma dieta existente do usuário.
  * @param {int} dietId - O ID da dieta a ser excluída.
  */
-const removeDiet = async function(dietId) {
+const removeDiet = async function (dietId) {
     const userId = user.id;
     Swal.fire({
-        title: "Você tem certeza?",
-        text: "Não será possível acessar novamente esta Dieta!",
+        title: `${mainLanguage === 'pt-BR' ? 'Você tem certeza?' : mainLanguage === 'en' ? 'Are you sure?' : mainLanguage === 'es' ? '¿Estás seguro?' : 'Você tem certeza?'}`,
+        text: `${mainLanguage === 'pt-BR' ? 'Não será possível acessar novamente esta Dieta!' : mainLanguage === 'en' ? 'You will not be able to access this Diet again!' : mainLanguage === 'es' ? '¡No podrás acceder a esta Dieta nuevamente!' : 'Não será possível acessar novamente esta Dieta!'}`,
         icon: "warning",
         showCancelButton: true,
         confirmButtonColor: "#3085d6",
         cancelButtonColor: "#d33",
-        confirmButtonText: "Sim, excluir!",
-        cancelButtonText: 'Cancelar'
+        confirmButtonText: `${mainLanguage === 'pt-BR' ? 'Sim, excluir!' : mainLanguage === 'en' ? 'Yes, delete!' : mainLanguage === 'es' ? '¡Sí, eliminar!' : 'Sim, excluir!'}`,
+        cancelButtonText: `${mainLanguage === 'pt-BR' ? 'Cancelar' : mainLanguage === 'en' ? 'Cancel' : mainLanguage === 'es' ? 'Cancelar' : 'Cancelar'}`
     }).then(async (result) => {
         if (result.isConfirmed) {
             try {
@@ -343,10 +351,10 @@ const removeDiet = async function(dietId) {
                     }
                     const data = await response.json();
                     Swal.fire({
-                        title: "Excluído!",
-                        text: "A sua dieta foi excluída com sucesso.",
+                        title: `${mainLanguage === 'pt-BR' ? 'Excluído!' : mainLanguage === 'en' ? 'Deleted!' : mainLanguage === 'es' ? '¡Eliminado!' : 'Excluído!'}`,
+                        text: `${mainLanguage === 'pt-BR' ? 'A sua dieta foi excluída com sucesso.' : mainLanguage === 'en' ? 'Your diet has been successfully deleted.' : mainLanguage === 'es' ? 'Tu dieta ha sido eliminada con éxito.' : 'A sua dieta foi excluída com sucesso.'}`,
                         icon: "success"
-                    });
+                    })
                     console.log(data.message);
                 } else {
                     console.error('Erro ao excluir dieta:', response.status);
@@ -363,10 +371,10 @@ const removeDiet = async function(dietId) {
  * @param {object} diet - O objeto contendo os detalhes da dieta a ser atualizada.
  * @param {object} loadingSwal - O objeto Swal usado para exibir um indicador de carregamento durante a atualização da dieta.
  */
-const updateDiet = async function(diet, loadingSwal) {
+const updateDiet = async function (diet, loadingSwal) {
     try {
         const response = await fetch('/update-diet', {
-            method: 'PUT', 
+            method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'
             },
@@ -375,17 +383,16 @@ const updateDiet = async function(diet, loadingSwal) {
 
         if (response.ok) {
             loadingSwal.close();
-            Swal.fire('Dieta atualizada com sucesso!', '', 'success').then(function() {
+            Swal.fire(`${mainLanguage === 'pt-BR' ? 'Dieta atualizada com sucesso!' : mainLanguage === 'en' ? 'Diet updated successfully!' : mainLanguage === 'es' ? '¡Dieta actualizada con éxito!' : 'Dieta atualizada com sucesso!'}`, '', 'success').then(function () {
                 document.getElementById(`diet-calories-${diet.name}`).textContent = `${diet.calories}kcal`;
                 location.reload();
                 window.location.href = 'home#Diet';
             });
         } else {
-            Swal.fire('Erro ao atualizar o dieta!', '', 'error');
+            Swal.fire(`${mainLanguage === 'pt-BR' ? 'Erro ao atualizar a dieta!' : mainLanguage === 'en' ? 'Error updating diet!' : mainLanguage === 'es' ? 'Error al actualizar la dieta!' : 'Erro ao atualizar a dieta!'}`, '', 'error');
         }
     } catch (error) {
-        console.error('Erro ao atualizar o dieta:', error);
-        Swal.fire('Erro ao atualizar o dieta!', '', 'error');
+        Swal.fire(`${mainLanguage === 'pt-BR' ? 'Erro ao atualizar a dieta!' : mainLanguage === 'en' ? 'Error updating diet!' : mainLanguage === 'es' ? 'Error al actualizar la dieta!' : 'Erro ao atualizar a dieta!'}`, '', 'error');
     }
 }
 
@@ -455,7 +462,7 @@ function removerIngrediente(ingrediente, dietId) {
     if (ingredienteAchado !== undefined) {
         const indice = ingredientesSelecionados.findIndex(item => item.nome === ingredienteAchado.nome);
         console.log(indice);
-        
+
         if (indice !== -1) {
             ingredientesSelecionados.splice(indice, 1);
             totalCalorias -= ingredienteAchado.calorias;
@@ -464,18 +471,18 @@ function removerIngrediente(ingrediente, dietId) {
             fetch(`/dietIngredient/${dietId}/${ingredienteAchado.nome}`, {
                 method: 'DELETE'
             })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Erro ao remover a relação de ingrediente.');
-                }
-                return response.json();
-            })
-            .then(data => {
-                console.log(data.message);
-            })
-            .catch(error => {
-                console.error('Erro ao remover a relação de ingrediente:', error);
-            });
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Erro ao remover a relação de ingrediente.');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    console.log(data.message);
+                })
+                .catch(error => {
+                    console.error('Erro ao remover a relação de ingrediente:', error);
+                });
 
             const amountDiv = document.getElementById('total-calories');
             amountDiv.textContent = `${totalCalorias} kcal`;
@@ -499,10 +506,11 @@ function handleCheckboxClick(checkbox, ingrediente, dietId) {
     }
 }
 
-function init () {
+function init() {
     window.addOrEnterDiet = addOrEnterDiet;
     window.removeDiet = removeDiet;
     window.updateDiet = updateDiet;
+    mainLanguage = window.navigator.languages ? window.navigator.languages[0] : window.navigator.language;
 }
 
 init();

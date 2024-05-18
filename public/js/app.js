@@ -28,6 +28,13 @@ const clearStorage = function() {
 }
 
 /**
+ * Declara a string que irá conter a linguagem do usuário.
+ * @type {string}
+ * @let
+ */
+let mainLanguage = '';
+
+/**
  * Alterna entre os formulários de login e registro na página, ajustando suas posições.
  * @function switchForms
  * @param {string} form - Uma string que indica qual formulário exibir ('login' para login e 'register' para registro).
@@ -167,6 +174,7 @@ function init() {
     window.handleLogin = handleLogin;
     window.handleSubmit = handleSubmit;
     window.switchForms = switchForms;
+    mainLanguage = window.navigator.languages ? window.navigator.languages[0] : window.navigator.language;
 }
 
 init();
