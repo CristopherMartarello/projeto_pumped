@@ -55,6 +55,9 @@ app.get('/redirect', (req, res) => {
         case 'pt':
             pagePath = '/index-pt.html';
             break;
+        case 'pt-BR':
+            pagePath = '/index-pt.html';
+            break;
         case 'es':
             pagePath = '/index-es.html';
             break;
@@ -67,7 +70,6 @@ app.get('/redirect', (req, res) => {
 });
 
 app.get('/index-pt.html', (req, res) => {
-    console.log('bateu na rota');
     res.sendFile(path.join(__dirname, 'public', 'index-pt.html'));
 });
 
@@ -95,10 +97,16 @@ app.get('/home', (req, res) => {
         case 'pt':
             pagePath = path.join(__dirname, 'public', 'home-pt.html');
             break;
+        case 'pt-BR':
+            pagePath = path.join(__dirname, 'public', 'home-pt.html');
+            break;
         case 'es':
             pagePath = path.join(__dirname, 'public', 'home-es.html');
             break;
         case 'en-US':
+            pagePath = path.join(__dirname, 'public', 'home-en.html');
+            break;
+        case 'en':
             pagePath = path.join(__dirname, 'public', 'home-en.html');
             break;
         default:
