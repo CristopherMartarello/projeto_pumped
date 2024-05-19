@@ -45,7 +45,7 @@ export const addOrEnterDiet = async function (boolean, dietId) {
 
             if (dietId) {
                 const loadingSwal = Swal.fire({
-                    title: `${mainLanguage === 'pt-BR' ? 'Carregando...' : mainLanguage === 'en' ? 'Loading...' : mainLanguage === 'es' ? 'Cargando...' : 'Carregando...'}`,
+                    title: `${mainLanguage === 'pt-BR' ? 'Carregando...' : mainLanguage === 'en' ? 'Loading...' : mainLanguage === 'en-US' ? 'Loading...' : mainLanguage === 'es' ? 'Cargando...' : 'Carregando...'}`,
                     allowOutsideClick: false,
                     showConfirmButton: false,
                     didOpen: () => {
@@ -114,7 +114,7 @@ export const addOrEnterDiet = async function (boolean, dietId) {
 
                 const contadorDiv = document.createElement('div');
                 contadorDiv.classList.add('info-diet');
-                contadorDiv.textContent = `${mainLanguage === 'pt-BR' ? 'Total de calorias' : mainLanguage === 'en' ? 'Total calories' : mainLanguage === 'es' ? 'Total de calorías' : 'Total de calorias'}`;
+                contadorDiv.textContent = `${mainLanguage === 'pt-BR' ? 'Total de calorias' : mainLanguage === 'en' ? 'Total calories' : mainLanguage === 'en-US' ? 'Total Calories' : mainLanguage === 'es' ? 'Total de calorías' : 'Total de calorias'}`;
 
 
                 const amountDiv = document.createElement('div');
@@ -182,10 +182,10 @@ export const addOrEnterDiet = async function (boolean, dietId) {
                     showCloseButton: true,
                     showCancelButton: true,
                     focusConfirm: false,
-                    confirmButtonText: `${mainLanguage === 'pt-BR' ? '<i class="fa fa-thumbs-up"></i> Finalizar Dieta' : mainLanguage === 'en' ? '<i class="fa fa-thumbs-up"></i> Finish Diet' : mainLanguage === 'es' ? '<i class="fa fa-thumbs-up"></i> Finalizar Dieta' : '<i class="fa fa-thumbs-up"></i> Finalizar Dieta'}`,
-                    confirmButtonText: `${mainLanguage === 'pt-BR' ? '<i class="fa fa-thumbs-up"></i> Finalizar Dieta' : mainLanguage === 'en' ? '<i class="fa fa-thumbs-up"></i> Finish Diet' : mainLanguage === 'es' ? '<i class="fa fa-thumbs-up"></i> Finalizar Dieta' : '<i class="fa fa-thumbs-up"></i> Finalizar Dieta'}`,
-                    cancelButtonText: `${mainLanguage === 'pt-BR' ? '<i class="fa fa-thumbs-down"></i> Cancelar' : mainLanguage === 'en' ? '<i class="fa fa-thumbs-down"></i> Cancel' : mainLanguage === 'es' ? '<i class="fa fa-thumbs-down"></i> Cancelar' : '<i class="fa fa-thumbs-down"></i> Cancelar'}`,
-                    cancelButtonAriaLabel: `${mainLanguage === 'pt-BR' ? 'Cancelar' : mainLanguage === 'en' ? 'Cancel' : mainLanguage === 'es' ? 'Cancelar' : 'Cancelar'}`,
+                    confirmButtonText: `${mainLanguage === 'pt-BR' ? '<i class="fa fa-thumbs-up"></i> Finalizar Dieta' : mainLanguage === 'en' ? '<i class="fa fa-thumbs-up"></i> Finish Diet' : mainLanguage === 'en-US' ? '<i class="fa fa-thumbs-up"></i> Finish Diet' : mainLanguage === 'es' ? '<i class="fa fa-thumbs-up"></i> Finalizar Dieta' : '<i class="fa fa-thumbs-up"></i> Finalizar Dieta'}`,
+                    confirmButtonText: `${mainLanguage === 'pt-BR' ? '<i class="fa fa-thumbs-up"></i> Finalizar Dieta' : mainLanguage === 'en' ? '<i class="fa fa-thumbs-up"></i> Finish Diet' : mainLanguage === 'en-US' ? '<i class="fa fa-thumbs-up"></i> Finish Diet' : mainLanguage === 'es' ? '<i class="fa fa-thumbs-up"></i> Finalizar Dieta' : '<i class="fa fa-thumbs-up"></i> Finalizar Dieta'}`,
+                    cancelButtonText: `${mainLanguage === 'pt-BR' ? '<i class="fa fa-thumbs-down"></i> Cancelar' : mainLanguage === 'en' ? '<i class="fa fa-thumbs-down"></i> Cancel' :  mainLanguage === 'en-US' ? '<i class="fa fa-thumbs-down"></i> Cancel' : mainLanguage === 'es' ? '<i class="fa fa-thumbs-down"></i> Cancelar' : '<i class="fa fa-thumbs-down"></i> Cancelar'}`,
+                    cancelButtonAriaLabel: `${mainLanguage === 'pt-BR' ? 'Cancelar' : mainLanguage === 'en' ? 'Cancel' : mainLanguage === 'en-US' ? 'Cancel' : mainLanguage === 'es' ? 'Cancelar' : 'Cancelar'}`,
                     didOpen: () => {
                         const dietId = data.id;
                         const checkboxes = document.querySelectorAll('.ingredient-checkbox');
@@ -209,7 +209,7 @@ export const addOrEnterDiet = async function (boolean, dietId) {
                             'ingredientesSelecionados': ingredientesSelecionados
                         }
                         const loadingSwal = Swal.fire({
-                            title: `${mainLanguage === 'pt-BR' ? 'Carregando...' : mainLanguage === 'en' ? 'Loading...' : mainLanguage === 'es' ? 'Cargando...' : 'Carregando...'}`,
+                            title: `${mainLanguage === 'pt-BR' ? 'Carregando...' : mainLanguage === 'en' ? 'Loading...' : mainLanguage === 'en-US' ? 'Loading...' : mainLanguage === 'es' ? 'Cargando...' : 'Carregando...'}`,
                             allowOutsideClick: false,
                             showConfirmButton: false,
                             didOpen: () => {
@@ -225,9 +225,9 @@ export const addOrEnterDiet = async function (boolean, dietId) {
         }
     } else {
         const { value: formValue } = await Swal.fire({
-            title: `${mainLanguage === 'pt-BR' ? 'Cadastrar uma nova dieta' : mainLanguage === 'en' ? 'Register a new diet' : mainLanguage === 'es' ? 'Registrar una nueva dieta' : 'Cadastrar uma nova dieta'}`,
+            title: `${mainLanguage === 'pt-BR' ? 'Cadastrar uma nova dieta' : mainLanguage === 'en' ? 'Register a new diet' : mainLanguage === 'en-US' ? 'Register a new diet' : mainLanguage === 'es' ? 'Registrar una nueva dieta' : 'Cadastrar uma nova dieta'}`,
             html: `
-                <label for="swal-input-1">${mainLanguage === 'pt-BR' ? 'Nome da Dieta' : mainLanguage === 'en' ? 'Diet Name' : mainLanguage === 'es' ? 'Nombre de la Dieta' : 'Nome da Dieta'}</label>
+                <label for="swal-input-1">${mainLanguage === 'pt-BR' ? 'Nome da Dieta' : mainLanguage === 'en' ? 'Diet Name' : mainLanguage === 'en-US' ? 'Diet Name' : mainLanguage === 'es' ? 'Nombre de la Dieta' : 'Nome da Dieta'}</label>
                 <input id="swal-input1" name="swal-input1" class="swal2-input">
             `,
             focusConfirm: false,
@@ -238,23 +238,23 @@ export const addOrEnterDiet = async function (boolean, dietId) {
 
         if (formValue !== '') {
             const { value: focus } = await Swal.fire({
-                title: `${mainLanguage === 'pt-BR' ? 'Qual o foco da sua dieta?' : mainLanguage === 'en' ? 'What is the focus of your diet?' : mainLanguage === 'es' ? '¿Cuál es el enfoque de tu dieta?' : 'Qual o foco da sua dieta?'}`,
+                title: `${mainLanguage === 'pt-BR' ? 'Qual o foco da sua dieta?' : mainLanguage === 'en' ? 'What is the focus of your diet?' : mainLanguage === 'en-US' ? 'What is the focus of your diet?' : mainLanguage === 'es' ? '¿Cuál es el enfoque de tu dieta?' : 'Qual o foco da sua dieta?'}`,
                 input: "select",
                 inputOptions: {
                     Focos: {
-                        Hipertrofia: `${mainLanguage === 'pt-BR' ? 'Hipertrofia' : mainLanguage === 'en' ? 'Hypertrophy' : mainLanguage === 'es' ? 'Hipertrofia' : 'Hipertrofia'}`,
-                        Definição: `${mainLanguage === 'pt-BR' ? 'Definição' : mainLanguage === 'en' ? 'Definition' : mainLanguage === 'es' ? 'Definición' : 'Definição'}`,
-                        Emagrecer: `${mainLanguage === 'pt-BR' ? 'Emagrecer' : mainLanguage === 'en' ? 'Weight Loss' : mainLanguage === 'es' ? 'Perder Peso' : 'Emagrecer'}`,
+                        Hipertrofia: `${mainLanguage === 'pt-BR' ? 'Hipertrofia' : mainLanguage === 'en' ? 'Hypertrophy' : mainLanguage === 'en-US' ? 'Hypertrophy' : mainLanguage === 'es' ? 'Hipertrofia' : 'Hipertrofia'}`,
+                        Definição: `${mainLanguage === 'pt-BR' ? 'Definição' : mainLanguage === 'en' ? 'Definition' : mainLanguage === 'en-US' ? 'Definition' : mainLanguage === 'es' ? 'Definición' : 'Definição'}`,
+                        Emagrecer: `${mainLanguage === 'pt-BR' ? 'Emagrecer' : mainLanguage === 'en' ? 'Weight Loss' : mainLanguage === 'en-US' ? 'Weight Loss' : mainLanguage === 'es' ? 'Perder Peso' : 'Emagrecer'}`,
                     }
                 },
-                inputPlaceholder: `${mainLanguage === 'pt-BR' ? 'Qual o foco da sua dieta?' : mainLanguage === 'en' ? 'What is the focus of your diet?' : mainLanguage === 'es' ? '¿Cuál es el enfoque de tu dieta?' : 'Qual o foco da sua dieta?'}`,
+                inputPlaceholder: `${mainLanguage === 'pt-BR' ? 'Qual o foco da sua dieta?' : mainLanguage === 'en' ? 'What is the focus of your diet?' : mainLanguage === 'en-US' ? 'What is the focus of your diet?' : mainLanguage === 'es' ? '¿Cuál es el enfoque de tu dieta?' : 'Qual o foco da sua dieta?'}`,
                 showCancelButton: true,
                 inputValidator: (value) => {
                     return new Promise((resolve) => {
                         if (value !== '') {
                             resolve();
                         } else {
-                            resolve(`${mainLanguage === 'pt-BR' ? 'Você precisa selecionar um foco!' : mainLanguage === 'en' ? 'You need to select a focus!' : mainLanguage === 'es' ? '¡Necesitas seleccionar un enfoque!' : 'Você precisa selecionar um foco!'}`);
+                            resolve(`${mainLanguage === 'pt-BR' ? 'Você precisa selecionar um foco!' : mainLanguage === 'en' ? 'You need to select a focus!' : mainLanguage === 'en-US' ? 'You need to select a focus!' : mainLanguage === 'es' ? '¡Necesitas seleccionar un enfoque!' : 'Você precisa selecionar um foco!'}`);
                         }
                     });
                 }
@@ -262,27 +262,27 @@ export const addOrEnterDiet = async function (boolean, dietId) {
 
             if (focus) {
                 Swal.fire({
-                    title: `${mainLanguage === 'pt-BR' ? 'Deseja criar a sua dieta?' : mainLanguage === 'en' ? 'Do you want to create your diet?' : mainLanguage === 'es' ? '¿Quieres crear tu dieta?' : 'Deseja criar a sua dieta?'}`,
+                    title: `${mainLanguage === 'pt-BR' ? 'Deseja criar a sua dieta?' : mainLanguage === 'en' ? 'Do you want to create your diet?' : mainLanguage === 'en-US' ? 'Do you want to create your diet?' : mainLanguage === 'es' ? '¿Quieres crear tu dieta?' : 'Deseja criar a sua dieta?'}`,
                     html: `
                         ${formValue} - ${focus}
                     `,
                     showDenyButton: true,
                     showCancelButton: true,
-                    confirmButtonText: `${mainLanguage === 'pt-BR' ? 'Salvar' : mainLanguage === 'en' ? 'Save' : mainLanguage === 'es' ? 'Guardar' : 'Salvar'}`,
-                    denyButtonText: `${mainLanguage === 'pt-BR' ? 'Descartar' : mainLanguage === 'en' ? 'Discard' : mainLanguage === 'es' ? 'Descartar' : 'Descartar'}`,
-                    cancelButtonText: `${mainLanguage === 'pt-BR' ? 'Cancelar' : mainLanguage === 'en' ? 'Cancel' : mainLanguage === 'es' ? 'Cancelar' : 'Cancelar'}`
+                    confirmButtonText: `${mainLanguage === 'pt-BR' ? 'Salvar' : mainLanguage === 'en' ? 'Save' : mainLanguage === 'en-US' ? 'Save' : mainLanguage === 'es' ? 'Guardar' : 'Salvar'}`,
+                    denyButtonText: `${mainLanguage === 'pt-BR' ? 'Descartar' : mainLanguage === 'en' ? 'Discard' : mainLanguage === 'en-US' ? 'Discard' : mainLanguage === 'es' ? 'Descartar' : 'Descartar'}`,
+                    cancelButtonText: `${mainLanguage === 'pt-BR' ? 'Cancelar' : mainLanguage === 'en' ? 'Cancel' : mainLanguage === 'en-US' ? 'Cancel' : mainLanguage === 'es' ? 'Cancelar' : 'Cancelar'}`
                 }).then((result) => {
                     if (result.isConfirmed) {
                         createDiet(formValue, 0, focus);
                     } else if (result.isDenied) {
-                        Swal.fire(`${mainLanguage === 'pt-BR' ? 'Dieta cancelada!' : mainLanguage === 'en' ? 'Diet canceled!' : mainLanguage === 'es' ? 'Dieta cancelada!' : 'Dieta cancelada!'}`, "", "info");
+                        Swal.fire(`${mainLanguage === 'pt-BR' ? 'Dieta cancelada!' : mainLanguage === 'en' ? 'Diet canceled!' : mainLanguage === 'en-US' ? 'Diet canceled!' : mainLanguage === 'es' ? 'Dieta cancelada!' : 'Dieta cancelada!'}`, "", "info");
                     }
                 });
             }
         } else {
             Swal.fire({
-                title: `${mainLanguage === 'pt-BR' ? 'Ocorreu um erro' : mainLanguage === 'en' ? 'An error occurred' : mainLanguage === 'es' ? 'Se ha producido un error' : 'Ocorreu um erro'}`,
-                text: `${mainLanguage === 'pt-BR' ? 'Você precisa escolher um nome para a sua dieta para prosseguir...' : mainLanguage === 'en' ? 'You need to choose a name for your diet to proceed...' : mainLanguage === 'es' ? 'Debes elegir un nombre para tu dieta para continuar...' : 'Você precisa escolher um nome para a sua dieta para prosseguir...'}`,
+                title: `${mainLanguage === 'pt-BR' ? 'Ocorreu um erro' : mainLanguage === 'en' ? 'An error occurred' : mainLanguage === 'en-US' ? 'An error occurred' : mainLanguage === 'es' ? 'Se ha producido un error' : 'Ocorreu um erro'}`,
+                text: `${mainLanguage === 'pt-BR' ? 'Você precisa escolher um nome para a sua dieta para prosseguir...' : mainLanguage === 'en' ? 'You need to choose a name for your diet to proceed...' : mainLanguage === 'en-US' ? 'You need to choose a name for your diet to proceed...' : mainLanguage === 'es' ? 'Debes elegir un nombre para tu dieta para continuar...' : 'Você precisa escolher um nome para a sua dieta para prosseguir...'}`,
                 icon: "error"
             });
         }
@@ -312,13 +312,13 @@ const createDiet = function (name, calories, focus) {
             const currentLanguage = new URLSearchParams(window.location.search).get('lang');
             const redirectUrl = `http://localhost:3000/home?lang=${currentLanguage || mainLanguage}#userDiet`;
 
-            Swal.fire(`${mainLanguage === 'pt-BR' ? 'Dieta criada!' : mainLanguage === 'en' ? 'Diet created!' : mainLanguage === 'es' ? 'Dieta creada!' : 'Dieta criada!'}`, "", "success").then(function () {
+            Swal.fire(`${mainLanguage === 'pt-BR' ? 'Dieta criada!' : mainLanguage === 'en' ? 'Diet created!' : mainLanguage === 'en-US' ? 'Diet created!' : mainLanguage === 'es' ? 'Dieta creada!' : 'Dieta criada!'}`, "", "success").then(function () {
                 location.reload();
                 location.href = redirectUrl;
             });
         })
         .catch(error => {
-            Swal.fire(`${mainLanguage === 'pt-BR' ? 'Erro ao criar dieta!' : mainLanguage === 'en' ? 'Error creating diet!' : mainLanguage === 'es' ? 'Error al crear dieta!' : 'Erro ao criar dieta!'}`, "", "error");
+            Swal.fire(`${mainLanguage === 'pt-BR' ? 'Erro ao criar dieta!' : mainLanguage === 'en' ? 'Error creating diet!' : mainLanguage === 'en-US' ? 'Error creating diet!' : mainLanguage === 'es' ? 'Error al crear dieta!' : 'Erro ao criar dieta!'}`, "", "error");
         });
 }
 
@@ -329,14 +329,14 @@ const createDiet = function (name, calories, focus) {
 const removeDiet = async function (dietId) {
     const userId = user.id;
     Swal.fire({
-        title: `${mainLanguage === 'pt-BR' ? 'Você tem certeza?' : mainLanguage === 'en' ? 'Are you sure?' : mainLanguage === 'es' ? '¿Estás seguro?' : 'Você tem certeza?'}`,
-        text: `${mainLanguage === 'pt-BR' ? 'Não será possível acessar novamente esta Dieta!' : mainLanguage === 'en' ? 'You will not be able to access this Diet again!' : mainLanguage === 'es' ? '¡No podrás acceder a esta Dieta nuevamente!' : 'Não será possível acessar novamente esta Dieta!'}`,
+        title: `${mainLanguage === 'pt-BR' ? 'Você tem certeza?' : mainLanguage === 'en' ? 'Are you sure?' : mainLanguage === 'en-US' ? 'Are you sure?' : mainLanguage === 'es' ? '¿Estás seguro?' : 'Você tem certeza?'}`,
+        text: `${mainLanguage === 'pt-BR' ? 'Não será possível acessar novamente esta Dieta!' : mainLanguage === 'en' ? 'You will not be able to access this Diet again!' : mainLanguage === 'en-US' ? 'You will not be able to access this Diet again!' : mainLanguage === 'es' ? '¡No podrás acceder a esta Dieta nuevamente!' : 'Não será possível acessar novamente esta Dieta!'}`,
         icon: "warning",
         showCancelButton: true,
         confirmButtonColor: "#3085d6",
         cancelButtonColor: "#d33",
-        confirmButtonText: `${mainLanguage === 'pt-BR' ? 'Sim, excluir!' : mainLanguage === 'en' ? 'Yes, delete!' : mainLanguage === 'es' ? '¡Sí, eliminar!' : 'Sim, excluir!'}`,
-        cancelButtonText: `${mainLanguage === 'pt-BR' ? 'Cancelar' : mainLanguage === 'en' ? 'Cancel' : mainLanguage === 'es' ? 'Cancelar' : 'Cancelar'}`
+        confirmButtonText: `${mainLanguage === 'pt-BR' ? 'Sim, excluir!' : mainLanguage === 'en' ? 'Yes, delete!' : mainLanguage === 'en-US' ? 'Yes, delete!' : mainLanguage === 'es' ? '¡Sí, eliminar!' : 'Sim, excluir!'}`,
+        cancelButtonText: `${mainLanguage === 'pt-BR' ? 'Cancelar' : mainLanguage === 'en' ? 'Cancel' : mainLanguage === 'en-US' ? 'Cancel' : mainLanguage === 'es' ? 'Cancelar' : 'Cancelar'}`
     }).then(async (result) => {
         if (result.isConfirmed) {
             try {
@@ -351,8 +351,8 @@ const removeDiet = async function (dietId) {
                     }
                     const data = await response.json();
                     Swal.fire({
-                        title: `${mainLanguage === 'pt-BR' ? 'Excluído!' : mainLanguage === 'en' ? 'Deleted!' : mainLanguage === 'es' ? '¡Eliminado!' : 'Excluído!'}`,
-                        text: `${mainLanguage === 'pt-BR' ? 'A sua dieta foi excluída com sucesso.' : mainLanguage === 'en' ? 'Your diet has been successfully deleted.' : mainLanguage === 'es' ? 'Tu dieta ha sido eliminada con éxito.' : 'A sua dieta foi excluída com sucesso.'}`,
+                        title: `${mainLanguage === 'pt-BR' ? 'Excluído!' : mainLanguage === 'en' ? 'Deleted!' : mainLanguage === 'en-US' ? 'Deleted!' : mainLanguage === 'es' ? '¡Eliminado!' : 'Excluído!'}`,
+                        text: `${mainLanguage === 'pt-BR' ? 'A sua dieta foi excluída com sucesso.' : mainLanguage === 'en' ? 'Your diet has been successfully deleted.' : mainLanguage === 'en-US' ? 'Your diet has been successfully deleted.' : mainLanguage === 'es' ? 'Tu dieta ha sido eliminada con éxito.' : 'A sua dieta foi excluída com sucesso.'}`,
                         icon: "success"
                     })
                     console.log(data.message);
@@ -383,16 +383,16 @@ const updateDiet = async function (diet, loadingSwal) {
 
         if (response.ok) {
             loadingSwal.close();
-            Swal.fire(`${mainLanguage === 'pt-BR' ? 'Dieta atualizada com sucesso!' : mainLanguage === 'en' ? 'Diet updated successfully!' : mainLanguage === 'es' ? '¡Dieta actualizada con éxito!' : 'Dieta atualizada com sucesso!'}`, '', 'success').then(function () {
+            Swal.fire(`${mainLanguage === 'pt-BR' ? 'Dieta atualizada com sucesso!' : mainLanguage === 'en' ? 'Diet updated successfully!' : mainLanguage === 'en-US' ? 'Diet updated successfully!' : mainLanguage === 'es' ? '¡Dieta actualizada con éxito!' : 'Dieta atualizada com sucesso!'}`, '', 'success').then(function () {
                 document.getElementById(`diet-calories-${diet.name}`).textContent = `${diet.calories}kcal`;
                 location.reload();
                 window.location.href = 'home#Diet';
             });
         } else {
-            Swal.fire(`${mainLanguage === 'pt-BR' ? 'Erro ao atualizar a dieta!' : mainLanguage === 'en' ? 'Error updating diet!' : mainLanguage === 'es' ? 'Error al actualizar la dieta!' : 'Erro ao atualizar a dieta!'}`, '', 'error');
+            Swal.fire(`${mainLanguage === 'pt-BR' ? 'Erro ao atualizar a dieta!' : mainLanguage === 'en' ? 'Error updating diet!' : mainLanguage === 'en-US' ? 'Error updating diet!' : mainLanguage === 'es' ? 'Error al actualizar la dieta!' : 'Erro ao atualizar a dieta!'}`, '', 'error');
         }
     } catch (error) {
-        Swal.fire(`${mainLanguage === 'pt-BR' ? 'Erro ao atualizar a dieta!' : mainLanguage === 'en' ? 'Error updating diet!' : mainLanguage === 'es' ? 'Error al actualizar la dieta!' : 'Erro ao atualizar a dieta!'}`, '', 'error');
+        Swal.fire(`${mainLanguage === 'pt-BR' ? 'Erro ao atualizar a dieta!' : mainLanguage === 'en' ? 'Error updating diet!' : mainLanguage === 'en-US' ? 'Error updating diet!' : mainLanguage === 'es' ? 'Error al actualizar la dieta!' : 'Erro ao atualizar a dieta!'}`, '', 'error');
     }
 }
 

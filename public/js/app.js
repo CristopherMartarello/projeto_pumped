@@ -76,7 +76,7 @@ const handleSubmit = function () {
     let password = document.querySelector('.password').value;
 
     const loadingSwal = Swal.fire({
-        title: `${mainLanguage === 'pt-BR' ? 'Carregando...' : mainLanguage === 'en' ? 'Loading...' : mainLanguage === 'es' ? 'Cargando...' : 'Carregando...'}`,
+        title: `${mainLanguage === 'pt-BR' ? 'Carregando...' : mainLanguage === 'en' ? 'Loading...' : mainLanguage === 'en-US' ? 'Loading...' : mainLanguage === 'es' ? 'Cargando...' : 'Carregando...'}`,
         allowOutsideClick: false,
         showConfirmButton: false,
         didOpen: () => {
@@ -98,14 +98,14 @@ const handleSubmit = function () {
         .then(data => {
             loadingSwal.close();
             Swal.fire(
-                `${mainLanguage === 'pt-BR' ? 'Usuário Cadastrado!' : mainLanguage === 'en' ? 'User Registered!' : mainLanguage === 'es' ? 'Usuario Registrado!' : 'Usuário Cadastrado!'}`,
+                `${mainLanguage === 'pt-BR' ? 'Usuário Cadastrado!' : mainLanguage === 'en' ? 'User Registered!' : mainLanguage === 'en-US' ? 'User Registered!' : mainLanguage === 'es' ? 'Usuario Registrado!' : 'Usuário Cadastrado!'}`,
                 "",
                 "success"
             );
         })
         .catch(error => {
             Swal.fire(
-                `${mainLanguage === 'pt-BR' ? 'Erro ao cadastrar usuário!' : mainLanguage === 'en' ? 'Error registering user!' : mainLanguage === 'es' ? 'Error al registrar usuario!' : 'Erro ao cadastrar usuário!'}`,
+                `${mainLanguage === 'pt-BR' ? 'Erro ao cadastrar usuário!' : mainLanguage === 'en' ? 'Error registering user!' : mainLanguage === 'en-US' ? 'Error registering user!': mainLanguage === 'es' ? 'Error al registrar usuario!' : 'Erro ao cadastrar usuário!'}`,
                 "",
                 "error"
             );
@@ -123,7 +123,7 @@ const handleLogin = function () {
     let password = document.querySelector('.passwordLogin').value;
 
     const loadingSwal = Swal.fire({
-        title: `${mainLanguage === 'pt-BR' ? 'Carregando...' : mainLanguage === 'en' ? 'Loading...' : mainLanguage === 'es' ? 'Cargando...' : 'Carregando...'}`,
+        title: `${mainLanguage === 'pt-BR' ? 'Carregando...' : mainLanguage === 'en' ? 'Loading...' : mainLanguage === 'en-US' ? 'Loading...' : mainLanguage === 'es' ? 'Cargando...' : 'Carregando...'}`,
         allowOutsideClick: false,
         showConfirmButton: false,
         didOpen: () => {
@@ -149,7 +149,7 @@ const handleLogin = function () {
                 window.location.href = `/home?lang=${userLanguage}`;
             } else {
                 Swal.fire(
-                    `${mainLanguage === 'pt-BR' ? 'Erro ao entrar na conta, verifique o usuário e/ou a senha!' : mainLanguage === 'en' ? 'Error logging into account, check the username and/or password!' : mainLanguage === 'es' ? 'Error al iniciar sesión, ¡verifica el nombre de usuario y/o la contraseña!' : 'Erro ao entrar na conta, verifique o usuário e/ou a senha!'}`,
+                    `${mainLanguage === 'pt-BR' ? 'Erro ao entrar na conta, verifique o usuário e/ou a senha!' : mainLanguage === 'en' ? 'Error logging into account, check the username and/or password!' : mainLanguage === 'en-US' ? 'Error logging into account, check the username and/or password!' : mainLanguage === 'es' ? 'Error al iniciar sesión, ¡verifica el nombre de usuario y/o la contraseña!' : 'Erro ao entrar na conta, verifique o usuário e/ou a senha!'}`,
                     "",
                     "error"
                 );
@@ -157,7 +157,7 @@ const handleLogin = function () {
         })
         .catch(error => {
             Swal.fire(
-                `${mainLanguage === 'pt-BR' ? 'Erro ao entrar na conta, verifique o usuário e a senha!' : mainLanguage === 'en' ? 'Error logging into account, check the username and password!' : mainLanguage === 'es' ? 'Error al iniciar sesión, ¡verifica el nombre de usuario y la contraseña!' : 'Erro ao entrar na conta, verifique o usuário e a senha!'}`,
+                `${mainLanguage === 'pt-BR' ? 'Erro ao entrar na conta, verifique o usuário e a senha!' : mainLanguage === 'en' ? 'Error logging into account, check the username and password!' : mainLanguage === 'en-US' ? 'Error logging into account, check the username and password!' : mainLanguage === 'es' ? 'Error al iniciar sesión, ¡verifica el nombre de usuario y la contraseña!' : 'Erro ao entrar na conta, verifique o usuário e a senha!'}`,
                 "",
                 "error"
             );

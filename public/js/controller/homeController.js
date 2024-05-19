@@ -193,7 +193,7 @@ const saveData = function () {
     var userData = getDataFromInputs();
     const { name, username, email, password, age, weight, id, height, birth, bio, gender, activity } = userData;
     const loadingSwal = Swal.fire({
-        title: `${mainLanguage === 'pt-BR' ? 'Carregando...' : mainLanguage === 'en' ? 'Loading...' : mainLanguage === 'es' ? 'Cargando...' : 'Carregando...'}`,
+        title: `${mainLanguage === 'pt-BR' ? 'Carregando...' : mainLanguage === 'en' ? 'Loading...' : mainLanguage === 'en-US' ? 'Loading...' : mainLanguage === 'es' ? 'Cargando...' : 'Carregando...'}`,
         allowOutsideClick: false,
         showConfirmButton: false,
         didOpen: () => {
@@ -223,10 +223,13 @@ const saveData = function () {
             loadingSwal.close();
             localStorage.removeItem('user');
             localStorage.setItem('user', JSON.stringify(userData));
-            //REVISAR AQUI
-            Swal.fire(`${mainLanguage === 'pt-BR' ? 'Dados atualizados!' : mainLanguage === 'en' ? 'Data updated!' : mainLanguage === 'es' ? '¡Datos actualizados!' : 'Dados atualizados!'}`, "", "success").then(function () {
+            
+            const currentLanguage = new URLSearchParams(window.location.search).get('lang');
+            const redirectUrl = `http://localhost:3000/home?lang=${currentLanguage || mainLanguage}#userData`;
+
+            Swal.fire(`${mainLanguage === 'pt-BR' ? 'Dados atualizados!' : mainLanguage === 'en' ? 'Data updated!' : mainLanguage === 'en-US' ? 'Data updated!' : mainLanguage === 'es' ? '¡Datos actualizados!' : 'Dados atualizados!'}`, "", "success").then(function () {
                 location.reload();
-                window.location.href = 'home#userData';
+                location.href = redirectUrl;
             });
         })
         .catch(error => {
@@ -246,13 +249,13 @@ const fillAditionalInfo = function (data) {
     var waterIntakeDiv = document.getElementById('water-intake-block');
     waterIntakeDiv.innerHTML = `
     <i class="fa fa-coffee" style="color: #000"></i> 
-    <label style="color: #000">${mainLanguage === 'pt-BR' ? 'Água' : mainLanguage === 'en' ? 'Water' : mainLanguage === 'es' ? 'Agua' : 'Água'}</label> 
+    <label style="color: #000">${mainLanguage === 'pt-BR' ? 'Água' : mainLanguage === 'en' ? 'Water' : mainLanguage === 'en-US' ? 'Water' : mainLanguage === 'es' ? 'Agua' : 'Água'}</label> 
     <span>${waterIntake.toFixed(0)}ml</span>`;
 
     var imcDiv = document.getElementById('imc-block');
     imcDiv.innerHTML = `
         <i class="fa fa-balance-scale" aria-hidden="true" style="color: #000"></i> 
-        <label style="color: #000">${mainLanguage === 'pt-BR' ? 'IMC' : mainLanguage === 'en' ? 'BMI' : mainLanguage === 'es' ? 'IMC' : 'IMC'}</label> 
+        <label style="color: #000">${mainLanguage === 'pt-BR' ? 'IMC' : mainLanguage === 'en' ? 'BMI' : mainLanguage === 'en-US' ? 'BMI' : mainLanguage === 'es' ? 'IMC' : 'IMC'}</label> 
         <span>${imc.toFixed(2)}</span>`;
 }
 
@@ -277,61 +280,61 @@ const fillCaloriesParameters = function (data) {
     var TMBMaleDiv = document.getElementById('tmb-male');
     TMBMaleDiv.innerHTML = `
     <i class="fa fa-mars" style="color: #000"></i> 
-    <label style="color: #000">${mainLanguage === 'pt-BR' ? 'TMB' : mainLanguage === 'en' ? 'BMR' : mainLanguage === 'es' ? 'TMB' : 'TMB'}</label> 
+    <label style="color: #000">${mainLanguage === 'pt-BR' ? 'TMB' : mainLanguage === 'en' ? 'BMR' : mainLanguage === 'en-US' ? 'BMR' : mainLanguage === 'es' ? 'TMB' : 'TMB'}</label> 
     <span>${TMBMale.toFixed(0)} kcal</span>`;
 
     var TMBFemaleDiv = document.getElementById('tmb-female');
     TMBFemaleDiv.innerHTML = `
     <i class="fa fa-venus" aria-hidden="true" style="color: #000"></i> 
-    <label style="color: #000">${mainLanguage === 'pt-BR' ? 'TMB' : mainLanguage === 'en' ? 'BMR' : mainLanguage === 'es' ? 'TMB' : 'TMB'}</label> 
+    <label style="color: #000">${mainLanguage === 'pt-BR' ? 'TMB' : mainLanguage === 'en' ? 'BMR' : mainLanguage === 'en-US' ? 'BMR' : mainLanguage === 'es' ? 'TMB' : 'TMB'}</label> 
     <span>${TMBFemale.toFixed(0)} kcal</span>`;
 
     var imcDiv = document.getElementById('calorie-for-imc');
     imcDiv.innerHTML = `
     <i class="fa fa-balance-scale" aria-hidden="true" style="color: #000"></i> 
-    <label style="color: #000">${mainLanguage === 'pt-BR' ? 'IMC' : mainLanguage === 'en' ? 'BMI' : mainLanguage === 'es' ? 'IMC' : 'IMC'}</label> 
+    <label style="color: #000">${mainLanguage === 'pt-BR' ? 'IMC' : mainLanguage === 'en' ? 'BMI' : mainLanguage === 'en-US' ? 'BMI' : mainLanguage === 'es' ? 'IMC' : 'IMC'}</label> 
     <span>${imc.toFixed(2)}</span>`;
 
     var imcDiv = document.getElementById('calorie-for-water');
     imcDiv.innerHTML = `
     <i class="fa fa-coffee" aria-hidden="true" style="color: #000"></i> 
-    <label style="color: #000">${mainLanguage === 'pt-BR' ? 'Água' : mainLanguage === 'en' ? 'Water' : mainLanguage === 'es' ? 'Agua' : 'Água'}</label> 
+    <label style="color: #000">${mainLanguage === 'pt-BR' ? 'Água' : mainLanguage === 'en' ? 'Water' : mainLanguage === 'en-US' ? 'Water' : mainLanguage === 'es' ? 'Agua' : 'Água'}</label> 
     <span>${waterIntake.toFixed(0)} ml</span>`;
 
     var WLMaleDiv = document.getElementById('calorie-for-weightloss-male');
     WLMaleDiv.innerHTML = `
     <i class="fa fa-mars" style="color: #000"></i> 
-    <label style="color: #000">${mainLanguage === 'pt-BR' ? 'Emagrecimento' : mainLanguage === 'en' ? 'Weight Loss' : mainLanguage === 'es' ? 'Pérdida de Peso' : 'Emagrecimento'}</label> 
+    <label style="color: #000">${mainLanguage === 'pt-BR' ? 'Emagrecimento' : mainLanguage === 'en' ? 'Weight Loss' : mainLanguage === 'en-US' ? 'Weight Loss' : mainLanguage === 'es' ? 'Pérdida de Peso' : 'Emagrecimento'}</label> 
     <span>${weightLossMale.toFixed(0)} kcal</span>`;
 
     var WLFemaleDiv = document.getElementById('calorie-for-weightloss-female');
     WLFemaleDiv.innerHTML = `
     <i class="fa fa-venus" aria-hidden="true" style="color: #000"></i> 
-    <label style="color: #000">${mainLanguage === 'pt-BR' ? 'Emagrecimento' : mainLanguage === 'en' ? 'Weight Loss' : mainLanguage === 'es' ? 'Pérdida de Peso' : 'Emagrecimento'}</label> 
+    <label style="color: #000">${mainLanguage === 'pt-BR' ? 'Emagrecimento' : mainLanguage === 'en' ? 'Weight Loss' : mainLanguage === 'en-US' ? 'Weight Loss' : mainLanguage === 'es' ? 'Pérdida de Peso' : 'Emagrecimento'}</label> 
     <span>${weightLossFemale.toFixed(0)} kcal</span>`;
 
     var MGMaleDiv = document.getElementById('calorie-for-massgain-male');
     MGMaleDiv.innerHTML = `
     <i class="fa fa-mars" style="color: #000"></i> 
-    <label style="color: #000">${mainLanguage === 'pt-BR' ? 'Hipertrofia' : mainLanguage === 'en' ? 'Mass Gain' : mainLanguage === 'es' ? 'Ganancia de Masa' : 'Hipertrofia'}</label> 
+    <label style="color: #000">${mainLanguage === 'pt-BR' ? 'Hipertrofia' : mainLanguage === 'en' ? 'Mass Gain' : mainLanguage === 'en-US' ? 'Mass Gain' : mainLanguage === 'es' ? 'Ganancia de Masa' : 'Hipertrofia'}</label> 
     <span>${massGainMale.toFixed(0)} kcal</span>`;
 
     var MGFemaleDiv = document.getElementById('calorie-for-massgain-female');
     MGFemaleDiv.innerHTML = `
     <i class="fa fa-venus" aria-hidden="true" style="color: #000"></i> 
-    <label style="color: #000">${mainLanguage === 'pt-BR' ? 'Hipertrofia' : mainLanguage === 'en' ? 'Mass Gain' : mainLanguage === 'es' ? 'Ganancia de Masa' : 'Hipertrofia'}</label> 
+    <label style="color: #000">${mainLanguage === 'pt-BR' ? 'Hipertrofia' : mainLanguage === 'en' ? 'Mass Gain' : mainLanguage === 'en-US' ? 'Mass Gain' : mainLanguage === 'es' ? 'Ganancia de Masa' : 'Hipertrofia'}</label> 
     <span>${massGainFemale.toFixed(0)} kcal</span>`;
 
     var MaintanceMaleDiv = document.getElementById('calorie-for-maintance-male');
     MaintanceMaleDiv.innerHTML = `
     <i class="fa fa-mars" style="color: #000"></i> 
-    <label style="color: #000">${mainLanguage === 'pt-BR' ? 'Definição (manter)' : mainLanguage === 'en' ? 'Maintenance (keep)' : mainLanguage === 'es' ? 'Definición (mantener)' : 'Definição (manter)'}</label> 
+    <label style="color: #000">${mainLanguage === 'pt-BR' ? 'Definição (manter)' : mainLanguage === 'en' ? 'Maintenance (keep)' : mainLanguage === 'en-US' ? 'Maintenance (keep)' : mainLanguage === 'es' ? 'Definición (mantener)' : 'Definição (manter)'}</label> 
     <span>${maintanceMale.toFixed(0)} kcal</span>`;
 
     var MaintanceFemaleDiv = document.getElementById('calorie-for-maintance-female');
     MaintanceFemaleDiv.innerHTML = `
     <i class="fa fa-venus" aria-hidden="true" style="color: #000"></i> 
-    <label style="color: #000">${mainLanguage === 'pt-BR' ? 'Definição (manter)' : mainLanguage === 'en' ? 'Maintenance (keep)' : mainLanguage === 'es' ? 'Definición (mantener)' : 'Definição (manter)'}</label> 
+    <label style="color: #000">${mainLanguage === 'pt-BR' ? 'Definição (manter)' : mainLanguage === 'en' ? 'Maintenance (keep)' : mainLanguage === 'en-US' ? 'Maintenance (keep)' : mainLanguage === 'es' ? 'Definición (mantener)' : 'Definição (manter)'}</label> 
     <span>${maintanceFemale.toFixed(0)} kcal</span>`;
 
     const ctx = document.getElementById('graph1');
@@ -340,11 +343,11 @@ const fillCaloriesParameters = function (data) {
         type: 'bar',
         data: {
             labels: [
-                mainLanguage === 'pt-BR' ? 'Homens' : mainLanguage === 'en' ? 'Men' : mainLanguage === 'es' ? 'Hombres' : 'Homens',
-                mainLanguage === 'pt-BR' ? 'Mulheres' : mainLanguage === 'en' ? 'Women' : mainLanguage === 'es' ? 'Mujeres' : 'Mulheres'
+                mainLanguage === 'pt-BR' ? 'Homens' : mainLanguage === 'en' ? 'Men' : mainLanguage === 'en-US' ? 'Men' : mainLanguage === 'es' ? 'Hombres' : 'Homens',
+                mainLanguage === 'pt-BR' ? 'Mulheres' : mainLanguage === 'en' ? 'Women' : mainLanguage === 'en-US' ? 'Women' : mainLanguage === 'es' ? 'Mujeres' : 'Mulheres'
             ],
             datasets: [{
-                label: mainLanguage === 'pt-BR' ? '% de kcal para emagrecimento' : mainLanguage === 'en' ? '% of kcal for weight loss' : mainLanguage === 'es' ? '% de kcal para pérdida de peso' : '% de kcal para emagrecimento',
+                label: mainLanguage === 'pt-BR' ? '% de kcal para emagrecimento' : mainLanguage === 'en' ? '% of kcal for weight loss' : mainLanguage === 'en-US' ? '% of kcal for weight loss' : mainLanguage === 'es' ? '% de kcal para pérdida de peso' : '% de kcal para emagrecimento',
                 data: [weightLossMale, weightLossFemale],
                 backgroundColor: [
                     'rgba(54, 162, 235, 0.2)',
@@ -363,13 +366,13 @@ const fillCaloriesParameters = function (data) {
                     beginAtZero: true,
                     title: {
                         display: true,
-                        text: mainLanguage === 'pt-BR' ? 'Calorias' : mainLanguage === 'en' ? 'Calories' : mainLanguage === 'es' ? 'Calorías' : 'Calorias'
+                        text: mainLanguage === 'pt-BR' ? 'Calorias' : mainLanguage === 'en' ? 'Calories' : mainLanguage === 'en-US' ? 'Calories' : mainLanguage === 'es' ? 'Calorías' : 'Calorias'
                     }
                 },
                 x: {
                     title: {
                         display: true,
-                        text: mainLanguage === 'pt-BR' ? 'Gênero' : mainLanguage === 'en' ? 'Gender' : mainLanguage === 'es' ? 'Género' : 'Gênero'
+                        text: mainLanguage === 'pt-BR' ? 'Gênero' : mainLanguage === 'en' ? 'Gender' : mainLanguage === 'en-US' ? 'Gender' : mainLanguage === 'es' ? 'Género' : 'Gênero'
                     }
                 }
             },
@@ -397,11 +400,11 @@ const fillCaloriesParameters = function (data) {
         type: 'bar',
         data: {
             labels: [
-                mainLanguage === 'pt-BR' ? 'Homens' : mainLanguage === 'en' ? 'Men' : mainLanguage === 'es' ? 'Hombres' : 'Homens',
-                mainLanguage === 'pt-BR' ? 'Mulheres' : mainLanguage === 'en' ? 'Women' : mainLanguage === 'es' ? 'Mujeres' : 'Mulheres'
+                mainLanguage === 'pt-BR' ? 'Homens' : mainLanguage === 'en' ? 'Men' : mainLanguage === 'en-US' ? 'Men' : mainLanguage === 'es' ? 'Hombres' : 'Homens',
+                mainLanguage === 'pt-BR' ? 'Mulheres' : mainLanguage === 'en' ? 'Women' : mainLanguage === 'en-US' ? 'Women' : mainLanguage === 'es' ? 'Mujeres' : 'Mulheres'
             ],
             datasets: [{
-                label: mainLanguage === 'pt-BR' ? '% de kcal para hipertrofia' : mainLanguage === 'en' ? '% of kcal for muscle gain' : mainLanguage === 'es' ? '% de kcal para ganancia muscular' : '% de kcal para hipertrofia',
+                label: mainLanguage === 'pt-BR' ? '% de kcal para hipertrofia' : mainLanguage === 'en' ? '% of kcal for muscle gain' : mainLanguage === 'en-US' ? '% of kcal for muscle gain' : mainLanguage === 'es' ? '% de kcal para ganancia muscular' : '% de kcal para hipertrofia',
                 data: [massGainMale, massGainFemale],
                 backgroundColor: [
                     'rgba(54, 162, 235, 0.2)',
@@ -420,13 +423,13 @@ const fillCaloriesParameters = function (data) {
                     beginAtZero: true,
                     title: {
                         display: true,
-                        text: mainLanguage === 'pt-BR' ? 'Calorias' : mainLanguage === 'en' ? 'Calories' : mainLanguage === 'es' ? 'Calorías' : 'Calorias'
+                        text: mainLanguage === 'pt-BR' ? 'Calorias' : mainLanguage === 'en' ? 'Calories' : mainLanguage === 'en-US' ? 'Calories' : mainLanguage === 'es' ? 'Calorías' : 'Calorias'
                     }
                 },
                 x: {
                     title: {
                         display: true,
-                        text: mainLanguage === 'pt-BR' ? 'Gênero' : mainLanguage === 'en' ? 'Gender' : mainLanguage === 'es' ? 'Género' : 'Gênero'
+                        text: mainLanguage === 'pt-BR' ? 'Gênero' : mainLanguage === 'en' ? 'Gender' : mainLanguage === 'en-US' ? 'Gender' : mainLanguage === 'es' ? 'Género' : 'Gênero'
                     }
                 }
             },
@@ -453,11 +456,11 @@ const fillCaloriesParameters = function (data) {
         type: 'bar',
         data: {
             labels: [
-                mainLanguage === 'pt-BR' ? 'Homens' : mainLanguage === 'en' ? 'Men' : mainLanguage === 'es' ? 'Hombres' : 'Homens',
-                mainLanguage === 'pt-BR' ? 'Mulheres' : mainLanguage === 'en' ? 'Women' : mainLanguage === 'es' ? 'Mujeres' : 'Mulheres'
+                mainLanguage === 'pt-BR' ? 'Homens' : mainLanguage === 'en' ? 'Men' : mainLanguage === 'en-US' ? 'Men' : mainLanguage === 'es' ? 'Hombres' : 'Homens',
+                mainLanguage === 'pt-BR' ? 'Mulheres' : mainLanguage === 'en' ? 'Women' : mainLanguage === 'en-US' ? 'Women' : mainLanguage === 'es' ? 'Mujeres' : 'Mulheres'
             ],
             datasets: [{
-                label: mainLanguage === 'pt-BR' ? '% de kcal para definição' : mainLanguage === 'en' ? '% of kcal for maintenance' : mainLanguage === 'es' ? '% de kcal para mantenimiento' : '% de kcal para definição',
+                label: mainLanguage === 'pt-BR' ? '% de kcal para definição' : mainLanguage === 'en' ? '% of kcal for maintenance' : mainLanguage === 'en-US' ? '% of kcal for maintenance' : mainLanguage === 'es' ? '% de kcal para mantenimiento' : '% de kcal para definição',
                 data: [maintanceMale, maintanceFemale],
                 backgroundColor: [
                     'rgba(54, 162, 235, 0.2)',
@@ -476,13 +479,13 @@ const fillCaloriesParameters = function (data) {
                     beginAtZero: true,
                     title: {
                         display: true,
-                        text: mainLanguage === 'pt-BR' ? 'Calorias' : mainLanguage === 'en' ? 'Calories' : mainLanguage === 'es' ? 'Calorías' : 'Calorias'
+                        text: mainLanguage === 'pt-BR' ? 'Calorias' : mainLanguage === 'en' ? 'Calories' : mainLanguage === 'en-US' ? 'Calories' : mainLanguage === 'es' ? 'Calorías' : 'Calorias'
                     }
                 },
                 x: {
                     title: {
                         display: true,
-                        text: mainLanguage === 'pt-BR' ? 'Gênero' : mainLanguage === 'en' ? 'Gender' : mainLanguage === 'es' ? 'Género' : 'Gênero'
+                        text: mainLanguage === 'pt-BR' ? 'Gênero' : mainLanguage === 'en' ? 'Gender' : mainLanguage === 'en-US' ? 'Gender' : mainLanguage === 'en-US' ? 'Gender' : mainLanguage === 'es' ? 'Género' : 'Gênero'
                     }
                 }
             },
@@ -509,13 +512,13 @@ const fillCaloriesParameters = function (data) {
         type: 'pie',
         data: {
             labels: [
-                mainLanguage === 'pt-BR' ? 'Homens TMB' : mainLanguage === 'en' ? 'Men BMR' : mainLanguage === 'es' ? 'Hombres TMB' : 'Homens TMB',
-                mainLanguage === 'pt-BR' ? 'Mulheres TMB' : mainLanguage === 'en' ? 'Women BMR' : mainLanguage === 'es' ? 'Mujeres TMB' : 'Mulheres TMB',
-                mainLanguage === 'pt-BR' ? 'IMC' : mainLanguage === 'en' ? 'BMI' : mainLanguage === 'es' ? 'IMC' : 'IMC',
-                mainLanguage === 'pt-BR' ? 'Ingestão de Água' : mainLanguage === 'en' ? 'Water Intake' : mainLanguage === 'es' ? 'Ingesta de Agua' : 'Ingestão de Água'
+                mainLanguage === 'pt-BR' ? 'Homens TMB' : mainLanguage === 'en' ? 'Men BMR' : mainLanguage === 'en-US' ? 'Men BMR' : mainLanguage === 'es' ? 'Hombres TMB' : 'Homens TMB',
+                mainLanguage === 'pt-BR' ? 'Mulheres TMB' : mainLanguage === 'en' ? 'Women BMR' : mainLanguage === 'en-US' ? 'Women BMR' : mainLanguage === 'es' ? 'Mujeres TMB' : 'Mulheres TMB',
+                mainLanguage === 'pt-BR' ? 'IMC' : mainLanguage === 'en' ? 'BMI' : mainLanguage === 'en-US' ? 'BMI' : mainLanguage === 'es' ? 'IMC' : 'IMC',
+                mainLanguage === 'pt-BR' ? 'Ingestão de Água' : mainLanguage === 'en' ? 'Water Intake' : mainLanguage === 'en-US' ? 'Water Intake' : mainLanguage === 'es' ? 'Ingesta de Agua' : 'Ingestão de Água'
             ],
             datasets: [{
-                label: mainLanguage === 'pt-BR' ? 'Taxa metabólica basal, IMC e Ingestão de Água' : mainLanguage === 'en' ? 'Basal Metabolic Rate, BMI and Water Intake' : mainLanguage === 'es' ? 'Tasa Metabólica Basal, IMC e Ingesta de Agua' : 'Taxa metabólica basal, IMC e Ingestão de Água',
+                label: mainLanguage === 'pt-BR' ? 'Taxa metabólica basal, IMC e Ingestão de Água' : mainLanguage === 'en' ? 'Basal Metabolic Rate, BMI and Water Intake' : mainLanguage === 'en-US' ? 'Basal Metabolic Rate, BMI and Water Intake' : mainLanguage === 'es' ? 'Tasa Metabólica Basal, IMC e Ingesta de Agua' : 'Taxa metabólica basal, IMC e Ingestão de Água',
                 data: [TMBMale, TMBFemale, imc, waterIntake],
                 backgroundColor: [
                     'rgba(54, 162, 235, 0.2)',
@@ -590,13 +593,13 @@ const calculateAverageCalories = async function (age, height, weight, activity) 
             type: 'bar',
             data: {
                 labels: [
-                    mainLanguage === 'pt-BR' ? 'Idade' : mainLanguage === 'en' ? 'Age' : mainLanguage === 'es' ? 'Edad' : 'Idade',
-                    mainLanguage === 'pt-BR' ? 'Altura' : mainLanguage === 'en' ? 'Height' : mainLanguage === 'es' ? 'Altura' : 'Altura',
-                    mainLanguage === 'pt-BR' ? 'Peso' : mainLanguage === 'en' ? 'Weight' : mainLanguage === 'es' ? 'Peso' : 'Peso',
-                    mainLanguage === 'pt-BR' ? 'Atividade' : mainLanguage === 'en' ? 'Activity' : mainLanguage === 'es' ? 'Actividad' : 'Atividade'
+                    mainLanguage === 'pt-BR' ? 'Idade' : mainLanguage === 'en' ? 'Age' : mainLanguage === 'en-US' ? 'Age' : mainLanguage === 'es' ? 'Edad' : 'Idade',
+                    mainLanguage === 'pt-BR' ? 'Altura' : mainLanguage === 'en' ? 'Height' : mainLanguage === 'en-US' ? 'Height' : mainLanguage === 'es' ? 'Altura' : 'Altura',
+                    mainLanguage === 'pt-BR' ? 'Peso' : mainLanguage === 'en' ? 'Weight' : mainLanguage === 'en-US' ? 'Weight' : mainLanguage === 'es' ? 'Peso' : 'Peso',
+                    mainLanguage === 'pt-BR' ? 'Atividade' : mainLanguage === 'en' ? 'Activity' : mainLanguage === 'en-US' ? 'Activity' : mainLanguage === 'es' ? 'Actividad' : 'Atividade'
                 ],
                 datasets: [{
-                    label: mainLanguage === 'pt-BR' ? 'Informações Gerais' : mainLanguage === 'en' ? 'General Information' : mainLanguage === 'es' ? 'Información General' : 'Informações Gerais',
+                    label: mainLanguage === 'pt-BR' ? 'Informações Gerais' : mainLanguage === 'en' ? 'General Information' : mainLanguage === 'en-US' ? 'General Information' : mainLanguage === 'es' ? 'Información General' : 'Informações Gerais',
                     data: [age, height, weight, activity],
                     backgroundColor: [
                         'rgba(54, 162, 235, 0.2)',
